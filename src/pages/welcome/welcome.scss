@@ -3,7 +3,7 @@ page-welcome {
     position: relative;
     background: url('../assets/img/dish-918613_1280.jpg') no-repeat transparent;
     background-size: cover;
-    height: 50%;
+    height: 45%;
     z-index: 1;
     background-repeat: repeat-x;
     animation: animatedBackground 10s linear infinite;
@@ -38,7 +38,23 @@ page-welcome {
     font-weight: bold;
     max-width: 80%;
     margin: auto;
+    opacity: 0.8;
   }
+
+  .splash-text-info {
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+    padding: 24px;
+    opacity: 0.8;
+    .nav-page {
+      margin: 0;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 12px;
+    }
+}
+
   button.login {
     margin-top: 25px;
     background-color: white;

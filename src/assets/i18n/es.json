@@ -31,7 +31,9 @@
   "WELCOME_TITLE": "Bienvenido/a",
 
   "PAGE_LOGIN": {
-    "TITLE": "Cuidar tu cuerpo comienza con saber entenderlo"
+    "TITLE": "Cuidar tu cuerpo comienza con saber entenderlo",
+    "WITHOUT_1":"Propiedad intelectual",
+    "WITHOUT_2":"Póliticas de Privacidad y Cookies"
   },
 
   "LOGIN_TITLE": "Iniciar sesión",

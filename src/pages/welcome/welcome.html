@@ -9,5 +9,10 @@
   <div padding>
     <button ion-button block (click)="signup()">{{ 'SIGNUP' | translate }}</button>
     <button ion-button block (click)="login()" class="login">{{ 'LOGIN' | translate }}</button>
+
+    <div class="splash-text-info">
+      <p class="nav-page">{{ 'PAGE_LOGIN.WITHOUT_1' | translate }} </p>
+      <p class="nav-page" (click)="goToPage('tutorial')">{{ 'PAGE_LOGIN.WITHOUT_2' | translate }} &nbsp;</p>
+    </div>
   </div>
 </ion-content>

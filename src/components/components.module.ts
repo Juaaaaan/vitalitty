@@ -1,8 +1,16 @@
 import { NgModule } from '@angular/core';
 import { WritterComponent } from './writter/writter';
+import { TranslateModule } from '@ngx-translate/core';
+import { IonicModule } from 'ionic-angular';
+import { PipesModule } from '../pipes/pipes.module';
+
 @NgModule({
 	declarations: [WritterComponent],
-	imports: [],
+	imports: [
+    IonicModule,
+    TranslateModule.forChild(),
+    PipesModule
+  ],
 	exports: [WritterComponent]
 })
 export class ComponentsModule {}

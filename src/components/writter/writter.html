@@ -1,4 +1,16 @@
-<!-- Generated template for the WritterComponent component -->
-<div>
-  {{text}}
-</div>
+<span class="text" *ngIf="!valueType; else typed" [attr.info-label]="infoLabel">{{valueToWrite | translate}}<ng-container *ngTemplateOutlet="extraContent"></ng-container></span>
+
+<ng-template #typed>
+    <span class="text" [ngSwitch]="valueType" [attr.info-label]="infoLabel">
+        <ng-container *ngSwitchCase="'required'">{{valueToWrite | translate}}<span> *<ng-container *ngTemplateOutlet="extraContent"></ng-container></span></ng-container>
+        <ng-container *ngSwitchCase="'date'">{{valueToWrite | customDate:valueTypeArgs}}<ng-container *ngTemplateOutlet="extraContent"></ng-container></ng-container>
+        <ng-container *ngSwitchCase="'number'">{{valueToWrite | number:valueTypeArgs:'es'}}<ng-container *ngTemplateOutlet="extraContent"></ng-container></ng-container>
+        <ng-container *ngSwitchCase="'currency'">{{valueToWrite | currency:valueTypeArgs | async}}<ng-container *ngTemplateOutlet="extraContent"></ng-container></ng-container>
+    </span>
+</ng-template>
+
+
+
+<ng-template #extraContent>
+    <ng-content></ng-content>
+</ng-template>

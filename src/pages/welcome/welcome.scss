@@ -20,6 +20,9 @@ page-welcome {
     margin-top: -64px;
     text-align: center;
   }
+  .list-form {
+    margin: 10px 0px;
+  }
   .splash-logo {
     margin: auto;
     background: url('../assets/img/Logo1-800x800.jpg') repeat transparent;
@@ -41,17 +44,32 @@ page-welcome {
     opacity: 0.8;
   }
 
+  .animation-form {
+    position: relative;
+    animation-name: example;
+    animation-duration: 5s;
+    animation-delay: 2s;
+    // @keyframes example {
+    //   0%  {top:25px;}
+    //   25% {top:50px;}
+    //   50% {display: none}
+    // }
+  }
+
   .splash-text-info {
     display: flex;
+    flex-direction: column !important;
     justify-content: center;
     flex-flow: wrap;
     padding: 24px;
     opacity: 0.8;
     .nav-page {
+      display: flex;
       margin: 0;
       font-weight: bold;
       cursor: pointer;
       font-size: 12px;
+      justify-content: center;
     }
 }
 

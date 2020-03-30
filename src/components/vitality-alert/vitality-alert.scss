@@ -1,0 +1,118 @@
+vitality-alert {
+  height: auto !important;
+  display: block;
+  background-color: white;
+  border-radius: 8px;
+  .acie-alert-container {
+      padding: 56px;
+      position: relative;
+      &.user-management {
+          padding: 28px;
+      }
+      .acie-alert-image {
+          height: 120px;
+          width: 120px;
+          margin-right: 56px;
+      }
+      .acie-alert-information {
+          width: 100%;
+      }
+      .acie-alert-title {
+          width: 100%;
+          margin-bottom: 16px;
+          font-size: 18px;
+          font-weight: bold;
+      }
+      .acie-alert-description {
+          width: 100%;
+          margin-bottom: 24px;
+          font-size: 14px;
+          font-weight: normal;
+          line-height: 1.29;
+      }
+      .acie-alert-subMessage {
+          margin-bottom: 8px;
+      }
+      .acie-close-alert {
+          height: 24px;
+          width: 24px;
+          position: absolute;
+          top: 16px;
+          right: 16px;
+          cursor: pointer;
+      }
+      img {
+          object-fit: contain;
+      }
+      .acie-alert-button {
+          margin-right: 24px;
+          &.action {
+              min-width: 160px;
+          }
+          &:last-child {
+              margin-right: 0px;
+          }
+      }
+      .management-title {
+          margin-bottom: 12px;
+          padding-left: 12px;
+          font-size: 18px;
+          font-weight: normal;
+      }
+      .management-description {
+          margin-bottom: 32px;
+          padding-left: 12px;
+          font-size: 14px;
+          font-weight: bold;
+      }
+      .management-form {
+          width: 100%;
+          margin-bottom: 56px;
+      }
+      .management-buttons {
+          width: 100%;
+          padding: 0 12px;
+      }
+      .alert-text {
+          color: map-get($colors, acie-text-default);
+      }
+      .hasLink {
+          cursor: pointer;
+          text-decoration: underline;
+      }
+  }
+  @mixin responsive-acie-alert($minW, $paddingY, $paddingX, $buttonW, $imgM) {
+      min-width: $minW;
+      .acie-alert-container {
+          padding: $paddingY $paddingX;
+          .acie-alert-image {
+              margin-right: $imgM;
+          }
+      }
+      .acie-alert-button {
+          width: $buttonW;
+      }
+  }
+  @media (min-width: 1280px) {
+      @include responsive-acie-alert(672px, 56px, 56px, 160px, 56px);
+  }
+  @media (max-width: 1280px) {
+      @include responsive-acie-alert(672px, 56px, 32px, 160px, 56px);
+  }
+  @media (max-width: 768px) {
+      @include responsive-acie-alert(480px, 48px, 24px, 160px, 32px);
+  }
+  @media (max-width: 480px) {
+      @include responsive-acie-alert(312px, 32px, 16px, 120px, 0px);
+      .acie-alert-container {
+          justify-content: center;
+      }
+      .acie-alert-information {
+          width: 100%;
+          align-items: center;
+      }
+      .acie-alert-image {
+          margin-bottom: 32px;
+      }
+  }
+}

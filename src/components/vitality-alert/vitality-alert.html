@@ -1,0 +1,15 @@
+<div class="acie-alert-container linear-x start-items wrap" [ngClass]="{'center-content': !alertInfo.img}" *ngIf="alertInfo">
+  <img class="acie-alert-image" [src]="alertInfo.img" *ngIf="alertInfo.img">
+  <div class="acie-alert-information linear-y" [ngClass]="alertInfo.img ? 'start-items' : 'center-items'">
+      <writter class="acie-alert-title alert-text" [value]="alertInfo.title"></writter>
+      <writter class="acie-alert-description alert-text" [value]="alertInfo.message" [ngClass]="{'acie-alert-subMessage': !!alertInfo.body}" *ngIf="alertInfo.message"></writter>
+      <writter class="acie-alert-description alert-text" [value]="alertInfo.body" *ngIf="alertInfo.body"></writter>
+      <writter class="acie-alert-description alert-text" [value]="alertInfo.message_forgot" *ngIf="alertInfo.message_forgot"></writter>
+      <writter class="acie-alert-description alert-text hasLink" [value]="alertInfo.message_forgot_2" *ngIf="alertInfo.message_forgot_2" (click)="goToPage('PasswordForgottenPage')"></writter>
+
+      <div class="acie-buttons-container linear-x center-items">
+          <button class="acie-button acie-alert-button" ion-button [outline]="button.role === 'cancel' ? '' : null" *ngFor="let button of alertButtons" (click)="alertButtonClicked(button)">{{button.text}}</button>
+      </div>
+  </div>
+  <img class="acie-close-alert" src="./assets/icon/close.svg" (click)="closeModal()">
+</div>

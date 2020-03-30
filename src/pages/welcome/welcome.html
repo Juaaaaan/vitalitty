@@ -7,12 +7,35 @@
     </div>
   </div>
   <div padding>
+    <ng-container *ngIf="isLogin">
+      <div padding>
+        <form [formGroup]="loginForm" (keydown.enter)="doLogin()" (submit)="doLogin()">
+          <ion-list class="list-form">
+            <ion-item>
+              <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
+              <ion-input type="text" formControlName='nif' name="nif"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
+              <ion-input formControlName="password" titleForm="LOGIN.USER.PASSWORD" styleType="floating" [type]="passwordInputType" icon checkenv>
+              </ion-input>
+              <ion-icon class="acie-input-icon" [name]="passwordIconName" (click)="showPassword()"></ion-icon>
+            </ion-item>
+            <div padding>
+              <button ion-button block color="primary">{{ 'LOGIN_BUTTON' | translate }}</button>
+            </div>
+          </ion-list>
+        </form>
+      </div>
+    </ng-container>
+    <button ion-button block (click)="login(true)" *ngIf="!isLogin" class="login" [ngClass]="{ 'animation-form' : isLogin }">{{ 'LOGIN' | translate }}</button>
+    <writter value="¿No tienes cuenta? Puedes registrarte a continuación"></writter>
     <button ion-button block (click)="signup()">{{ 'SIGNUP' | translate }}</button>
-    <button ion-button block (click)="login()" class="login">{{ 'LOGIN' | translate }}</button>
 
     <div class="splash-text-info">
-      <p class="nav-page">{{ 'PAGE_LOGIN.WITHOUT_1' | translate }} </p>
-      <p class="nav-page" (click)="goToPage('tutorial')">{{ 'PAGE_LOGIN.WITHOUT_2' | translate }} &nbsp;</p>
+      <writter class="nav-page">{{ 'PAGE_LOGIN.WITHOUT_1' | translate }} </writter>
+      <br>
+      <writter class="nav-page" (click)="goToPage('tutorial')">{{ 'PAGE_LOGIN.WITHOUT_2' | translate }}</writter>
     </div>
   </div>
 </ion-content>

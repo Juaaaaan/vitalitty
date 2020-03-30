@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertController, AlertButton, Platform, ModalController, Modal, Alert } from 'ionic-angular';
-import { AcieAlertComponent } from '../../components/acie/acie-alert/acie-alert';
+// import { AcieAlertComponent } from '../../components/acie/acie-alert/acie-alert';
 
 export interface AlertModel {
   title: string;
@@ -58,7 +58,7 @@ export class AlertHelperProvider {
     this.alertBehaviour.subscribe(
       (value: AlertModel) => {
         if (!!value && value.title) {
-          this.createAlert(value);
+          // this.createAlert(value);
         }
       }
     );
@@ -71,24 +71,24 @@ export class AlertHelperProvider {
   // *******************************************
   // UI Methods
   // *******************************************
-  private createAlert(alertModel: AlertModel) {
-    if (this.isWeb) {
+  // private createAlert(alertModel: AlertModel) {
+  //   if (this.isWeb) {
 
-      this.modalInstance = this.modalCtrl.create(AcieAlertComponent, { data: alertModel, buttons: this.translateButtons() }, { cssClass: 'acie-alert linear-x center-xy ' + ((this.isIE && !this.isEdge) ? 'ie' : ''), enableBackdropDismiss: false });
+  //     this.modalInstance = this.modalCtrl.create(AcieAlertComponent, { data: alertModel, buttons: this.translateButtons() }, { cssClass: 'acie-alert linear-x center-xy ' + ((this.isIE && !this.isEdge) ? 'ie' : ''), enableBackdropDismiss: false });
 
-      this.modalInstance.onDidDismiss(() => this.buttons = []);
-      this.modalInstance.present();
-    } else {
-      this.alertInstance = this.alertCtrl.create({
-        title: alertModel.title,
-        message: alertModel.message,
-        buttons: this.translateButtons()
-      });
+  //     this.modalInstance.onDidDismiss(() => this.buttons = []);
+  //     this.modalInstance.present();
+  //   } else {
+  //     this.alertInstance = this.alertCtrl.create({
+  //       title: alertModel.title,
+  //       message: alertModel.message,
+  //       buttons: this.translateButtons()
+  //     });
 
-      this.alertInstance.onDidDismiss(() => this.buttons = []);
-      this.alertInstance.present();
-    }
-  }
+  //     this.alertInstance.onDidDismiss(() => this.buttons = []);
+  //     this.alertInstance.present();
+  //   }
+  // }
 
 
 

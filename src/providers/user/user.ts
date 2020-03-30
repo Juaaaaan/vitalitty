@@ -1,7 +1,7 @@
 import 'rxjs/add/operator/toPromise';
 
 import { Injectable } from '@angular/core';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Api } from '../api/api';
 
 /**
@@ -27,26 +27,46 @@ import { Api } from '../api/api';
 export class User {
   _user: any;
 
-  constructor(public api: Api) { }
+  constructor(public api: Api,
+    public http: HttpClient) { }
 
   /**
    * Send a POST request to our login endpoint with the data
    * the user entered on the form.
    */
+  // login(accountInfo: any) {
+  //   let seq = this.api.post('login', accountInfo).share();
+
+  //   seq.subscribe((res: any) => {
+  //     // If the API returned a successful response, mark the user as logged in
+  //     if (res.status == 'success') {
+  //       this._loggedIn(res);
+  //     } else {
+  //     }
+  //   }, err => {
+  //     console.error('ERROR', err);
+  //   });
+
+  //   return seq;
+  // }
+
   login(accountInfo: any) {
-    let seq = this.api.post('login', accountInfo).share();
-
-    seq.subscribe((res: any) => {
-      // If the API returned a successful response, mark the user as logged in
-      if (res.status == 'success') {
-        this._loggedIn(res);
-      } else {
+    const useMock: boolean = true;
+    return new Promise<any>(
+      (resolve, reject) => {
+        if (useMock) {
+          let seq = this.api.post('login', accountInfo).subscribe(
+            (response: any) => resolve(response),
+            (error) => reject(error)
+          );
+        } else {
+          this.http.post('www.google.es', accountInfo).subscribe(
+            (response: any) => resolve(response),
+            (error) => reject(error)
+          );
+        }
       }
-    }, err => {
-      console.error('ERROR', err);
-    });
-
-    return seq;
+    );
   }
 
   /**

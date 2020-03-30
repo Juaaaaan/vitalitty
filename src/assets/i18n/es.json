@@ -1,4 +1,8 @@
 {
+  "BACK_BUTTON_TEXT": "Volver",
+  "TUTORIAL_SKIP_BUTTON": "Saltar",
+  "TUTORIAL_CONTINUE_BUTTON": "Continuar",
+
   "NAME": "Nombre",
   "PASSWORD": "Contraseña",
   "EMAIL": "Email",
@@ -11,8 +15,8 @@
 
   "MAP_TITLE": "Mapa",
 
-  "TUTORIAL_SLIDE1_TITLE": "Bienvenido/a al Ionic Super Starter",
-  "TUTORIAL_SLIDE1_DESCRIPTION": "El <b>Ionic Super Starter</b> es un starter de Ionic completo con muchas páginas preconstruidas y mejores prácticas.",
+  "TUTORIAL_SLIDE1_TITLE": "Bienvenido/a sabíamos que ibas a venir",
+  "TUTORIAL_SLIDE1_DESCRIPTION": "Somos <b>Vitalitty</b> quienes te vamos a acompañar en todo momento a cumplir tus objetivos",
 
   "TUTORIAL_SLIDE2_TITLE": "Cómo usar el Super Starter",
   "TUTORIAL_SLIDE2_DESCRIPTION": "Monta los varios tipos de página que quieras y quita los que no. Hemos incluido muchas estructuras de página comunes en apps móviles, como páginas de inicio de sesión y registro, pestañas, y esta página de tutorial.",

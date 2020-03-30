@@ -29,8 +29,8 @@
       </div>
     </ng-container>
     <button ion-button block (click)="login(true)" *ngIf="!isLogin" class="login" [ngClass]="{ 'animation-form' : isLogin }">{{ 'LOGIN' | translate }}</button>
-    <writter value="¿No tienes cuenta? Puedes registrarte a continuación"></writter>
-    <button ion-button block (click)="signup()">{{ 'SIGNUP' | translate }}</button>
+    <writter class="text-register" value="¿Qué no tienes cuenta en Vitalitty?"></writter>
+    <button ion-button block class="signup" (click)="signup()">{{ 'SIGNUP' | translate }}</button>
 
     <div class="splash-text-info">
       <writter class="nav-page">{{ 'PAGE_LOGIN.WITHOUT_1' | translate }} </writter>

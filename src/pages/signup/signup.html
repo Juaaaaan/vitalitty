@@ -8,6 +8,12 @@
 
 
 <ion-content>
+  <div padding>
+    <ion-item>
+      <img src="img_avatar.png" alt="Avatar" type="file">
+      <ion-input type="file" name="image" accept="image/png, image/jpeg"></ion-input>
+    </ion-item>
+  </div>
   <form (submit)="doSignup()">
     <ion-list>
 
@@ -21,17 +27,23 @@
         <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
       </ion-item>
 
-      <!--
-      Want to add a Username? Here you go:
+      <ion-item>
+        <ion-label fixed>Peso</ion-label>
+        <ion-input type="number" [(ngModel)]="account.weight" name="weight"></ion-input>
+      </ion-item>
 
       <ion-item>
-        <ion-label floating>Username</ion-label>
-        <ion-input type="text" [(ngModel)]="account.username" name="username"></ion-input>
+        <ion-label fixed>Altura</ion-label>
+        <ion-input type="number" [(ngModel)]="account.tall" name="tall"></ion-input>
       </ion-item>
-      -->
 
       <ion-item>
         <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
+        <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>Repita contraseña</ion-label>
         <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
       </ion-item>
 

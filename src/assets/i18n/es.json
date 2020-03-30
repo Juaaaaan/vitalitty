@@ -1,7 +1,7 @@
 {
   "BACK_BUTTON_TEXT": "Volver",
   "TUTORIAL_SKIP_BUTTON": "Saltar",
-  "TUTORIAL_CONTINUE_BUTTON": "Continuar",
+  "TUTORIAL_CONTINUE_BUTTON": "¡Adelante!",
 
   "NAME": "Nombre",
   "PASSWORD": "Contraseña",
@@ -18,11 +18,14 @@
   "TUTORIAL_SLIDE1_TITLE": "Bienvenido/a sabíamos que ibas a venir",
   "TUTORIAL_SLIDE1_DESCRIPTION": "Somos <b>Vitalitty</b> quienes te vamos a acompañar en todo momento a cumplir tus objetivos",
 
-  "TUTORIAL_SLIDE2_TITLE": "Cómo usar el Super Starter",
-  "TUTORIAL_SLIDE2_DESCRIPTION": "Monta los varios tipos de página que quieras y quita los que no. Hemos incluido muchas estructuras de página comunes en apps móviles, como páginas de inicio de sesión y registro, pestañas, y esta página de tutorial.",
+  "TUTORIAL_SLIDE2_TITLE": "Pero, ¿Esto qué es?",
+  "TUTORIAL_SLIDE2_DESCRIPTION": "Aquí te vamos a enseñar a como crear un <b>hábito alimenticio </b> acorde a tus necesidades. Te facilitaremos, de forma digital, <b>pedir</b> cita con Jesús, tu nutricionista. Podrás ver tu <b>historico estadistico</b> acompañado de comentarios de Jesús y muchísimo más...",
 
-  "TUTORIAL_SLIDE3_TITLE": "Empezando",
-  "TUTORIAL_SLIDE3_DESCRIPTION": "¿Necesitas ayuda? Échale un vistazo al README del Super Starter para ver el tutorial completo.",
+  "TUTORIAL_SLIDE3_TITLE": "Empieza registrandote",
+  "TUTORIAL_SLIDE3_DESCRIPTION": "Para que podamos ayudarte, necesitamos un poco de información tuya",
+
+  "TUTORIAL_SLIDE4_TITLE": "¡PERFECTO!",
+  "TUTORIAL_SLIDE4_DESCRIPTION": "Continua para que podamos emprender este viaje juntos",
 
   "SETTINGS_TITLE": "Ajustes",
   "SETTINGS_OPTION1": "Opción 1",

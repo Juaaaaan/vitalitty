@@ -105,19 +105,6 @@ export class WelcomePage implements OnInit {
       });
       toast.present();
     }
-    // this.user.login(this.account).subscribe((resp) => {
-    //   if (resp) {
-    //   }
-    // }, (err) => {
-    //   // this.navCtrl.push(MainPage);
-    //   // Unable to log in
-    //   let toast = this.toastCtrl.create({
-    //     message: this.translate.instant('LOGIN_ERROR'),
-    //     duration: 3000,
-    //     position: 'bottom'
-    //   });
-    //   toast.present();
-    // });
   }
 
   signup() {

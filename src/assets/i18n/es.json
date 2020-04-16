@@ -47,6 +47,8 @@
   "LOGIN_ERROR": "No se ha podido iniciar sesión. Por favor revisa la información de la cuenta e inténtalo de nuevo.",
   "LOGIN_ERROR_001": "¿Te has olvidado del email o contraseña? Inténtalo de nuevo",
   "LOGIN_BUTTON": "Iniciar sesión",
+  "MY_PROFILE_BUTTON": "Mi perfil",
+  "CLIENT_SECTION": "Pacientes",
   "SIGNUP_TITLE": "Entrar",
   "SIGNUP_ERROR": "No se ha podido crear la cuenta. Por favor revisa la información de la cuenta e inténtalo de nuevo.",
   "SIGNUP_BUTTON": "Registrarse",

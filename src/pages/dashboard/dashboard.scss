@@ -1,0 +1,95 @@
+page-dashboard {
+  .overview {
+    background: url('../assets/img/gradient-sign-in-and-sign-up-e1577ceaa2408ca10ed18b5133049fc9f7c988992472530668ba30b44ff6e2e4.svg') repeat transparent;
+    background-size: 100%;
+    .content-initial {
+      display: flex;
+      justify-content: center;
+      .first-content {
+        padding: 40px;
+        background-color: white;
+        border-radius: 4px;
+        width: auto;
+        height: auto;
+        max-height: 250px;
+        max-width: 500px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .title-dashboard {
+        font-size: 27px;
+        font-weight: bold;
+      }
+      .subtitle-dashboard {
+        font-size: 15px;
+      }
+    }
+  }
+  .second {
+    .content-align {
+      display: grid;
+      justify-items: center;
+    }
+    .title-dashboard-sec {
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 22px;
+      display: flex;
+      justify-content: center;
+      width: auto;
+      max-width: 1024px;
+    }
+    .content-initial {
+      display: flex;
+      align-items: center;
+      width: auto;
+      max-width: 1024px;
+      justify-content: center;
+      .second-content {
+        padding: 30px;
+        background-color: white;
+        width: 80%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .third-img {
+        width: 40%;
+        .third {
+          background: url('../assets/img/analytics-3265840_1280.jpg') no-repeat;
+          background-size: 100%;
+          height: 330px;
+          width: 500px;
+          border-radius: 4px;
+        }
+      }
+      .second-content-button {
+        width: 20%;
+      }
+      .third-content {
+        width: 60%;
+      }
+      .title-dashboard {
+        font-size: 27px;
+        font-weight: bold;
+      }
+      .subtitle-dashboard {
+        font-size: 15px;
+      }
+      .subtitle-dashboard-sec {
+        font-size: 14px;
+      }
+    }
+  }
+
+  @media (max-width: 1080px) {
+    .second {
+      .content-initial {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}

@@ -1,5 +1,55 @@
 page-signup {
-    img {
+  background-color: #488aff;
+    .img {
         border-radius: 50%;
       }
+
+      .header-wrapper {
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        background-color: transparent !important;
+        .header {
+          background-color: transparent !important;
+
+          padding: 20px;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          .img-signup {
+            height: 25px;
+          }
+          .action-url {
+            display: flex;
+            justify-content: end;
+            font-size: 15px;
+            line-height: 15px;
+          }
+        }
+      }
+
+    .splash-logo {
+      margin: auto;
+      background: url('../assets/img/Logo1-800x800.jpg') repeat transparent;
+      background-size: 100%;
+      width: 128px;
+      height: 90px;
+    }
+
+    .splash-info {
+      position: relative;
+      z-index: 2;
+      margin-top: -64px;
+      text-align: center;
+    }
+
+    .splash-bg {
+      position: relative;
+      background: url('../assets/img/adventure-1807524_1280.webp') no-repeat transparent;
+      background-size: cover;
+      height: 45%;
+      z-index: 1;
+      background-repeat: repeat-x;
+      // animation: animatedBackground 10s linear infinite;
+    }
 }

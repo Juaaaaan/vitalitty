@@ -1,12 +1,16 @@
+import { Storage } from '@ionic/storage';
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { User } from '../../providers/user/user';
 import { TranslateService } from '@ngx-translate/core';
 import { MainPage } from '../';
 import { FormHelperProvider } from './../../providers/form-helper/form-helper';
-import { FormGroup, FormControl, Validators, Validator } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PATTERNS } from '../../providers/validators/validators.patterns';
 import { KeyValueModel } from '../../../../mapfre-acie/mapfre-acie/src/providers/ui/ui.models';
+import { StorageKeys } from './../../providers/storage/storage.keys';
+import { LoginServiceModel } from '../../providers/auth/auth.model';
+import { AuthServiceParser } from '../../providers/auth/auth.parser';
 
 
 /**
@@ -20,15 +24,13 @@ import { KeyValueModel } from '../../../../mapfre-acie/mapfre-acie/src/providers
   selector: 'page-welcome',
   templateUrl: 'welcome.html',
   providers: [
-    FormHelperProvider
+    FormHelperProvider,
+    AuthServiceParser
   ]
 })
 export class WelcomePage implements OnInit {
 
-  account: { email: string, password: string } = {
-    email: 'test@example.com',
-    password: 'test'
-  };
+  public account: LoginServiceModel;
 
 
   // UI Vars
@@ -42,7 +44,7 @@ export class WelcomePage implements OnInit {
 
    // Control Vars
    private loginFormErrors = new Map<string, KeyValueModel[]>();
-   private currentErrors = new Map<string, string>();
+  //  private currentErrors = new Map<string, string>();
    public maxLength: number = 256;
    public nifLength: number = 9;
 
@@ -50,19 +52,19 @@ export class WelcomePage implements OnInit {
     public user: User,
     public toastCtrl: ToastController,
     public translate: TranslateService,
-    public formHelper: FormHelperProvider) {
+    public formHelper: FormHelperProvider,
+    public storage: Storage,
+    public auth: AuthServiceParser) {
 
 
-      this.loginFormErrors.set('nif', [{ key: 'required', value: 'LOGIN.USER.NIF.ERROR' }, { key: 'pattern', value: 'LOGIN.USER.NIF.ERROR.PATTERN' }, { key: 'maxlength', value: 'LOGIN.USER.NIF.ERROR.PATTERN' }]);
-      this.loginFormErrors.set('cif', [{ key: 'required', value: 'LOGIN.USER.CIF.ERROR' }, { key: 'pattern', value: 'LOGIN.USER.CIF.ERROR.PATTERN' }, { key: 'maxlength', value: 'LOGIN.USER.MAX_LENGTH' }]);
+      this.loginFormErrors.set('email', [{ key: 'required', value: 'LOGIN.USER.NIF.ERROR' }, { key: 'pattern', value: 'LOGIN.USER.NIF.ERROR.PATTERN' }, { key: 'maxlength', value: 'LOGIN.USER.NIF.ERROR.PATTERN' }]);
       this.loginFormErrors.set('password', [{ key: 'required', value: 'LOGIN.USER.PASSWORD.ERROR' }, { key: 'pattern', value: 'LOGIN.USER.PASSWORD.ERROR.PATTERN' }, { key: 'maxlength', value: 'LOGIN.USER.MAX_LENGTH' }]);
 
      }
 
      ngOnInit() {
       this.loginForm = new FormGroup({
-        nif: new FormControl('', [Validators.required, Validators.pattern(PATTERNS.PATTERN_DNI), Validators.maxLength(this.nifLength)]),
-        cif: new FormControl('', [Validators.required, Validators.pattern(PATTERNS.PATTERN_CIF), Validators.maxLength(this.maxLength)]),
+        email: new FormControl('', [Validators.required, Validators.pattern(PATTERNS.PATTERN_DNI), Validators.maxLength(this.nifLength)]),
         password: new FormControl('', [Validators.required, Validators.maxLength(this.maxLength)]),
       });
      }
@@ -94,12 +96,14 @@ export class WelcomePage implements OnInit {
   }
 
   async doLogin() {
-    const response = await this.user.login(this.account).catch(err => console.log(err)) || null;
+    const bodyAccount = this.auth.parserAdmin(this.loginForm.value);
+    const response = await this.user.login(bodyAccount).catch(err => console.log(err)) || null;
     if (response && response.status === 'OK') {
+      this.storage.set(response.body.isAdmin, StorageKeys.USER_INFO);
       this.navCtrl.push(MainPage);
     } else {
       let toast = this.toastCtrl.create({
-        message: this.translate.instant('LOGIN_ERROR'),
+        message: response.status_code === 'LGN_001' ? this.translate.instant('LOGIN_ERROR_001') : this.translate.instant('LOGIN_ERROR'),
         duration: 3000,
         position: 'bottom'
       });

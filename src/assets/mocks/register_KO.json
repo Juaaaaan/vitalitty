@@ -1,0 +1,7 @@
+{
+  "status": "KO",
+  "status_code": "REG_001",
+  "body": {
+      "error_message": "Error, no hemos podido registrarte. ¿Puedes volver a intentarlo?"
+  }
+}

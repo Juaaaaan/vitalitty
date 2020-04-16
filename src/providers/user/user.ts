@@ -1,8 +1,9 @@
 import 'rxjs/add/operator/toPromise';
 
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Api } from '../api/api';
+import { LoginResponseModel, LoginServiceModel } from '../auth/auth.model';
 
 /**
  * Most apps have the concept of a User. This is a simple provider
@@ -50,15 +51,26 @@ export class User {
   //   return seq;
   // }
 
-  login(accountInfo: any) {
+  login(accountInfo: LoginServiceModel) {
     const useMock: boolean = true;
     return new Promise<any>(
       (resolve, reject) => {
         if (useMock) {
-          let seq = this.api.post('login', accountInfo).subscribe(
-            (response: any) => resolve(response),
-            (error) => reject(error)
-          );
+          if (accountInfo.email === 'admin@vitalitty.com' && accountInfo.password === 'Pass1234%') {
+            this.http.get('assets/mocks/login.json').subscribe(
+              (response: LoginResponseModel) => resolve(response),
+              (error) => reject(error)
+            );
+          } else {
+            this.http.get('assets/mocks/login_KO.json').subscribe(
+              (response: LoginResponseModel) => resolve(response),
+              (error) => reject(error)
+            );
+          }
+          // let seq = this.api.post('login', accountInfo).subscribe(
+          //   (response: any) => resolve(response),
+          //   (error) => reject(error)
+          // );
         } else {
           this.http.post('www.google.es', accountInfo).subscribe(
             (response: any) => resolve(response),

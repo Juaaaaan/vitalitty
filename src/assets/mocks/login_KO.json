@@ -1,0 +1,7 @@
+{
+    "status": "KO",
+    "status_code": "LGN_001",
+    "body": {
+        "error_message": "Las credenciales no son correctas"
+    }
+}

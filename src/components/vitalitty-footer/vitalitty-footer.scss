@@ -1,0 +1,72 @@
+vitalitty-footer {
+  .acie-footer-container {
+    height: $web-footer-height;
+    min-height: $web-footer-height;
+    background-color: #282828;
+    padding: 20px 24px;
+    position: relative;
+
+}
+
+.acie-footer-wrapper {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap-reverse;
+    max-width: 1448px;
+    margin: 0 auto;
+}
+
+.acie-footer-links-container {
+    height: 16px;
+    &>* {
+        cursor: pointer;
+    }
+}
+
+writter.acie-footer-link {
+    margin-left: 16px;
+    padding-right: 16px;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.39;
+    color: grey;
+    border-right: 1px solid green;
+    &:last-of-type {
+        padding-right: 0;
+        border-right: initial;
+    }
+    &:first-of-type {
+        margin-left: 0;
+    }
+}
+
+.acie-footer-company-name {
+    margin-left: 40px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1;
+    color: grey;
+}
+
+@media (max-width: 480px) {
+    .acie-footer-container {
+        height: auto;
+        padding: 24px;
+    }
+    .acie-footer-wrapper {
+        max-width: 340px;
+        margin: 0 auto;
+    }
+    .acie-footer-links-container {
+        margin-bottom: 24px;
+    }
+    .acie-footer-company-name {
+        font-size: 12px;
+        margin-left: 24px;
+    }
+    writter.acie-footer-link {
+        margin-left: 8px;
+        padding-right: 8px;
+    }
+}
+}

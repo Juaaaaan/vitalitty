@@ -32,6 +32,7 @@ page-dashboard {
       justify-items: center;
     }
     .title-dashboard-sec {
+      width: 80%;
       font-size: 22px;
       font-weight: bold;
       margin-top: 22px;
@@ -56,7 +57,7 @@ page-dashboard {
         flex-direction: column;
       }
       .third-img {
-        width: 40%;
+        // width: 40%;
         .third {
           background: url('../assets/img/analytics-3265840_1280.jpg') no-repeat;
           background-size: 100%;
@@ -89,6 +90,16 @@ page-dashboard {
       .content-initial {
         display: flex;
         flex-direction: column;
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    .second {
+      .content-initial {
+        .second-content {
+          padding: 20px 10px;
+          width: 100%;
+        }
       }
     }
   }

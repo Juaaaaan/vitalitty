@@ -13,6 +13,7 @@ import { Items } from '../mocks/providers/items';
 import { Settings, User, Api } from '../providers';
 import { MyApp } from './app.component';
 import { ComponentsModule } from '../components/components.module';
+// import { ChartsModule } from 'ng2-charts';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -52,6 +53,7 @@ export function provideSettings(storage: Storage) {
     }),
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
+    // ChartsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

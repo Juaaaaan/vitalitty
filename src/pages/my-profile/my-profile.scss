@@ -1,3 +1,65 @@
 page-my-profile {
+  .splash-bg {
+    position: relative;
+    background: url('../assets/img/dish-918613_1280.jpg') no-repeat transparent;
+    background-size: cover;
+    height: 30%;
+    z-index: 1;
+    background-repeat: repeat-x;
+    animation: animatedBackground 10s linear infinite;
+  }
+  .splash-info {
+    position: relative;
+    z-index: 2;
+    margin-top: -64px;
+    text-align: center;
+  }
+
+  .splash-logo {
+    cursor: pointer;
+    margin: auto auto 24px auto;
+    // background: url('../assets/img/Logo1-800x800.jpg') repeat transparent;
+    background-size: 100%;
+    width: 128px;
+    height: 90px;
+  }
+
+  .icon-img {
+    border-radius: 8px;
+    cursor: pointer;
+    max-width: 85%;
+  }
+
+  .fileInput {
+    cursor: pointer;
+    height: 100%;
+    position:absolute;
+    top: 0;
+    right: 0;
+    z-index: 99;
+    /*This makes the button huge. If you want a bigger button, increase the font size*/
+    font-size:50px;
+    /*Opacity settings for all browsers*/
+    opacity: 0;
+    -moz-opacity: 0;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0)
+  }
+
+  .container-form {
+    background-color: white;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+    height: auto;
+    max-height: 300px;
+    width: auto;
+    max-width: auto;
+    margin: 32px 8px;
+    .content-form {
+      display: flex;
+      flex-direction: column;
+      .title-form {
+        font-weight: bold;
+      }
+    }
+  }
 
 }

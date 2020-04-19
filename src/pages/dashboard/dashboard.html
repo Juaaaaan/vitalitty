@@ -4,13 +4,13 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<!-- <ion-header>
+<ion-header no-shadow>
   <ion-navbar>
-    <ion-title>dashboard</ion-title>
+    <ion-buttons end>
+      <!-- <button ion-button (click)="startApp()" color="primary">{{ 'TUTORIAL_SKIP_BUTTON' | translate}}</button> -->
+    </ion-buttons>
   </ion-navbar>
-</ion-header> -->
-<!-- <vitalitty-header></vitalitty-header> -->
-<vitalitty-header></vitalitty-header>
+</ion-header>
 
 <ion-content>
 <div class="overview">
@@ -34,7 +34,7 @@
         <writter class="subtitle-dashboard-sec" value="Cuentanos más de tí, tu perfil lo verán todos los pacientes trata de que sea elegante áun así, si quieres cambiar algo de tu perfil, modificar algún dato puedes hacerlo en cualquier momento"></writter>
       </div>
       <div class="second-content-button">
-        <button ion-button block color="primary">{{ 'MY_PROFILE_BUTTON' | translate }}</button>
+        <button ion-button block color="primary" (click)="goToPage('MyProfilePage')">{{ 'MY_PROFILE_BUTTON' | translate }}</button>
     </div>
     </div>
   </div>

@@ -1,0 +1,14 @@
+<!-- Generated template for the VitalittyLoggedUserComponent component -->
+<div class="wrapper" (click)="showMenu()">
+  <icon-text class="icon-text-wrapper">
+      <ion-icon class="icon-left" name="md-person"></ion-icon>
+      {{userData.name}} {{userData.lastName}}
+      <ion-icon class="icon-right" [name]=" isOpen ? 'ios-arrow-up' : 'ios-arrow-down'"></ion-icon>
+  </icon-text>
+  <div class="opened" *ngIf="isOpen" @accordionHeight>
+      <div class="options-wrapper">
+          <writter *ngFor="let option of options" [value]="option.name" (click)="clickedOption(option)"></writter>
+      </div>
+  </div>
+</div>
+

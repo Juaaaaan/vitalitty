@@ -43,6 +43,12 @@
     "WITHOUT_2":"Póliticas de Privacidad y Cookies"
   },
 
+  "LANDING_TITLE_1": "Bienvenido, te estábamos esperando",
+  "LANDING_TITLE_2": "A partir de ahora se acabarón las escusas, nos vamos a poner en forma.",
+  "LANDING_TITLE_3": "Trabajando juntos con el equipo que podemos formar, lograremos nuestros objetivos.",
+  "LANDING_TITLE_4":"¿No tienes cuenta? Puedes registrarte siempre quieras pero antes nos podrás conocer mejor",
+  "LANDING_TITLE_5": "Para los que ya nos conocemos, ya sabes que tienes que iniciar sesión",
+
   "LOGIN_TITLE": "Iniciar sesión",
   "LOGIN_ERROR": "No se ha podido iniciar sesión. Por favor revisa la información de la cuenta e inténtalo de nuevo.",
   "LOGIN_ERROR_001": "¿Te has olvidado del email o contraseña? Inténtalo de nuevo",

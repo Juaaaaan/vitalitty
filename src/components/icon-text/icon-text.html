@@ -1,0 +1,6 @@
+<!-- Generated template for the IconTextComponent component -->
+<div class="linear-x" [ngClass]="{'start-items': position === 'start', 'end-items': position === 'end', 'center-items': position === 'center'}">
+  <ng-content select=".icon-left" class="start-items"></ng-content>
+  <ng-content></ng-content>
+  <ng-content select=".icon-right" class="end-items"></ng-content>
+</div>

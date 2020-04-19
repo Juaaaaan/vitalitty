@@ -25,11 +25,20 @@ $background-color:  #fff;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
-  danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222
+  primary: #488aff,
+  mapfre-positive-value : #039E00,
+  mapfre-negative-value : #D81E05,
+  mapfre-white : #fff,
+  acie-text-default: #3d3d3d,
+  acie-text-light: #707070,
+  acie-text-label: #919191,
+  acie-text-disabled: #d1d1d1,
+  acie-border: #e2e2e2,
+  acie-background: #f0f0f0,
+  acie-client-gold: #a68b4b,
+  acie-client-silver: #abb2b8,
+  acie-client-platinum: #2d4f60,
+  acie-scrollbar: #AFAFAF,
 );
 
 

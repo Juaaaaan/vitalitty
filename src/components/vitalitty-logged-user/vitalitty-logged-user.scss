@@ -1,0 +1,45 @@
+vitalitty-logged-user {
+  $primary: map-get($colors, primary);
+  .wrapper {
+      position: relative;
+      .icon-text-wrapper {
+          .linear-x {
+              .icon-left {
+                  margin-right: 10px;
+              }
+              .icon-right {
+                  margin-left: 10px;
+              }
+          }
+      }
+      .opened {
+          min-width: 150px;
+          -webkit-box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.5);
+          -moz-box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.5);
+          box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.5);
+          writter {
+              display: block;
+              padding: 4px 0;
+          }
+          .options-wrapper {
+              padding: 10px;
+          }
+      }
+  }
+
+  @media (min-width: 768px) {
+      .opened {
+          background-color: $primary;
+          position: absolute;
+          top: 30px;
+      }
+  }
+
+  @media (max-width: 768px) {
+      .opened {
+          -webkit-box-shadow: unset !important;
+          -moz-box-shadow: unset !important;
+          box-shadow: unset !important;
+      }
+  }
+}

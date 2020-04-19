@@ -22,4 +22,8 @@ export class LandingPage {
     console.log('ionViewDidLoad LandingPage');
   }
 
+  goToPage(page: string) {
+    this.navCtrl.push(page);
+  }
+
 }

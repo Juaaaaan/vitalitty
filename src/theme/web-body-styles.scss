@@ -1,0 +1,88 @@
+::-webkit-scrollbar {
+    width: none;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: map-get($colors, acie-scrollbar);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: map-get($colors, acie-text-label);
+}
+
+@mixin content-alignment($paddingH, $paddingW, $width, $pageTitle) {
+    padding: $paddingH $paddingW;
+    .page-content {
+        min-width: $width;
+        max-width: $width;
+        margin: 0 auto;
+    }
+    .page-main-title {
+        font-size: $pageTitle;
+        font-weight: 300;
+        color: map-get($colors, acie-text-default)
+    }
+}
+
+ion-content {
+    .scroll-content {
+        margin-top: $web-header-height !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    &.has-expandable-header {
+        .scroll-content {
+            contain: initial;
+        }
+        expandable-header {
+            width: 100%;
+            position: fixed;
+            top: $web-header-height;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: map-get($colors, acie-background);
+            z-index: 1000;
+            overflow: visible;
+            pointer-events: none;
+            acie-private-subheader {
+                position: absolute;
+                width: 100%;
+                height: auto;
+                bottom: 0;
+                left: 0;
+            }
+        }
+    }
+}
+
+.page-main-container {
+    @media (max-width: 1280px) {
+        @include content-alignment(56px, 24px, 720px, 32px);
+    }
+    @media (min-width: 1280px) {
+        @include content-alignment(56px, 32px, 1024px, 32px);
+    }
+    @media (max-width: 768px) {
+        @include content-alignment(56px, 24px, 432px, 32px);
+    }
+    @media (max-width: 480px) {
+        @include content-alignment(32px, 24px, 312px, 24px);
+    }
+}
+
+input[type=password]::-ms-reveal,
+input[type=password]::-ms-clear {
+    display: none;
+}
+
+input::-ms-clear {
+    display: none;
+}

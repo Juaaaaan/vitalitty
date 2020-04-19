@@ -1,0 +1,55 @@
+<!-- Generated template for the VitalittyHeaderComponent component -->
+<ion-header *ngIf="isWeb; else webheader">
+  <ion-navbar>
+      <ion-title>login {{'appname' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ng-template #webheader>
+  <div [ngClass]="{'reverse': !showMenuOptions}" class="acie-header-container linear-x center-items">
+
+      <div class="acie-header-logo" (click)="emitLogoClicked()">
+          <img [src]="logo" alt="logo">
+      </div>
+
+      <!-- pantalla grande -->
+      <div *ngIf="showMenuOptions">
+          <!-- logged -->
+          <div class="circle" *ngIf="userInfo" (click)="showPopOver()">{{userInfo.name.charAt(0) | titlecase}}</div>
+          <!-- not logged -->
+          <div class="texts" *ngIf="!userInfo">
+              <writter *ngFor="let o of options" [value]="o.value" (click)="goToPageFromMenu(o)"></writter>
+          </div>
+      </div>
+
+      <!-- pantalla pequeña -->
+      <div *ngIf="!showMenuOptions">
+          <div class="hamburger" #hamburgerReference (click)="revealMenu()">
+              <img src="./assets/img/Logo1-800x800.jpg">
+          </div>
+
+      </div>
+  </div>
+
+  <!-- menu for small screen -->
+  <div class="menuToggle" [ngClass]="{'reveal': menuRevealed}" *ngIf="!showMenuOptions" #menuOpenedReference>
+      <!-- logged -->
+      <div class="linear-y" *ngIf="userInfo">
+          <div class="user-details linear-x">
+              <div class="circle">{{userInfo.name.charAt(0) | titlecase}}</div>
+              <div class="name-email-wrapper menu-overflow linear-y">
+                  <writter class="name">{{userInfo.name | titlecase}} {{userInfo.lastName.charAt(0) | titlecase}}.</writter>
+                  <writter class="email">{{userInfo.email}}</writter>
+              </div>
+          </div>
+          <div class="options linear-y">
+              <writter *ngFor="let o of options" [value]="o.value" (click)="goToPageFromMenu(o)"></writter>
+          </div>
+      </div>
+      <!-- not logged -->
+      <div class="options linear-y" *ngIf="!userInfo">
+          <writter *ngFor="let o of options" [value]="o.value" (click)="goToPageFromMenu(o)"></writter>
+      </div>
+  </div>
+
+</ng-template>

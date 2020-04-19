@@ -16,6 +16,13 @@
           <button ion-button block class="signup" (click)="goToPage('WelcomePage')">{{ 'LOGIN_TITLE' | translate }}</button>
         </div>
       </div>
+      <div class="download-app">
+        <div padding class="content-download">
+          <writter class="text-download" value="Puedes pulsar en cualquier enlace para poder descargar la aplicación"></writter>
+        </div>
+        <img class="img-landing" src="../assets/img/badge_google_play.png" (click)="goToLink('https://play.google.com/store/apps?hl=es')">
+        <img class="img-landing" src="../assets/img/app-store.png"(click)="goToLink('https://www.apple.com/es/ios/app-store/')">
+      </div>
     </div>
   </div>
 

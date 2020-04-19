@@ -26,4 +26,8 @@ export class LandingPage {
     this.navCtrl.push(page);
   }
 
+  goToLink(link: string) {
+    window.open(link, '_blank');
+  }
+
 }

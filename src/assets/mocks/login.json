@@ -2,6 +2,6 @@
   "status": "OK",
   "status_code": 200,
   "body": {
-      "isAdmin":"admin"
+      "isAdmin":"client"
   }
 }

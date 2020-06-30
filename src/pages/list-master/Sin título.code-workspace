@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "../../.."
+		},
+		{
+			"path": "../../../../mapfre-comunidades"
+		},
+		{
+			"path": "../../../../mapfre-smartdd"
+		},
+		{
+			"path": "../../../../mapfre-maiassist-app"
+		},
+		{
+			"path": "../../../../smartdd"
+		}
+	],
+	"settings": {}
+}

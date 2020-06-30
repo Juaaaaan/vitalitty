@@ -3,14 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { User } from '../../providers/user/user';
 import { TranslateService } from '@ngx-translate/core';
-import { MainPage } from '../';
 import { FormHelperProvider } from './../../providers/form-helper/form-helper';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PATTERNS } from '../../providers/validators/validators.patterns';
-import { KeyValueModel } from '../../../../mapfre-acie/mapfre-acie/src/providers/ui/ui.models';
 import { StorageKeys } from './../../providers/storage/storage.keys';
 import { LoginServiceModel } from '../../providers/auth/auth.model';
 import { AuthServiceParser } from '../../providers/auth/auth.parser';
+import { KeyValueModel } from '../../providers/ui/ui.models';
 
 
 /**
@@ -37,6 +36,7 @@ export class WelcomePage implements OnInit {
   public isLogin: boolean = false;
   public passwordInputType: string = 'password';
   public passwordIconName: string = 'md-eye';
+  public countError: number = 0;
 
    // Form Var
    public loginForm: FormGroup;
@@ -47,6 +47,7 @@ export class WelcomePage implements OnInit {
   //  private currentErrors = new Map<string, string>();
    public maxLength: number = 256;
    public nifLength: number = 9;
+   public isLockedAccount: boolean = false;
 
   constructor(public navCtrl: NavController,
     public user: User,
@@ -102,13 +103,35 @@ export class WelcomePage implements OnInit {
       this.storage.set(response.body.isAdmin, StorageKeys.USER_INFO);
       this.navCtrl.push('DashboardPage');
     } else {
-      let toast = this.toastCtrl.create({
-        message: response.status_code === 'LGN_001' ? this.translate.instant('LOGIN_ERROR_001') : this.translate.instant('LOGIN_ERROR'),
-        duration: 3000,
-        position: 'bottom'
-      });
-      toast.present();
+      if (this.countError === 3) {
+        this.goBack(response);
+      } else {
+        this.countError++ ;
+        let toast = this.toastCtrl.create({
+          message: response.status_code === 'LGN_001' ? this.translate.instant('LOGIN_ERROR_001') : this.translate.instant('LOGIN_ERROR'),
+          duration: 3000,
+          position: 'bottom'
+        });
+        toast.present();
+      }
     }
+  }
+
+  public passwordForgotten() {
+    setTimeout(() => {
+      this.isLockedAccount = false;
+    }, 500);
+  }
+
+  private goBack(errorResponse) {
+    this.isLockedAccount = true;
+    let toast = this.toastCtrl.create({
+      message: errorResponse.status_code === 'LGN_001' ? this.translate.instant('LOGIN_ERROR_002') : this.translate.instant('LOGIN_ERROR'),
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
+    this.countError = 0;
   }
 
   signup() {

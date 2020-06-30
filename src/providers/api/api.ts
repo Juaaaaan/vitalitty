@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
  */
 @Injectable()
 export class Api {
+  // URL PARA LOS ENDPOINTS DE AWS
   url: string = 'https://example.com/api/v1';
 
   constructor(public http: HttpClient) {

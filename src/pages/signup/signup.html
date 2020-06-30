@@ -1,14 +1,5 @@
 <ion-header>
   <ion-navbar class="header-wrapper" hideBackButton="false">
-    <div class="header">
-      <a href="http://localhost:8100/login">
-        <img class="img-signup" src="/assets/img/Logo1-800x800.jpg">
-      </a>
-
-      <writter class="action-url" value="SIGNUP_TITLE"></writter>
-      <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
-      <!-- <ion-title class="action-url ">{{ 'SIGNUP_TITLE' | translate }}</!-->
-    </div>
   </ion-navbar>
 
 </ion-header>
@@ -23,9 +14,9 @@
     </div>
   </div> -->
   <div padding>
-    <div>
-      <ion-item>
-        <ion-input type="file" name="image" accept="image/png, image/jpeg"></ion-input>
+    <div class="pepe">
+      <ion-item class="pepito">
+        <ion-input type="file" name="image" accept="image/*"></ion-input>
       </ion-item>
     </div>
     <form (submit)="doSignup()">
@@ -39,6 +30,11 @@
         <ion-item>
           <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
           <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label fixed>{{ 'GENDER' | translate }}</ion-label>
+          <ion-input type="gender" [(ngModel)]="account.gender" name="gender"></ion-input>
         </ion-item>
 
         <ion-item>

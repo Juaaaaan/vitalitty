@@ -9,12 +9,17 @@
   "LOGIN": "Iniciar sesión",
   "SIGNUP": "Registrarse",
   "GENDER": "Sexo",
+  "WEIGHT":"Peso",
+  "TALL":"Altura",
+  "CONFIRM_PASSWORD":"Confirmar Contraseña",
 
   "TAB1_TITLE": "Items",
   "TAB2_TITLE": "Buscar",
   "TAB3_TITLE": "Ajustes",
 
   "MAP_TITLE": "Mapa",
+
+  "LOGOUT":"Salir",
 
   "TUTORIAL_SLIDE1_TITLE": "Bienvenido/a sabíamos que ibas a venir",
   "TUTORIAL_SLIDE1_DESCRIPTION": "Somos <b>Vitalitty</b> quienes te vamos a acompañar en todo momento a cumplir tus objetivos",

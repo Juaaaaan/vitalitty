@@ -14,17 +14,18 @@ export class SignupPage {
   // The account fields for the login form.
   // If you're using the username field with or without email, make
   // sure to add it to the type
-  account: { name: string, email: string, gender: string, password: string, weight: number | string, tall: number | string } = {
-    name: 'Elena Nitos',
-    email: 'vitalitty@vitalitty.com',
-    gender: 'femenino',
-    password: 'test',
-    weight: 90,
-    tall: 185
+  account: { name: string, email: string, gender: string, password: string, confirmPassword: string, weight: number | string, tall: number | string } = {
+    name: '',
+    email: '',
+    gender: '',
+    password: '',
+    confirmPassword: '',
+    weight: '',
+    tall: ''
   };
 
   // Our translated text strings
-  private signupErrorString: string;
+  public signupErrorString: string;
 
   constructor(public navCtrl: NavController,
     public user: User,
@@ -49,6 +50,13 @@ export class SignupPage {
         position: 'bottom'
       });
       toast.present();
+    });
+  }
+
+  public login() {
+    this.navCtrl.setRoot('WelcomePage', {}, {
+      animate: true,
+      direction: 'backward'
     });
   }
 }

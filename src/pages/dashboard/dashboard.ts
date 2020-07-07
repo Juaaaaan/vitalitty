@@ -26,4 +26,9 @@ export class DashboardPage {
     this.navCtrl.push(page);
   }
 
+  public closeApp(page: string) {
+    window.localStorage.clear();
+    this.navCtrl.push(page)
+  }
+
 }

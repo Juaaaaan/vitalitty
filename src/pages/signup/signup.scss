@@ -1,7 +1,38 @@
 page-signup {
+  .back-image {
+    background: url('../assets/img/italian-cuisine-2378729_1280.webp') repeat transparent;
+  }
   background-color: #488aff;
     .img {
         border-radius: 50%;
+      }
+      .fileInput {
+        cursor: pointer;
+        height: 128px;
+        position:absolute;
+        top: 0;
+        right: 0;
+        z-index: 99;
+        /*This makes the button huge. If you want a bigger button, increase the font size*/
+        font-size:50px;
+        /*Opacity settings for all browsers*/
+        opacity: 0;
+        -moz-opacity: 0;
+        filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0)
+      }
+
+      .formRegister {
+        margin-top: 56px;
+      }
+
+      .form-input-register {
+        background: transparent;
+        .input-form {
+          color:white;
+        }
+        input {
+          color: white;
+        }
       }
 
       .header-wrapper {

@@ -48,4 +48,88 @@ $web-footer-height: 64px;
       transition-duration: .6s;
       left: 70vw;
   }
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: map-get($colors, 'mapfre-gray-border');
+    }
+    ion-content .scroll-content {
+    overflow-y: auto !important;
+    }
+
+    ion-content.bg-grey {
+        .scroll-content {
+            background-color: map-get($colors, 'mapfre-gray-background') !important;
+        }
+    }
+
+    @media only screen and (min-width: 760px) and (min-height: 400px) {
+        .modal-popup .modal-wrapper {
+            left: calc(50% - (300px/2)) !important;
+            top: calc(50% - (65vh/2)) !important;
+            width: 300px !important;
+            height: 65vh !important;
+            .calendar-header {
+                margin-top: 15px;
+            }
+        }
+        .modal-info .modal-wrapper {
+            left: calc(50% - (400px/2)) !important;
+            top: calc(50% - (65vh/2)) !important;
+            width: 400px !important;
+            height: 65vh !important;
+            .calendar-header {
+                margin-top: 15px;
+            }
+        }
+    }
+    
+    @media screen and (max-width: 760px) {
+        ion-app.app-root {
+            width: 100%;
+            margin: 0;
+        }
+    }
+    
+    @media all and (min-width: 1340px) {
+        ion-app.app-root {
+            width: 70%;
+            margin: 0 15%;
+        }
+    }
+    
+    @media screen and (min-width: 760px) {
+        ion-footer {
+            padding: 0 !important;
+            &.block {
+                padding: 0 !important;
+            }
+        }
+        .mat-datepicker-toggle {
+            right: 0;
+            top: 30px;
+            position: absolute;
+            z-index: 1;
+        }
+    }
+    
+    @media screen and (min-height: 500px) and (max-height: 700px) {
+        // .card ion-card-content {
+        // padding: 7px 13px !important;
+        // }
+    }
+    
+    @media screen and (min-height: 700px) {
+        .card ion-card-content {
+            padding: 13px 16px !important;
+        }
+    }
+
+    ion-footer .col-segment-tab {
+        height: 60px !important;
+        padding: 0 !important;
+    }
+    
+    ion-header.header-ios {
+        padding-top: env(safe-area-inset-top) !important;
+    }
 }

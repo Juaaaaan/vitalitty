@@ -1,8 +1,26 @@
 page-signup {
+
+  .content-signup {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: url('../assets/img/wood-2879244_1920.jpg') repeat transparent;
+    height: 100%;
+  }
+
+  .right-container {
+    width: 100%;
+    max-width: 56%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    left: 22%;
+  }
+
   .back-image {
     background: url('../assets/img/italian-cuisine-2378729_1280.webp') repeat transparent;
   }
-  background-color: #488aff;
     .img {
         border-radius: 50%;
       }
@@ -27,12 +45,6 @@ page-signup {
 
       .form-input-register {
         background: transparent;
-        .input-form {
-          color:white;
-        }
-        input {
-          color: white;
-        }
       }
 
       .header-wrapper {

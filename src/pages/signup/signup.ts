@@ -40,9 +40,18 @@ export class SignupPage {
   doSignup() {
     // Attempt to login in through our User service
     this.user.signup(this.account).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
+    if (resp) {
+      let toast = this.toastCtrl.create({
+        message: this.translate.instant('REGISTER_OK'),
+        duration: 5000,
+        position: 'bottom'
+      });
+      toast.present();
+      if (toast.dismiss()) {
+        this.login();
+      }
+    }
     }, (err) => {
-      console.log(err, 'FKAG');
       // Unable to sign up
       let toast = this.toastCtrl.create({
         message: err === 'LGN_001' ? this.translate.instant('LOGIN_ERROR_001') : this.translate.instant('LOGIN_ERROR'),

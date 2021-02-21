@@ -15,12 +15,16 @@
               <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
               <ion-input [disabled]="isLockedAccount" type="text" formControlName='email' name="email"></ion-input>
             </ion-item>
-            <ion-item>
-              <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
-              <ion-input [disabled]="isLockedAccount" formControlName="password" titleForm="LOGIN.USER.PASSWORD" styleType="floating" [type]="passwordInputType" icon checkenv>
-              </ion-input>
-              <ion-icon class="acie-input-icon" [name]="passwordIconName" (click)="showPassword()"></ion-icon>
-            </ion-item>
+            <div class="form-password">
+              <ion-item>
+                <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
+                <ion-input [disabled]="isLockedAccount" formControlName="password" titleForm="LOGIN.USER.PASSWORD" styleType="floating" [type]="passwordInputType" icon checkenv>
+                </ion-input>
+                <ion-icon class="acie-input-icon" name="eye" (click)="showPassword()"></ion-icon>
+                <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
+              </ion-item>
+              <ion-icon class="password-eye" ios="ios-eye" md="md-eye" (click)="showPassword()"></ion-icon>
+            </div>
             <div padding>
               <button ion-button block [disabled]="isLockedAccount" color="primary">{{ 'LOGIN_BUTTON' | translate }}</button>
             </div>

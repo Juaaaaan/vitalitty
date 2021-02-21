@@ -35,7 +35,8 @@ export class WelcomePage implements OnInit {
   // UI Vars
   public isLogin: boolean = false;
   public passwordInputType: string = 'password';
-  public passwordIconName: string = 'md-eye';
+  public passwordIconName: string = 'eye';
+  public clickedEye: boolean = false;
   public countError: number = 0;
 
    // Form Var

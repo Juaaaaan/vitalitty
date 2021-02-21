@@ -30,7 +30,6 @@ page-welcome {
     width: 128px;
     height: 90px;
   }
-
   .main-container {
     width: 100%;
     max-width: 56%;
@@ -48,6 +47,15 @@ page-welcome {
 
   .no-account {
     margin: 16px;
+  }
+
+  .form-password {
+    display: flex;
+  }
+  .password-eye {
+    font-size: 24px;
+    padding-top: 8px;
+    cursor:pointer;
   }
 
   .splash-intro {

@@ -47,9 +47,9 @@ export class SignupPage {
         position: 'bottom'
       });
       toast.present();
-      if (toast.dismiss()) {
+      setTimeout(() => {
         this.login();
-      }
+      }, 5500);
     }
     }, (err) => {
       // Unable to sign up

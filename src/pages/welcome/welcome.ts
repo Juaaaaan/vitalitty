@@ -120,6 +120,7 @@ export class WelcomePage implements OnInit {
 
   public passwordForgotten() {
     setTimeout(() => {
+      this.navCtrl.push('RecoverPasswordPage');
       this.isLockedAccount = false;
     }, 500);
   }

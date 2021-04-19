@@ -1,7 +1,72 @@
 page-signup {
-  background-color: #488aff;
+
+  .content-signup {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: url('../assets/img/wood-2879244_1920.jpg') repeat transparent;
+    height: 100%;
+  }
+
+  .right-container {
+    width: 100%;
+    max-width: 56%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    left: 22%;
+  }
+
+  ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #909;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #909;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #909;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #909;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+   color:    #909;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+   color:    #909;
+}
+
+  .back-image {
+    background: url('../assets/img/italian-cuisine-2378729_1280.webp') repeat transparent;
+  }
     .img {
         border-radius: 50%;
+      }
+      .fileInput {
+        cursor: pointer;
+        height: 128px;
+        position:absolute;
+        top: 0;
+        right: 0;
+        z-index: 99;
+        /*This makes the button huge. If you want a bigger button, increase the font size*/
+        font-size:50px;
+        /*Opacity settings for all browsers*/
+        opacity: 0;
+        -moz-opacity: 0;
+        filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0)
+      }
+
+      .formRegister {
+        margin-top: 56px;
+      }
+
+      .form-input-register {
+        background: transparent;
       }
 
       .header-wrapper {

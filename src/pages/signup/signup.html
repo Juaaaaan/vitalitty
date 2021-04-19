@@ -1,71 +1,44 @@
-<ion-header>
-  <ion-navbar class="header-wrapper" hideBackButton="false">
-    <div class="header">
-      <a href="http://localhost:8100/login">
-        <img class="img-signup" src="/assets/img/Logo1-800x800.jpg">
-      </a>
-
-      <writter class="action-url" value="SIGNUP_TITLE"></writter>
-      <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
-      <!-- <ion-title class="action-url ">{{ 'SIGNUP_TITLE' | translate }}</!-->
-    </div>
-  </ion-navbar>
-
-</ion-header>
-
 
 <ion-content>
-  <!-- <div class="splash-bg"></div> -->
-  <!-- <div class="splash-info">
-    <div class="splash-logo icon-img"></div>
-    <div class="splash-intro">
-      {{ 'PAGE_LOGIN.TITLE' | translate }}
-    </div>
-  </div> -->
-  <div padding>
-    <div>
-      <ion-item>
-        <ion-input type="file" name="image" accept="image/png, image/jpeg"></ion-input>
-      </ion-item>
-    </div>
-    <form (submit)="doSignup()">
-      <ion-list>
-
-        <ion-item>
-          <ion-label fixed>{{ 'NAME' | translate }}</ion-label>
-          <ion-input type="text" [(ngModel)]="account.name" name="name"></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
-          <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-label fixed>Peso</ion-label>
-          <ion-input type="number" [(ngModel)]="account.weight" name="weight"></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-label fixed>Altura</ion-label>
-          <ion-input type="number" [(ngModel)]="account.tall" name="tall"></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
-          <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-label fixed>Repita contraseña</ion-label>
-          <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
-        </ion-item>
-
-        <div padding>
-          <button ion-button color="primary" block>{{ 'SIGNUP_BUTTON' | translate }}</button>
+  <div class="content-signup">
+    <div class="right-container">
+      <div padding>
+        <div class="pepe">
+          <div class="splash-logo">
+            <img class="icon-img" src="../assets/img/img_avatar.png">
+            <input class="fileInput" type="file" name="file1" accept="image/*"/>
+          </div>
         </div>
-
-      </ion-list>
-    </form>
+        <form class="formRegister" (submit)="doSignup()">
+          <ion-list>
+            <ion-item class="form-input-register">
+              <ion-input class="input-form" [placeholder]="'NAME' | translate" type="text" [(ngModel)]="account.name" name="name"></ion-input>
+            </ion-item>
+            <ion-item class="form-input-register">
+              <ion-input class="input-form" [placeholder]="'EMAIL' | translate" type="email" [(ngModel)]="account.email" name="email"></ion-input>
+            </ion-item>
+            <ion-item class="form-input-register">
+              <ion-input class="input-form" [placeholder]="'GENDER' | translate" type="gender" [(ngModel)]="account.gender" name="gender"></ion-input>
+            </ion-item>
+            <ion-item class="form-input-register">
+              <ion-input class="input-form" [placeholder]="'WEIGHT' | translate" type="number" [(ngModel)]="account.weight" name="weight">kg</ion-input>
+            </ion-item>
+            <ion-item class="form-input-register">
+              <ion-input class="input-form" [placeholder]="'TALL' | translate" type="number" [(ngModel)]="account.tall" name="tall">cm</ion-input>
+            </ion-item>
+            <ion-item class="form-input-register">
+              <ion-input class="input-form" [placeholder]="'PASSWORD' | translate" type="password" [(ngModel)]="account.password" name="password"></ion-input>
+            </ion-item>
+            <ion-item class="form-input-register">
+              <ion-input class="input-form" [placeholder]="'CONFIRM_PASSWORD' | translate" type="password" [(ngModel)]="account.confirmPassword" name="confirmPassword"></ion-input>
+            </ion-item>
+            <div padding>
+              <button ion-button color="primary" block>{{ 'SIGNUP_BUTTON' | translate }}</button>
+            </div>
+          </ion-list>
+        </form>
+  
+      </div>
+    </div>
   </div>
 </ion-content>

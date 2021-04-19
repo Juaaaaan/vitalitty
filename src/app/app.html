@@ -2,3 +2,17 @@
         <vitalitty-header #referenceHeader [logo]="logo" [options]="parsedHeaderOptions" (menuOpenedEmitter)="menuOpened($event)" [userInfo]="userHeader" (optionClicked)="optionClicked($event)" (logoClicked)="headerLogoClicked()" checkenv></vitalitty-header>
         <ion-nav [root]="rootPage" [ngClass]="{'moveToLeft': menuIsOpened}"></ion-nav>
 </div> -->
+<!-- <mapfre-menu 
+    side="left"
+    [content]="navCtrl" 
+    [persistent]="true" 
+    (optionClicked)="doMenuOptionClicked($event)">
+</mapfre-menu> -->
+
+<!-- <div class="role_indicator" *ngIf="environment && environment!=='prod' && role">{{role}}</div> -->
+
+<!-- <div class="environment_indicator" *ngIf="environment && environment!=='prod'">{{environment}}/{{version}}</div> -->
+
+<ion-nav #content [root]="rootPage" [ngClass]="{'isIE': isIE}"></ion-nav>
+
+<cookies-popup [ngClass]="{'ie': isIE, 'safari': isSafari}" [show]="showCookies" (onOpenLink)="openPoliciesCookies()"></cookies-popup>

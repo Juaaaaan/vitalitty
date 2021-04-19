@@ -14,23 +14,25 @@ export class SignupPage {
   // The account fields for the login form.
   // If you're using the username field with or without email, make
   // sure to add it to the type
-  account: { name: string, email: string, password: string, weight: number | string, tall: number | string } = {
-    name: 'Elena Nitos',
-    email: 'vitalitty@vitalitty.com',
-    password: 'test',
-    weight: 90,
-    tall: 185
+  account: { name: string, email: string, gender: string, password: string, confirmPassword: string, weight: number | string, tall: number | string } = {
+    name: '',
+    email: '',
+    gender: '',
+    password: '',
+    confirmPassword: '',
+    weight: '',
+    tall: ''
   };
 
   // Our translated text strings
-  private signupErrorString: string;
+  public signupErrorString: string;
 
   constructor(public navCtrl: NavController,
     public user: User,
     public toastCtrl: ToastController,
-    public translateService: TranslateService) {
+    public translate: TranslateService) {
 
-    this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
+    this.translate.get('SIGNUP_ERROR').subscribe((value) => {
       this.signupErrorString = value;
     })
   }
@@ -38,18 +40,32 @@ export class SignupPage {
   doSignup() {
     // Attempt to login in through our User service
     this.user.signup(this.account).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
-    }, (err) => {
-
-      this.navCtrl.push(MainPage);
-
-      // Unable to sign up
+    if (resp) {
       let toast = this.toastCtrl.create({
-        message: this.signupErrorString,
-        duration: 3000,
-        position: 'top'
+        message: this.translate.instant('REGISTER_OK'),
+        duration: 5000,
+        position: 'bottom'
       });
       toast.present();
+      setTimeout(() => {
+        this.login();
+      }, 5500);
+    }
+    }, (err) => {
+      // Unable to sign up
+      let toast = this.toastCtrl.create({
+        message: err === 'LGN_001' ? this.translate.instant('LOGIN_ERROR_001') : this.translate.instant('LOGIN_ERROR'),
+        duration: 3000,
+        position: 'bottom'
+      });
+      toast.present();
+    });
+  }
+
+  public login() {
+    this.navCtrl.setRoot('WelcomePage', {}, {
+      animate: true,
+      direction: 'backward'
     });
   }
 }

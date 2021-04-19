@@ -30,10 +30,32 @@ page-welcome {
     width: 128px;
     height: 90px;
   }
+  .main-container {
+    width: 100%;
+    max-width: 56%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    left: 22%;
+  }
 
   .icon-img {
     border-radius: 8px;
     margin-bottom: 24px;
+  }
+
+  .no-account {
+    margin: 16px;
+  }
+
+  .form-password {
+    display: flex;
+  }
+  .password-eye {
+    font-size: 24px;
+    padding-top: 8px;
+    cursor:pointer;
   }
 
   .splash-intro {
@@ -49,11 +71,6 @@ page-welcome {
     animation-name: example;
     animation-duration: 5s;
     animation-delay: 2s;
-    // @keyframes example {
-    //   0%  {top:25px;}
-    //   25% {top:50px;}
-    //   50% {display: none}
-    // }
   }
 
   .splash-text-info {
@@ -97,5 +114,17 @@ page-welcome {
     // &.activated {
     //   background-color: rgb(220, 220, 220);
     // }
+  }
+
+  @media only screen and (max-width: 760px) {
+    .main-container {
+      width: 100%;
+      max-width: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      left: 0;
+    }
   }
 }

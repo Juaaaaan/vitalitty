@@ -8,12 +8,18 @@
   "EMAIL": "Email",
   "LOGIN": "Iniciar sesión",
   "SIGNUP": "Registrarse",
+  "GENDER": "Sexo",
+  "WEIGHT":"Peso",
+  "TALL":"Altura",
+  "CONFIRM_PASSWORD":"Confirmar Contraseña",
 
   "TAB1_TITLE": "Items",
   "TAB2_TITLE": "Buscar",
   "TAB3_TITLE": "Ajustes",
 
   "MAP_TITLE": "Mapa",
+
+  "LOGOUT":"Salir",
 
   "TUTORIAL_SLIDE1_TITLE": "Bienvenido/a sabíamos que ibas a venir",
   "TUTORIAL_SLIDE1_DESCRIPTION": "Somos <b>Vitalitty</b> quienes te vamos a acompañar en todo momento a cumplir tus objetivos",
@@ -52,7 +58,10 @@
   "LOGIN_TITLE": "Iniciar sesión",
   "LOGIN_ERROR": "No se ha podido iniciar sesión. Por favor revisa la información de la cuenta e inténtalo de nuevo.",
   "LOGIN_ERROR_001": "¿Te has olvidado del email o contraseña? Inténtalo de nuevo",
+  "LOGIN_ERROR_002": "Te has equivocado más de 3 veces y hemos decidido bloquearte el acceso. Si quieres volver a entrar, recupera la contraseña",
   "LOGIN_BUTTON": "Iniciar sesión",
+  "RECOVER_PASS_BUTTON":"Recuperar contraseña",
+  "FORGOTTEN_PASS": "Recuperar contraseña",
   "MY_PROFILE_BUTTON": "Mi perfil",
   "CLIENT_SECTION": "Pacientes",
   "SIGNUP_TITLE": "Entrar",
@@ -66,5 +75,6 @@
 
   "CARDS_TITLE": "Social",
 
-  "SEARCH_TITLE": "Buscar"
+  "SEARCH_TITLE": "Buscar",
+  "REGISTER_OK": "¡Genial! Te has dado de alta con nosotros. En breves serás reconducido a la página de inicio para acceder a Vitalitty"
 }

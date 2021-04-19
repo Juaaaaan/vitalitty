@@ -6,34 +6,44 @@
       {{ 'PAGE_LOGIN.TITLE' | translate }}
     </div>
   </div>
-  <div padding>
-    <ng-container *ngIf="isLogin">
+  <div padding class="main-container">
+    <ng-container>
       <div padding>
         <form [formGroup]="loginForm" (keydown.enter)="doLogin()" (submit)="doLogin()">
           <ion-list class="list-form">
             <ion-item>
               <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
-              <ion-input type="text" formControlName='email' name="email"></ion-input>
+              <ion-input [disabled]="isLockedAccount" type="text" formControlName='email' name="email"></ion-input>
             </ion-item>
-            <ion-item>
-              <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
-              <ion-input formControlName="password" titleForm="LOGIN.USER.PASSWORD" styleType="floating" [type]="passwordInputType" icon checkenv>
-              </ion-input>
-              <ion-icon class="acie-input-icon" [name]="passwordIconName" (click)="showPassword()"></ion-icon>
-            </ion-item>
+            <div class="form-password">
+              <ion-item>
+                <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
+                <ion-input [disabled]="isLockedAccount" formControlName="password" titleForm="LOGIN.USER.PASSWORD" styleType="floating" [type]="passwordInputType" icon checkenv>
+                </ion-input>
+                <ion-icon class="acie-input-icon" name="eye" (click)="showPassword()"></ion-icon>
+                <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
+              </ion-item>
+              <ion-icon class="password-eye" ios="ios-eye" md="md-eye" (click)="showPassword()"></ion-icon>
+            </div>
             <div padding>
-              <button ion-button block color="primary">{{ 'LOGIN_BUTTON' | translate }}</button>
+              <button ion-button block [disabled]="isLockedAccount" color="primary">{{ 'LOGIN_BUTTON' | translate }}</button>
             </div>
           </ion-list>
         </form>
+        <div padding *ngIf="isLockedAccount">
+          <writter class="text-register" value="No te preocupes, puedes recuperar tu contraseña, si quieres claro"></writter>
+          <button ion-button block class="signup" color="primary" (click)="passwordForgotten()" >{{ 'FORGOTTEN_PASS' | translate }}</button>
+        </div>
       </div>
     </ng-container>
-    <button ion-button block (click)="login(true)" *ngIf="!isLogin" class="login" [ngClass]="{ 'animation-form' : isLogin }">{{ 'LOGIN' | translate }}</button>
-    <writter class="text-register" value="¿Qué no tienes cuenta en Vitalitty?"></writter>
-    <button ion-button block class="signup" (click)="signup()">{{ 'SIGNUP' | translate }}</button>
+    <div class="no-account" padding>
+      <!-- <button ion-button block (click)="login(true)" *ngIf="!isLogin" class="login" [ngClass]="{ 'animation-form' : isLogin }">{{ 'LOGIN' | translate }}</button> -->
+      <writter class="text-register" value="¿Qué no tienes cuenta en Vitalitty?"></writter>
+      <button ion-button block class="signup" (click)="signup()">{{ 'SIGNUP' | translate }}</button>
+    </div>
 
     <div class="splash-text-info">
-      <writter class="nav-page">{{ 'PAGE_LOGIN.WITHOUT_1' | translate }} </writter>
+      <writter class="nav-page">{{ 'PAGE_LOGIN.WITHOUT_1' | translate }}</writter>
       <br>
       <writter class="nav-page" (click)="goToPage('tutorial')">{{ 'PAGE_LOGIN.WITHOUT_2' | translate }}</writter>
     </div>

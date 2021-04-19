@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "start": "ionic-app-scripts serve",
-    "int": "ionic serve",
+    "launch": "ionic serve",
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
@@ -40,7 +40,7 @@
     "cordova-plugin-whitelist": "1.3.3",
     "ionic-angular": "3.9.9",
     "ionicons": "3.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.27.0",
     "ng2-charts": "^2.3.0",
     "rxjs": "5.5.11",
     "sw-toolbox": "3.6.0",

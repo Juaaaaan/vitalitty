@@ -99,8 +99,10 @@ export class WelcomePage implements OnInit {
     const bodyAccount = this.auth.parserAdmin(this.loginForm.value);
     const response = await this.user.login(bodyAccount).catch(err => console.log(err)) || null;
     if (response && response.status === 'OK') {
-      this.storage.set(response.body.isAdmin, StorageKeys.USER_INFO);
-      this.navCtrl.push('DashboardPage');
+      if (response.body) {
+        this.storage.set(response.body.isAdmin, StorageKeys.USER_INFO);
+        this.navCtrl.push('DashboardPage');
+      }
     } else {
       let toast = this.toastCtrl.create({
         message: response.status_code === 'LGN_001' ? this.translate.instant('LOGIN_ERROR_001') : this.translate.instant('LOGIN_ERROR'),

@@ -56,7 +56,7 @@ export class User {
     return new Promise<any>(
       (resolve, reject) => {
         if (useMock) {
-          if (accountInfo.email === 'client@vitalitty.com' && accountInfo.password === 'Pass1234%') {
+          if (accountInfo.email === 'admin@vitalitty.com' && accountInfo.password === 'Pass1234%') {
             this.http.get('assets/mocks/login.json').subscribe(
               (response: LoginResponseModel) => resolve(response),
               (error) => reject(error)

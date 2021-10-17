@@ -16,8 +16,8 @@ export class VitalittyFooterComponent {
   text: string;
 
   constructor() {
-    console.log('Hello VitalittyFooterComponent Component');
-    this.text = 'Hello World';
+    // console.log('Hello VitalittyFooterComponent Component');
+    // this.text = 'Hello World';
   }
 
   // public goToPage(page: string) {

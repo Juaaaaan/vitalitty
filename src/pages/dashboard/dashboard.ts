@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { StorageProvider } from '../../providers/storage/storage';
 import { StorageKeys } from './../../providers/storage/storage.keys';
 
@@ -22,21 +22,25 @@ export class DashboardPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private storage: StorageProvider) {
+    private storage: StorageProvider,
+    private viewCtrl: ViewController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DashboardPage');
-    console.log(this.storage.get(StorageKeys.USER_INFO))
-  }
+  // ionViewDidLoad() {
+  //   console.log('ionViewDidLoad DashboardPage');
+  //   console.log(this.storage.get(StorageKeys.USER_INFO));
+  // }
 
   public goToPage(page: string) {
     this.navCtrl.push(page);
   }
 
   public closeApp(page: string) {
-    window.localStorage.clear();
-    this.navCtrl.push(page)
+    // window.localStorage.clear();
+    this.navCtrl.push(page).then(() => {
+      const index = this.viewCtrl.index;
+      this.navCtrl.remove(index);
+    })
   }
 
 }

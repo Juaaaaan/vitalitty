@@ -6,6 +6,7 @@ page-landing {
     height: 100%;
     z-index: 1;
     background-repeat: repeat-x;
+    border-image: linear-gradient(45deg, rgb(0,143,104), rgb(250,224,66)) 1;
     // animation: animatedBackground 10s linear infinite;
   }
 
@@ -95,6 +96,120 @@ page-landing {
     margin: 200px auto auto auto;
   }
 
+  .areas-container {
+    display: flex;
+    .nutrition-content {
+      padding: 8px;
+      width: 30%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      margin-right: 32px;
+      .img-nutrition {
+        border-radius: 8px;
+        height: 290px;
+      }
+      .img-nutrition:hover {
+        filter: blur(3px);
+        cursor: pointer;
+      }
+      .nutrition-title {
+        font-size: 16px;
+        text-align: center;
+      }
+      .nutrition-subtitle {
+        text-align: center;
+        color: grey;
+        margin-top: 0px;
+      }
+      .nutrition-description {
+        text-align: center;
+        color: grey;
+        line-height: 1.4;
+      }
+    }
+    .fisioterapia-content {
+      padding:8px;
+      width: 30%;
+      display: flex;
+      margin-left: 32px;
+      justify-content: center;
+      flex-direction: column;
+      .img-fisio {
+        border-radius: 8px;
+        height: 290px;
+      }
+      .img-fisio:hover {
+        filter: blur(3px);
+        cursor: pointer;
+      }
+      .fisioterapia-title {
+        font-size: 16px;
+        text-align: center;
+      }
+      .fisioterapia-subtitle {
+        text-align: center;
+        color: grey;
+        margin-top: 0px;
+      }
+      .fisioterapia-description {
+        text-align: center;
+        color: grey;
+        line-height: 1.4;
+      }
+    }
+    .black-content {
+      padding:8px;
+      width: 40%;
+      display: flex;
+      margin-left: 32px;
+      justify-content: center;
+      flex-direction: column;
+      background-color: rgb(50, 50, 50);
+      border-radius: 8px;
+      .black-title {
+        font-size: 28px;
+        text-align: center;
+        color: map-get($colors, primary);
+        margin-top: 0;
+        font-weight: lighter;
+      }
+      .black-subtitle {
+        text-align: center;
+        color: white;
+        margin-bottom: 4px;
+      }
+    }
+  }
+
+  .content-new {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    height: 400px;
+    background-color: white;
+    .new-title{
+      text-align: center;
+    }
+    .new-content-buttons {
+      margin: 0 auto;
+      max-width: 200px;
+      width: 100%;
+    }
+    .content-new-title {
+      font-size: 28px;
+      text-align: center;
+      color: map-get($colors, primary);
+      margin-top: 0;
+      font-weight: lighter;
+    }
+    .content-new-subtitle {
+      text-align: center;
+      color: white;
+      margin-bottom: 4px;
+    }
+  }
+
   @media (min-width: 768px) {
     .landing-content {
       display: flex;
@@ -113,6 +228,10 @@ page-landing {
         background-color: rgb(220, 220, 220);
       }
     }
+    button.login:hover {
+      color: white;
+    }
+
 
   }
   @media (max-width: 768px)  {

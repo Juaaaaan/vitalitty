@@ -12,13 +12,13 @@
         <form [formGroup]="loginForm" (keydown.enter)="doLogin()" (submit)="doLogin()">
           <ion-list class="list-form">
             <ion-item>
-              <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
-              <ion-input [disabled]="isLockedAccount" type="text" formControlName='email' name="email"></ion-input>
+              <!-- <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label> -->
+              <ion-input [disabled]="isLockedAccount" placeholder="{{ 'EMAIL' | translate }}" type="text" formControlName='email' name="email"></ion-input>
             </ion-item>
             <div class="form-password">
               <ion-item>
-                <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
-                <ion-input [disabled]="isLockedAccount" formControlName="password" titleForm="LOGIN.USER.PASSWORD" styleType="floating" [type]="passwordInputType" icon checkenv>
+                <!-- <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label> -->
+                <ion-input [disabled]="isLockedAccount" placeholder="{{ 'PASSWORD' | translate }}" formControlName="password" titleForm="LOGIN.USER.PASSWORD" styleType="floating" [type]="passwordInputType" icon checkenv>
                 </ion-input>
                 <ion-icon class="acie-input-icon" name="eye" (click)="showPassword()"></ion-icon>
                 <ion-icon ios="ios-eye" md="md-eye"></ion-icon>

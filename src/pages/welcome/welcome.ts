@@ -41,10 +41,12 @@ export class WelcomePage implements OnInit {
 
    // Form Var
    public loginForm: FormGroup;
+   public recoverForm: FormGroup;
 
 
    // Control Vars
    private loginFormErrors = new Map<string, KeyValueModel[]>();
+   private recoverFormErrors = new Map<string, KeyValueModel[]>();
   //  private currentErrors = new Map<string, string>();
    public maxLength: number = 256;
    public nifLength: number = 9;
@@ -61,6 +63,8 @@ export class WelcomePage implements OnInit {
 
       this.loginFormErrors.set('email', [{ key: 'required', value: 'LOGIN.USER.NIF.ERROR' }, { key: 'pattern', value: 'LOGIN.USER.NIF.ERROR.PATTERN' }, { key: 'maxlength', value: 'LOGIN.USER.NIF.ERROR.PATTERN' }]);
       this.loginFormErrors.set('password', [{ key: 'required', value: 'LOGIN.USER.PASSWORD.ERROR' }, { key: 'pattern', value: 'LOGIN.USER.PASSWORD.ERROR.PATTERN' }, { key: 'maxlength', value: 'LOGIN.USER.MAX_LENGTH' }]);
+      this.recoverFormErrors.set('email', [{ key: 'required', value: 'LOGIN.USER.NIF.ERROR' }, { key: 'pattern', value: 'LOGIN.USER.NIF.ERROR.PATTERN' }, { key: 'maxlength', value: 'LOGIN.USER.NIF.ERROR.PATTERN' }]);
+
 
      }
 
@@ -68,6 +72,9 @@ export class WelcomePage implements OnInit {
       this.loginForm = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.pattern(PATTERNS.PATTERN_DNI), Validators.maxLength(this.nifLength)]),
         password: new FormControl('', [Validators.required, Validators.maxLength(this.maxLength)]),
+      });
+      this.recoverForm = new FormGroup({
+        email: new FormControl('', [Validators.required, Validators.pattern(PATTERNS.PATTERN_DNI), Validators.maxLength(this.nifLength)]),
       });
      }
 
@@ -121,10 +128,19 @@ export class WelcomePage implements OnInit {
   }
 
   public passwordForgotten() {
+    let toast = this.toastCtrl.create({
+      message: 'Se ha enviado un enlace para recuperar la contraseña al email que nos has indicado',
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
     setTimeout(() => {
-      this.navCtrl.push('RecoverPasswordPage');
       this.isLockedAccount = false;
-    }, 500);
+    }, 3000);
+    // setTimeout(() => {
+    //   this.navCtrl.push('RecoverPasswordPage');
+    //   this.isLockedAccount = false;
+    // }, 500);
   }
 
   private goBack(errorResponse) {

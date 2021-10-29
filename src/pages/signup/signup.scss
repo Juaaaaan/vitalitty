@@ -82,103 +82,15 @@ page-signup {
     }
   }
 
-  ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color:    #909;
-}
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color:    #909;
-   opacity:  1;
-}
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color:    #909;
-   opacity:  1;
-}
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color:    #909;
-}
-::-ms-input-placeholder { /* Microsoft Edge */
-   color:    #909;
-}
-
-::placeholder { /* Most modern browsers support this now. */
-   color:    #909;
-}
-
-  .back-image {
-    background: url('../assets/img/italian-cuisine-2378729_1280.webp') repeat transparent;
-  }
-    .img {
-        border-radius: 50%;
-      }
-      .fileInput {
-        cursor: pointer;
-        height: 128px;
-        position:absolute;
-        top: 0;
-        right: 0;
-        z-index: 99;
-        /*This makes the button huge. If you want a bigger button, increase the font size*/
-        font-size:50px;
-        /*Opacity settings for all browsers*/
-        opacity: 0;
-        -moz-opacity: 0;
-        filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0)
-      }
-
-      .formRegister {
-        margin-top: 56px;
-      }
-
-      .form-input-register {
-        background: transparent;
-      }
-
-      .header-wrapper {
-        width: 100%;
-        overflow: hidden;
+  @media only screen and (max-width: 760px) {
+    .bg-content-img {
+      .content-signup {
         display: flex;
-        background-color: transparent !important;
-        .header {
-          background-color: transparent !important;
-
-          padding: 20px;
-          width: 100%;
-          display: flex;
-          align-items: center;
-          .img-signup {
-            height: 25px;
-          }
-          .action-url {
-            display: flex;
-            justify-content: end;
-            font-size: 15px;
-            line-height: 15px;
-          }
-        }
+        flex-direction: column;
       }
-
-    .splash-logo {
-      margin: auto;
-      background: url('../assets/img/Logo1-800x800.jpg') repeat transparent;
-      background-size: 100%;
-      width: 128px;
-      height: 90px;
+      .left-container {
+        border: none;
+      }
     }
-
-    .splash-info {
-      position: relative;
-      z-index: 2;
-      margin-top: -64px;
-      text-align: center;
-    }
-
-    .splash-bg {
-      position: relative;
-      background: url('../assets/img/adventure-1807524_1280.webp') no-repeat transparent;
-      background-size: cover;
-      height: 45%;
-      z-index: 1;
-      background-repeat: repeat-x;
-      // animation: animatedBackground 10s linear infinite;
-    }
+  }
 }

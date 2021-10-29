@@ -32,6 +32,14 @@
         </form>
         <div padding *ngIf="isLockedAccount">
           <writter class="text-register" value="No te preocupes, puedes recuperar tu contraseña, si quieres claro"></writter>
+          <form [formGroup]="recoverForm" (keydown.enter)="passwordForgotten()" (submit)="passwordForgotten()">
+            <ion-list class="list-form">
+              <ion-item>
+                <!-- <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label> -->
+                <ion-input placeholder="{{ 'EMAIL' | translate }}" type="text" formControlName='email' name="email"></ion-input>
+              </ion-item>
+            </ion-list>
+          </form>
           <button ion-button block class="signup" color="primary" (click)="passwordForgotten()" >{{ 'FORGOTTEN_PASS' | translate }}</button>
         </div>
       </div>

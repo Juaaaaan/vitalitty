@@ -15,6 +15,8 @@ import { MyApp } from './app.component';
 import { ComponentsModule } from '../components/components.module';
 // import { ChartsModule } from 'ng2-charts';
 
+import { Calendar } from '@ionic-native/calendar/ngx';
+
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: HttpClient) {
@@ -66,6 +68,7 @@ export function provideSettings(storage: Storage) {
     Camera,
     SplashScreen,
     StatusBar,
+    Calendar,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }

@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
 import { User } from '../../providers';
+import { NavHelperProvider } from '../../providers/ui/nav-helper';
 
 @IonicPage()
 @Component({
@@ -31,7 +32,8 @@ export class SignupPage {
     public user: User,
     public toastCtrl: ToastController,
     public translate: TranslateService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private navHelper: NavHelperProvider) {
 
     this.translate.get('SIGNUP_ERROR').subscribe((value) => {
       this.signupErrorString = value;
@@ -75,9 +77,10 @@ export class SignupPage {
   }
 
   public login() {
-    this.navCtrl.setRoot('WelcomePage', {}, {
-      animate: true,
-      direction: 'backward'
-    });
+    // this.navCtrl.setRoot('WelcomePage', {}, {
+    //   animate: true,
+    //   direction: 'backward'
+    // });
+    this.navHelper.popToPage('WelcomePage', {}, {animate:true, direction:'backward'});
   }
 }

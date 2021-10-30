@@ -65,6 +65,7 @@ export class NavHelperProvider {
   public popToPage(page: string, data?: any, options: any = {}) {
     if (this.navController.length() > 0) {
       const pages = this.navController.getActive().index;
+      console.log(pages);
       const popPage = this.navController.getViews().findIndex(v => v.id === page);
 
       if (popPage > -1) {

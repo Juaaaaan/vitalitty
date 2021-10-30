@@ -79,15 +79,16 @@ export class WelcomePage implements OnInit {
      }
 
   public goToPage(page:string) {
-    switch (page) {
-      case 'signup':
-        this.navCtrl.push('SignupPage');
-        break;
-      case 'tutorial':
-        this.navCtrl.push('TutorialPage');
-      default:
-        break;
-    }
+    this.navCtrl.push(page);
+    // switch (page) {
+    //   case 'signup':
+    //     this.navCtrl.push('SignupPage');
+    //     break;
+    //   case 'tutorial':
+    //     this.navCtrl.push('TutorialPage');
+    //   default:
+    //     break;
+    // }
   }
 
   showPassword() {

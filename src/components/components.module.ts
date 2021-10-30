@@ -8,6 +8,7 @@ import { VitalittyHeaderComponent } from './vitalitty-header/vitalitty-header';
 import { VitalittyLoggedUserComponent } from './vitalitty-logged-user/vitalitty-logged-user';
 import { IconTextComponent } from './icon-text/icon-text';
 import { HeaderLogoutComponent } from './header-logout/header-logout';
+import { AccordionComponent } from './accordion/accordion';
 
 @NgModule({
 	declarations: [WritterComponent,
@@ -15,7 +16,8 @@ import { HeaderLogoutComponent } from './header-logout/header-logout';
     VitalittyHeaderComponent,
     VitalittyLoggedUserComponent,
     IconTextComponent,
-    HeaderLogoutComponent],
+    HeaderLogoutComponent,
+    AccordionComponent],
 	imports: [
     IonicModule,
     TranslateModule.forChild(),
@@ -26,6 +28,7 @@ import { HeaderLogoutComponent } from './header-logout/header-logout';
     VitalittyHeaderComponent,
     VitalittyLoggedUserComponent,
     IconTextComponent,
-    HeaderLogoutComponent]
+    HeaderLogoutComponent,
+    AccordionComponent]
 })
 export class ComponentsModule {}

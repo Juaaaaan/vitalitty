@@ -15,7 +15,7 @@
     </div>
     <div class="right-container" padding>
       <p class="title-right-continer">Rellena tus datos</p>
-      <form [formGroup]="recoverForm" class="formRegister" (keydown.enter)="doSignup()" (submit)="doSignup()">
+      <form [formGroup]="recoverForm" class="formRegister" (keydown.enter)="doSignup()" (submit)="doSignup()" (change)="change($ev)">
         <ion-list>
           <ion-item class="form-input-register">
             <ion-input class="input-form" [placeholder]="'NAME_SURNAMES' | translate" type="text" name="name"></ion-input>
@@ -52,7 +52,7 @@
           </div>
 
           <div padding>
-            <button ion-button color="primary" block>{{ 'SIGNUP_BUTTON' | translate }}</button>
+            <button ion-button color="primary" [disabled]="!recoverForm.valid" block>{{ 'SIGNUP_BUTTON' | translate }}</button>
           </div>
         </ion-list>
       </form>

@@ -70,25 +70,16 @@ export class WelcomePage implements OnInit {
 
      ngOnInit() {
       this.loginForm = new FormGroup({
-        email: new FormControl('', [Validators.required, Validators.pattern(PATTERNS.PATTERN_DNI), Validators.maxLength(this.nifLength)]),
+        email: new FormControl('', [Validators.required, Validators.pattern(PATTERNS.PATTERN_EMAIL)]),
         password: new FormControl('', [Validators.required, Validators.maxLength(this.maxLength)]),
       });
       this.recoverForm = new FormGroup({
-        email: new FormControl('', [Validators.required, Validators.pattern(PATTERNS.PATTERN_DNI), Validators.maxLength(this.nifLength)]),
+        email: new FormControl('', [Validators.required, Validators.pattern(PATTERNS.PATTERN_EMAIL)]),
       });
      }
 
   public goToPage(page:string) {
     this.navCtrl.push(page);
-    // switch (page) {
-    //   case 'signup':
-    //     this.navCtrl.push('SignupPage');
-    //     break;
-    //   case 'tutorial':
-    //     this.navCtrl.push('TutorialPage');
-    //   default:
-    //     break;
-    // }
   }
 
   showPassword() {
@@ -106,24 +97,26 @@ export class WelcomePage implements OnInit {
   }
 
   async doLogin() {
-    const bodyAccount = this.auth.parserAdmin(this.loginForm.value);
-    const response = await this.user.login(bodyAccount).catch(err => console.log(err)) || null;
-    if (response && response.status === 'OK') {
-      if (response.body) {
-        this.storage.set(response.body.isAdmin, StorageKeys.USER_INFO);
-        this.navCtrl.push('DashboardPage');
-      }
-    } else {
-      if (this.countError === 3) {
-        this.goBack(response);
+    if (this.loginForm.valid) {
+      const bodyAccount = this.auth.parserAdmin(this.loginForm.value);
+      const response = await this.user.login(bodyAccount).catch(err => console.log(err)) || null;
+      if (response && response.status === 'OK') {
+        if (response.body) {
+          this.storage.set(response.body.isAdmin, StorageKeys.USER_INFO);
+          this.navCtrl.push('DashboardPage');
+        }
       } else {
-        this.countError++ ;
-        let toast = this.toastCtrl.create({
-          message: response.status_code === 'LGN_001' ? this.translate.instant('LOGIN_ERROR_001') : this.translate.instant('LOGIN_ERROR'),
-          duration: 3000,
-          position: 'bottom'
-        });
-        toast.present();
+        if (this.countError === 3) {
+          this.goBack(response);
+        } else {
+          this.countError++ ;
+          let toast = this.toastCtrl.create({
+            message: response.status_code === 'LGN_001' ? this.translate.instant('LOGIN_ERROR_001') : this.translate.instant('LOGIN_ERROR'),
+            duration: 3000,
+            position: 'bottom'
+          });
+          toast.present();
+        }
       }
     }
   }

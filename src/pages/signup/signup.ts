@@ -15,14 +15,14 @@ export class SignupPage {
   // The account fields for the login form.
   // If you're using the username field with or without email, make
   // sure to add it to the type
-  account: { name: string, email: string, gender: string, password: string, confirmPassword: string, observations: string } = {
-    name: '',
-    email: '',
-    gender: '',
-    password: '',
-    confirmPassword: '',
-    observations: ''
-  };
+  // account: { name: string, email: string, gender: string, password: string, confirmPassword: string, observations: string } = {
+  //   name: '',
+  //   email: '',
+  //   gender: '',
+  //   password: '',
+  //   confirmPassword: '',
+  //   observations: ''
+  // };
 
   // Our translated text strings
   public signupErrorString: string;
@@ -42,19 +42,27 @@ export class SignupPage {
 
   ngOnInit() {
     this.recoverForm = new FormGroup({
-      name: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required]),
-      gender: new FormControl('', [Validators.required]),
+      name: new FormControl(''),
+      email: new FormControl(''),
+      gender: new FormControl(''),
       password: new FormControl('', [Validators.required]),
       confirmPassword: new FormControl('', [Validators.required]),
-      observations: new FormControl('', [Validators.required]),
-      accept: new FormControl('', [Validators.required])
+      observations: new FormControl(''),
+      accept: new FormControl('')
     });
+  }
+
+  change(ev: Event) {
+    if(ev) {
+      console.log(this.recoverForm);
+    } else {
+      console.log(this.recoverForm);
+    }
   }
 
   doSignup() {
     // Attempt to login in through our User service
-    this.user.signup(this.account).subscribe((resp) => {
+    this.user.signup(this.recoverForm.value).subscribe((resp) => {
     if (resp) {
       let toast = this.toastCtrl.create({
         message: this.translate.instant('REGISTER_OK'),

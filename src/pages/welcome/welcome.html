@@ -26,7 +26,7 @@
               <ion-icon class="password-eye" ios="ios-eye" md="md-eye" (click)="showPassword()"></ion-icon>
             </div>
             <div padding>
-              <button ion-button block [disabled]="isLockedAccount" color="primary">{{ 'LOGIN_BUTTON' | translate }}</button>
+              <button ion-button block [disabled]="!loginForm.valid" color="primary">{{ 'LOGIN_BUTTON' | translate }}</button>
             </div>
           </ion-list>
         </form>

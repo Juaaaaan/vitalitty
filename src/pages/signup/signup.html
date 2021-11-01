@@ -24,7 +24,7 @@
             <ion-input class="input-form" [placeholder]="'EMAIL' | translate" type="email" name="email"></ion-input>
           </ion-item>
           <ion-item class="form-input-register">
-            <ion-input class="input-form" [placeholder]="'GENDER' | translate" type="gender" name="gender"></ion-input>
+            <ion-input class="input-form" [placeholder]="'GENDER' | translate" type="text" name="gender"></ion-input>
           </ion-item>
           <!-- <ion-item class="form-input-register">
             <ion-input class="input-form" [placeholder]="'WEIGHT' | translate" type="number" [(ngModel)]="account.weight" name="weight">kg</ion-input>
@@ -41,6 +41,16 @@
           <ion-item class="form-input-register">
             <ion-input class="input-form" [placeholder]="'CONFIRM_PASSWORD' | translate" type="password" name="confirmPassword"></ion-input>
           </ion-item>
+
+          <ion-item class="form-input-register">
+            <ion-label class="check-text">Debes aceptar la política de privacidad</ion-label>
+            <ion-checkbox class="input-form" color="primary" slot="end"></ion-checkbox>
+          </ion-item>
+          <div class="privacy-container">
+            <p class="text-privacy">* Para ver la política de privacidad puedes darle</p>
+            <p class="text-privacy-download" (click)="downloadPrivacy()">aquí</p>
+          </div>
+
           <div padding>
             <button ion-button color="primary" block>{{ 'SIGNUP_BUTTON' | translate }}</button>
           </div>

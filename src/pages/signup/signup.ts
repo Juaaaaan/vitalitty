@@ -48,6 +48,7 @@ export class SignupPage {
       password: new FormControl('', [Validators.required]),
       confirmPassword: new FormControl('', [Validators.required]),
       observations: new FormControl('', [Validators.required]),
+      accept: new FormControl('', [Validators.required])
     });
   }
 
@@ -82,5 +83,9 @@ export class SignupPage {
     //   direction: 'backward'
     // });
     this.navHelper.popToPage('WelcomePage', {}, {animate:true, direction:'backward'});
+  }
+  
+  public downloadPrivacy() {
+    window.open('../../assets/policies/Politica_y_privacidad_App_Vitalitty.pdf', '_blank', 'fullscreen=yes');
   }
 }

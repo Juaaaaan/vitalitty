@@ -21,9 +21,26 @@ page-policies {
           display: flex;
           flex-direction: column;
           .first-content {
-            padding: 16px;
+            padding: 16px 16px 0 16px ;
             font-size: 12px;
             font-weight: lighter;
+          }
+          .download-content {
+            padding-left: 16px;
+            margin-bottom: 16px;
+            display: flex;
+            .second-content {
+              font-size: 12px;
+              font-weight: lighter;
+            }
+            .second-content-download {
+              padding-left: 3px;
+              font-size: 12px;
+              font-weight: bold;
+              text-decoration: underline;
+              cursor: pointer;
+            }
+
           }
           .title-left-container{
             margin: 2px auto;

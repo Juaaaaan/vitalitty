@@ -14,6 +14,10 @@
   <div class="content-signup">
     <div class="left-container" padding>
       <p class="first-content">*La siguiente información recopilada de forma agrupada esta íntegramente realizada por Vitalitty</p>
+      <div class="download-content">
+        <p class="second-content">Puedes descargar la política de privacidad en el siguiente enlace</p>
+        <p class="second-content-download" (click)="openFile()">aquí</p>
+      </div>
       <accordion [text_title]="title_first" [text_description]="description_first" [optional_text]="descritpion_2_first"></accordion>
       <accordion [text_title]="title_second" [text_description]="description_second"></accordion>
       <accordion [text_title]='title_third' [text_description]="description_third"></accordion>

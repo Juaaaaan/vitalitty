@@ -32,6 +32,25 @@ page-signup {
         color: map-get($colors, primary);
       }
     }
+
+    .check-text {
+      color: rgba(128, 128, 128, 0.526);
+    }
+
+    .privacy-container {
+      display: flex;
+      .text-privacy {
+        font-size: 12px;
+        font-weight: lighter;
+      }
+      .text-privacy-download {
+        font-size: 12px;
+        font-weight: bold;
+        text-decoration: underline;
+        cursor: pointer;
+        margin-left: 3px;
+      }
+    }
   
     .left-container {
       width: 100%;

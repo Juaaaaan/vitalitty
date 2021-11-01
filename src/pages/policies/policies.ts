@@ -11,7 +11,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 @IonicPage()
 @Component({
   selector: 'page-policies',
-  templateUrl: 'policies.html',
+  templateUrl: 'policies.html'
+  // providers: [FileOpener]
 })
 export class PoliciesPage implements OnInit {
 
@@ -67,11 +68,12 @@ export class PoliciesPage implements OnInit {
   public last_description_2: string = '';
   public last_description_3: string = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PoliciesPage');
+    // console.log('ionViewDidLoad PoliciesPage');
   }
 
   ngOnInit() : void {
@@ -126,6 +128,11 @@ export class PoliciesPage implements OnInit {
     this.last_description_2 = 'Por  ello,  y  a  efectos  de  lo  previsto  en  el  REGLAMENTO  (UE)  2016/679  DEL PARLAMENTO  EUROPEO  Y  DEL  CONSEJO  de  27  de  abril  de  2016  (en  adelante, “RGPD”) relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales  y a la libre circulación de estos datos,  y la LEY 34/2002, de 11 de julio,  de  Servicios  de  la  Sociedad  de  la  información  y  de  comercio  electrónico  (en adelante, “LSSI”), VITALITT informa al usuario que, como responsable del tratamiento, incorporará  los  datos  de  carácter  personal  facilitados  por  los  usuarios  en  un  fichero automatizado. Entendemos que tus datos te pertenecen. Por tanto, si decides no autorizarnos a procesarlos puedes solicitarnos que dejemos de tratarlos.'
     this.last_description_3 = 'Nuestro compromiso empieza por explicarte lo siguiente. Se recogen tus datos para que la experiencia de usuario mejore, atendiendo a tus intereses y necesidades. Somos transparentes en relación a los datos que obtenemos acerca de ti y la razón por la que lo hacemos. Nuestra  intención  es  ofrecerte  la  mejor  experiencia  posible.  Por  ello,  cuando vayamos  a  usar  tu  información  personal  lo  haremos  siempre  cumpliendo  la normativa, y cuando sea necesario, solicitaremos tu consentimiento. Nuestra prioridad consiste en garantizar tu seguridad y tratar tus datos de acuerdo con la normativa europea. '
 
+  }
+
+  public openFile() {
+    // window.open("data:application/pdf," + encodeURI('../../assets/policies/Politica_y_privacidad_App_Vitalitty.pdf')); 
+    window.open('../../assets/policies/Politica_y_privacidad_App_Vitalitty.pdf', '_blank', 'fullscreen=yes');
   }
 
 }

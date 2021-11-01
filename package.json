@@ -50,6 +50,7 @@
     "ng2-charts-x": "^2.0.6",
     "rxjs": "5.5.11",
     "sw-toolbox": "3.6.0",
+    "utils": "^0.3.1",
     "zone.js": "0.8.29"
   },
   "devDependencies": {

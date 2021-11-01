@@ -85,6 +85,14 @@ page-dashboard {
     }
   }
 
+  .chart-content {
+    display: flex;
+    .canvas-graph {
+      width: auto;
+      height: auto;
+    }
+  }
+
   @media (max-width: 1080px) {
     .second {
       .content-initial {

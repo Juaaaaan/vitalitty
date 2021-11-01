@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, Platform } from 'ionic-angular';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { StorageProvider } from '../../providers/storage/storage';
+import { Chart } from 'chart.js';
+// import { Utils }
 // import { StorageKeys } from './../../providers/storage/storage.keys';
 
 /**
@@ -24,6 +26,12 @@ export class DashboardPage {
   // Variables
   public calendars = [];
 
+  // Obtenga el elemento dom del lienzo correspondiente
+	@ViewChild('pieCanvas') pieCanvas;
+	
+  // Crear un nuevo objeto para inicializar
+ pieChart: any;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     // private storage: StorageProvider,
@@ -40,6 +48,41 @@ export class DashboardPage {
 
   }
 
+  ngAfterViewInit() {
+    // Inicializa el gráfico
+     setTimeout(() => {
+       this.pieChart = this.getPieChart();
+     }, 350);
+  }
+
+  // https://www.chartjs.org/docs/latest/samples/other-charts/doughnut.html PARA CREAR GRÁFICOS
+  getChart(context, chartType, data, options?) {
+    return new Chart(context, {
+      data,
+      options,
+      type: chartType,
+    });
+  }
+
+  getPieChart() {
+    const DATA_COUNT = 5;
+    const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
+
+    const data = {
+      labels: ['Red', 'Blue', 'Yellow'],
+      datasets: [
+        {
+          data: [300, 50, 100],
+          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+          hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+          // data: Utils.numbers(NUMBER_CFG),
+          // backgroundColor: Object.values(Utils.CHART_COLORS),
+        }]
+    };
+
+    return this.getChart(this.pieCanvas.nativeElement, 'doughnut', data);
+  }
+
   // ionViewDidLoad() {
   //   console.log('ionViewDidLoad DashboardPage');
   //   console.log(this.storage.get(StorageKeys.USER_INFO));
@@ -52,18 +95,6 @@ export class DashboardPage {
   //   );
   // }
 
-  public addEvent(cal) {
-    let date = new Date();
-    let options = {calendarId: cal.id, calendarName: cal.name, url: 'https://ionicacademy.com', firstReminderMinutes: 15};
-
-    this.calendar.createEventInteractivelyWithOptions('My new event', 'España', 'Some special notes', date, date, options).then(() => {
-      console.log('flag');
-    });
-  }
-
-  public openCal(cal) {
-    this.navCtrl.push('AppointmentDetailPage', {name: cal.name});
-  }
 
 
   public goToPage(page: string) {

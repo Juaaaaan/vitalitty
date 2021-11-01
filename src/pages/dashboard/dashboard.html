@@ -13,62 +13,41 @@
 </ion-header>
 
 <ion-content>
-<div class="overview">
-  <div padding>
-    <div class="content-initial">
-      <div class="first-content">
-          <writter class="title-dashboard" value="Bienvenido Jesús, ¿Qué tal estás?"></writter>
-          <writter class="subtitle-dashboard" value="Aquí vas a poder ver la evolución de tus pacientes"></writter>
-          <writter class="subtitle-dashboard" value="Podrás gestionar tus citas y enviarselas"></writter>
-          <writter class="subtitle-dashboard" value="Disfruta, te lo mereces"></writter>
+  <div class="overview">
+    <div padding>
+      <div class="content-initial">
+        <div class="first-content">
+            <writter class="title-dashboard" value="Bienvenido Jesús, ¿Qué tal estás?"></writter>
+            <writter class="subtitle-dashboard" value="Aquí vas a poder ver la evolución de tus pacientes"></writter>
+            <writter class="subtitle-dashboard" value="Podrás gestionar tus citas y enviarselas"></writter>
+            <writter class="subtitle-dashboard" value="Disfruta, te lo mereces"></writter>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="second">
-  <div padding class="content-align">
-    <writter class="title-dashboard-sec" value="Como puedes comprobar todo sigue igual como lo dejaste"></writter>
-    <div class="content-initial">
-      <div class="second-content">
-        <writter class="subtitle-dashboard-sec" value="Cuentanos más de tí, tu perfil lo verán todos los pacientes trata de que sea elegante áun así, si quieres cambiar algo de tu perfil, modificar algún dato puedes hacerlo en cualquier momento"></writter>
-      </div>
-      <div class="second-content-button">
-        <button ion-button block color="primary" (click)="goToPage('MyProfilePage')">{{ 'MY_PROFILE_BUTTON' | translate }}</button>
-    </div>
-    </div>
-  </div>
-</div>
-
-<div class="second">
-  <p>HOLA</p>
-  <ion-list>
-    <ion-item *ngFor="let cal of calendars" tappable>
-      <button ion-button icon-only item-start clear (click)="addEvent(cal)">
-        <ion-icon name="add"></ion-icon>
-      </button>
-      {{cal.name}}
-      <p>{{cal.type}}</p>
-      <button ion-button icon-only item-start clear (click)="openCal(cal)">
-        <ion-icon name="arrow-forward"></ion-icon>
-      </button>
-    </ion-item>
-  </ion-list>
-</div>
 
   <div class="second">
     <div padding class="content-align">
+      <writter class="title-dashboard-sec" value="Como puedes comprobar todo sigue igual como lo dejaste"></writter>
       <div class="content-initial">
-        <div class="third-img">
-          <div class="third"></div>
+        <div class="second-content">
+          <writter class="subtitle-dashboard-sec" value="Cuentanos más de tí, tu perfil lo verán todos los pacientes trata de que sea elegante áun así, si quieres cambiar algo de tu perfil, modificar algún dato puedes hacerlo en cualquier momento"></writter>
         </div>
-        <div padding class="third-content">
-          <writter class="subtitle-dashboard-sec" value="Puedes ver en todo momento a tus pacientes"></writter>
-          <writter class="subtitle-dashboard-sec" value="Una vez que el paciente ha realizado alguna cita contigo puedes monitorizarles"></writter>
-          <writter class="subtitle-dashboard-sec" value="Serás capaz de enviarles cualquier tipo de dieta únicamente dandole a un botón, podrás generar gráficas metiendoles los datos para que ellos sean capaces de visualizarlas"></writter>
-          <button ion-button block color="primary">{{ 'CLIENT_SECTION' | translate }}</button>
+        <div class="second-content-button">
+          <button ion-button block color="primary" (click)="goToPage('MyProfilePage')">{{ 'MY_PROFILE_BUTTON' | translate }}</button>
       </div>
       </div>
+    </div>
+  </div>
+  <div class="info-content">
+    <div class="chart-content">
+      <ion-card>
+        <ion-card-header>Evolución</ion-card-header>
+        <ion-card-content>
+          <!-- <! - Debido a que el gráfico se dibuja a través del lienzo, debe tener una etiqueta de lienzo y obtener el dom a través de #pieCanvas -> -->
+          <canvas #pieCanvas class="canvas-graph"></canvas>
+        </ion-card-content>
+      </ion-card>
     </div>
   </div>
 

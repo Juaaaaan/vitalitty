@@ -85,11 +85,35 @@ page-dashboard {
     }
   }
 
+  .info-content {
+    display: flex;
+    justify-content: row;
+    // background-color: map-get($colors, acie-border);
+    background-color: #e2e2e27a;
+  }
   .chart-content {
     display: flex;
+    width: 40%;
+    .description-chart-pie {
+      margin: 4px;
+      font-weight: lighter;
+    }
+    .info-chart-pie {
+      font-size: 12px;
+      font-weight: lighter;
+      margin-bottom: 16px;
+    }
     .canvas-graph {
+      max-width: 600px !important;
+      max-height: 300px !important;
+    }
+  }
+  .bar-content {
+    display: flex;
+    width: 60%;
+    .canvas-graph-bar {
       width: auto;
-      height: auto;
+      max-height: 400px;
     }
   }
 

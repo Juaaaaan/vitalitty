@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, ViewController, Platform } from 'i
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { StorageProvider } from '../../providers/storage/storage';
 import { Chart } from 'chart.js';
-// import { Utils }
 // import { StorageKeys } from './../../providers/storage/storage.keys';
 
 /**
@@ -28,23 +27,17 @@ export class DashboardPage {
 
   // Obtenga el elemento dom del lienzo correspondiente
 	@ViewChild('pieCanvas') pieCanvas;
+  @ViewChild('barCanvas') barCanvas;
 	
   // Crear un nuevo objeto para inicializar
  pieChart: any;
+ barChart: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     // private storage: StorageProvider,
-    private viewCtrl: ViewController,
-    private calendar: Calendar
-    // private plt: Platform
+    private viewCtrl: ViewController
     ) {
-
-      // this.plt.ready().then(() => {
-      //   this.calendar.listCalendars().then(data => {
-      //     this.calendar = data;
-      //   }).catch(error => console.log(error));
-      // });
 
   }
 
@@ -53,14 +46,37 @@ export class DashboardPage {
      setTimeout(() => {
        this.pieChart = this.getPieChart();
      }, 350);
+     setTimeout(() => {
+      this.barChart = this.getBarChart();
+    }, 350);
   }
 
   // https://www.chartjs.org/docs/latest/samples/other-charts/doughnut.html PARA CREAR GRÁFICOS
-  getChart(context, chartType, data, options?) {
+  
+  getChartPie(context, chartType, data, options?) {
     return new Chart(context, {
       data,
       options,
       type: chartType,
+    });
+  }
+
+  getChartBar(context, chartType, data) {
+    return new Chart(context, {
+      data,
+      type: chartType,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position:'top',
+          },
+          title: {
+            display: true,
+            text: 'Evolución en función del peso'
+          }
+        }
+      }
     });
   }
 
@@ -69,31 +85,42 @@ export class DashboardPage {
     const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
 
     const data = {
-      labels: ['Red', 'Blue', 'Yellow'],
+      labels: ['Peso en Kilogramos', 'Altura en Centímetros', 'IMC'],
       datasets: [
         {
-          data: [300, 50, 100],
-          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-          hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
-          // data: Utils.numbers(NUMBER_CFG),
-          // backgroundColor: Object.values(Utils.CHART_COLORS),
+          data: [90, 185, 26],
+          backgroundColor: ['#6cd5c0', '#a4c5df', '#009fbf'],
+          hoverBackgroundColor: ['#6cd5c0', '#a4c5df', '#009fbf']
         }]
     };
 
-    return this.getChart(this.pieCanvas.nativeElement, 'doughnut', data);
+    return this.getChartPie(this.pieCanvas.nativeElement, 'doughnut', data);
   }
 
-  // ionViewDidLoad() {
-  //   console.log('ionViewDidLoad DashboardPage');
-  //   console.log(this.storage.get(StorageKeys.USER_INFO));
-  // }
+  getBarChart() {
+    const DATA_COUNT = 7;
+    const NUMBER_CFG = {count: DATA_COUNT, min: -100, max: 100};
 
-  // ngOnInit() : void {
-  //   this.calendar.createCalendar('MyCalendar').then(
-  //     (msg) => { console.log(msg); },
-  //     (err) => { console.log(err); }
-  //   );
-  // }
+    const data = {
+      labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+      datasets: [
+        {
+          label: 'Objetivo',
+          data: [110, 110, 105, 100, 100, 95, 95, 90, 90, 90, 90, 88],
+          borderColor: ['#a4c5df'],
+          // backgroundColor: ['#a4c5df50']
+        },
+        {
+          label: 'Evolución del peso mensual',
+          data: [115, 112, 108, 100, 105, 99, 95, 96, 94, 92, 93, 92],
+          borderColor: ['#009fbf'],
+          type: 'line',
+          backgroundColor: ['#a4c5df20']
+        }]
+    };
+
+    return this.getChartBar(this.barCanvas.nativeElement, 'bar', data);
+  }
 
 
 

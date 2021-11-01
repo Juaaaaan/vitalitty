@@ -39,15 +39,41 @@
       </div>
     </div>
   </div>
-  <div class="info-content">
-    <div class="chart-content">
+  <div class="info-content" padding>
+    <div class="chart-content" padding>
       <ion-card>
         <ion-card-header>Evolución</ion-card-header>
         <ion-card-content>
+          <p class="description-chart-pie">Este gráfico explica, según los datos tomados en la consulta, tu nivel metabólico. Cuanta más continuidad exista, mejores serán los datos y los gráficos tendrán más exactiud</p>
+          <p class="info-chart-pie">*Los gráficos pueden no cambiar instantanéamente</p>
           <!-- <! - Debido a que el gráfico se dibuja a través del lienzo, debe tener una etiqueta de lienzo y obtener el dom a través de #pieCanvas -> -->
           <canvas #pieCanvas class="canvas-graph"></canvas>
         </ion-card-content>
       </ion-card>
+    </div>
+    <div class="bar-content" padding>
+      <ion-card>
+        <ion-card-header>Evolución</ion-card-header>
+        <ion-card-content>
+          <p></p>
+          <!-- <! - Debido a que el gráfico se dibuja a través del lienzo, debe tener una etiqueta de lienzo y obtener el dom a través de #barCanvas -> -->
+          <canvas #barCanvas class="canvas-graph-bar"></canvas>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+  <div class="second">
+    <div padding class="content-align">
+      <writter class="title-dashboard-sec" value="Mis dietas"></writter>
+      <div class="content-initial">
+        <div class="second-content">
+          <writter class="subtitle-dashboard-sec" value="Estas son las últimas dietas que tienes"></writter>
+        </div>
+        <div class="second-content-button">
+          <button ion-button block color="primary" (click)="goToPage('MyProfilePage')">{{ 'MY_PROFILE_BUTTON' | translate }}</button>
+      </div>
+      </div>
     </div>
   </div>
 

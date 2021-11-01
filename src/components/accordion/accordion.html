@@ -1,9 +1,13 @@
 <!-- Generated template for the AccordionComponent component -->
 <ion-card>
-  <ion-card-header (click)="toggleAction(true)">
-    <p>Título de la politica</p>
+  <ion-card-header class="card-header" (click)="toggleAction(true)">
+    <p class="title_accordion">{{text_title}}</p>
+    <img *ngIf="isActive" class="img-icon" src="../../assets/icon/flecha-hacia-arriba.png" width="20px" height="20px">
+    <img *ngIf="!isActive" class="img-icon" src="../../assets/icon/flecha-hacia-abajo.png" width="20px" height="20px">
   </ion-card-header>
   <ion-card-content #first>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione repellat temporibus excepturi architecto maiores velit veritatis corrupti debitis esse obcaecati, exercitationem quasi reprehenderit deserunt! Eaque eius veritatis vel aspernatur modi.</p>
+    <p>{{text_description}}</p>
+    <p>{{optional_text}}</p>
+    <p>{{optional_text_2}}</p>
   </ion-card-content>
 </ion-card>

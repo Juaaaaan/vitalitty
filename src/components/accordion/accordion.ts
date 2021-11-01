@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewChild, Renderer2, Input } from '@angular/core';
 
 /**
  * Generated class for the AccordionComponent component.
@@ -13,6 +13,13 @@ import { Component, OnInit, ViewChild, Renderer2 } from '@angular/core';
 export class AccordionComponent implements OnInit{
 
   private openAccordion: boolean = false;
+  public isActive: boolean = false;
+
+  @Input() text_title: string;
+  @Input() text_description: string;
+  @Input() optional_text: string;
+  @Input() optional_text_2: string;
+
 
   @ViewChild('first') cardContent: any;
 
@@ -30,11 +37,13 @@ export class AccordionComponent implements OnInit{
     if (this.openAccordion) {
       if (isClicked) {
         this.openAccordion = false;
+        this.isActive = false;
         this.renderer.setStyle(this.cardContent.nativeElement, 'display', 'none');
       }
     } else {
       if (isClicked) {
         this.openAccordion = true;
+        this.isActive = true;
         this.renderer.setStyle(this.cardContent.nativeElement, 'max-height', '500px');
         this.renderer.removeStyle(this.cardContent.nativeElement, 'display');
       }

@@ -2,10 +2,20 @@ accordion {
     .card-header {
         cursor: pointer;
         color: white;
+        display: flex;
+
     }
     .card-content {
         padding: 0px 16px;
         height: 0px;
+    }
+
+    .title_accordion {
+        font-weight: bold;
+    }
+    .img-icon {
+        width: 20px;
+        margin-left: 8px;
     }
 
 }

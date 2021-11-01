@@ -13,26 +13,23 @@
 <ion-content class="bg-content-img">
   <div class="content-signup">
     <div class="left-container" padding>
-      <accordion></accordion>
-      <accordion></accordion>
-      <accordion></accordion>
-      <accordion></accordion>
-      <accordion></accordion>
-      <accordion></accordion>
-      <accordion></accordion>
-      <accordion></accordion>
-      <accordion></accordion>
-      <accordion></accordion>
-      <accordion></accordion>
-      <!-- <p class="title-left-container">Estamos para lo que necesites</p>
-      <p class="description-left-container">Estas a un paso de convertir todos tus objetivos en realidad. Para que eso se cumpla, es necesario que te crees una cuenta</p>
-      <div padding>
-        <p class="login-signup-top">¿Ya tienes cuenta?</p>
-        <div class="login-signup">
-          <p class="login-signup-first">Para iniciar sesión puedes volver para atrás o darle </p>
-          <p class="login-signup-second" (click)="login()">aquí</p>
-        </div>
-      </div> -->
+      <p class="first-content">*La siguiente información recopilada de forma agrupada esta íntegramente realizada por Vitalitty</p>
+      <accordion [text_title]="title_first" [text_description]="description_first" [optional_text]="descritpion_2_first"></accordion>
+      <accordion [text_title]="title_second" [text_description]="description_second"></accordion>
+      <accordion [text_title]='title_third' [text_description]="description_third"></accordion>
+      <accordion [text_title]='title_fourth' [text_description]="description_fourth"></accordion>
+      <accordion [text_title]='title_fifth' [text_description]="description_fifth"></accordion>
+      <accordion [text_title]='title_sixth' [text_description]="description_sixth"></accordion>
+      <accordion [text_title]='title_seventh' [text_description]="description_seventh"></accordion>
+      <accordion [text_title]='title_eigths' [text_description]="description_eigths"></accordion>
+      <accordion [text_title]='title_tenth' [text_description]="description_tenth"></accordion>
+      <accordion [text_title]='title_eleventh' [text_description]="description_eleventh"></accordion>
+      <accordion [text_title]='title_twelveth' [text_description]="description_twelveth"></accordion>
+      <accordion [text_title]='title_thirdthteen' [text_description]="description_thirdtenth"></accordion>
+      <accordion [text_title]='title_fourthteen' [text_description]="description_fourthteen"></accordion>
+      <accordion [text_title]='title_fifthteen' [text_description]="description_fifthteen"></accordion>
+
+      <accordion [text_title]="last_title" [text_description]="last_description" [optional_text]="last_description_2" [optional_text_2]="last_description_3"></accordion>
     </div>
   </div>
 </ion-content>

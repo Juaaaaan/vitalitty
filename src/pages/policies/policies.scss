@@ -20,6 +20,11 @@ page-policies {
           position: relative;
           display: flex;
           flex-direction: column;
+          .first-content {
+            padding: 16px;
+            font-size: 12px;
+            font-weight: lighter;
+          }
           .title-left-container{
             margin: 2px auto;
             font-size: 20px;

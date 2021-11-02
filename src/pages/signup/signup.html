@@ -18,13 +18,13 @@
       <form [formGroup]="recoverForm" class="formRegister" (keydown.enter)="doSignup()" (submit)="doSignup()" (change)="change($ev)">
         <ion-list>
           <ion-item class="form-input-register">
-            <ion-input class="input-form" [placeholder]="'NAME_SURNAMES' | translate" type="text" name="name"></ion-input>
+            <ion-input class="input-form" placeholder="* Nombre y apellidos" type="text" name="name" formControlName="name"></ion-input>
           </ion-item>
           <ion-item class="form-input-register">
-            <ion-input class="input-form" [placeholder]="'EMAIL' | translate" type="email" name="email"></ion-input>
+            <ion-input class="input-form" placeholder="* Email" type="email" name="email" formControlName="email"></ion-input>
           </ion-item>
           <ion-item class="form-input-register">
-            <ion-input class="input-form" [placeholder]="'GENDER' | translate" type="text" name="gender"></ion-input>
+            <ion-input class="input-form" placeholder="* Genero" type="text" name="gender" formControlName="gender"></ion-input>
           </ion-item>
           <!-- <ion-item class="form-input-register">
             <ion-input class="input-form" [placeholder]="'WEIGHT' | translate" type="number" [(ngModel)]="account.weight" name="weight">kg</ion-input>
@@ -33,18 +33,18 @@
             <ion-input class="input-form" [placeholder]="'TALL' | translate" type="number" [(ngModel)]="account.tall" name="tall">cm</ion-input>
           </ion-item> -->
           <ion-item class="form-input-register">
-            <ion-input class="input-form" placeholder="Observaciones / Álergenos" type="text" name="observations"></ion-input>
+            <ion-input class="input-form" placeholder="Observaciones / Álergenos" type="text" name="observations" formControlName="observations"></ion-input>
           </ion-item>
           <ion-item class="form-input-register">
-            <ion-input class="input-form" [placeholder]="'PASSWORD' | translate" type="password" name="password"></ion-input>
+            <ion-input class="input-form" placeholder="* Contraseña" type="password" name="password" formControlName="password"></ion-input>
           </ion-item>
           <ion-item class="form-input-register">
-            <ion-input class="input-form" [placeholder]="'CONFIRM_PASSWORD' | translate" type="password" name="confirmPassword"></ion-input>
+            <ion-input class="input-form" placeholder="* Confirmar contraseña" type="password" name="confirmPassword" formControlName="confirmPassword"></ion-input>
           </ion-item>
 
           <ion-item class="form-input-register">
             <ion-label class="check-text">Debes aceptar la política de privacidad</ion-label>
-            <ion-checkbox class="input-form" color="primary" slot="end"></ion-checkbox>
+            <ion-checkbox class="input-form" color="primary" slot="end" formControlName="accept"></ion-checkbox>
           </ion-item>
           <div class="privacy-container">
             <p class="text-privacy">* Para ver la política de privacidad puedes darle</p>

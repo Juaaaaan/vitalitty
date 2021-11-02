@@ -42,13 +42,13 @@ export class SignupPage {
 
   ngOnInit() {
     this.recoverForm = new FormGroup({
-      name: new FormControl(''),
-      email: new FormControl(''),
-      gender: new FormControl(''),
+      name: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required]),
+      gender: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
       confirmPassword: new FormControl('', [Validators.required]),
       observations: new FormControl(''),
-      accept: new FormControl('')
+      accept: new FormControl('', [Validators.required])
     });
   }
 

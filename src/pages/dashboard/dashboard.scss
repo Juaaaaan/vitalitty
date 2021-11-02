@@ -1,4 +1,67 @@
 page-dashboard {
+  .content-dashboard {
+    display: flex;
+  }
+  .left-menu {
+    width: 15%;
+    background-color: #e2e2e247;
+    height: 100%;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    .profile-css {
+      padding: 16px;
+      display: flex;
+      flex-direction: row;
+      margin: 16px auto;
+      border-top: 2px solid #6cd5c0;
+      border-bottom: 2px solid #6cd5c0;
+      .img-menu {
+        max-width: 40px;
+        max-height: 40px;
+        width: 100%;
+        height: 100%;
+        opacity: 40%;
+      }
+      .txt-menu {
+        margin-left: 16px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+    .profile-css-2 {
+      padding: 16px;
+      display: flex;
+      flex-direction: row;
+      margin: 16px auto;
+      //border-top: 2px solid #6cd5c0;
+      border-bottom: 2px solid #6cd5c0;
+      .img-menu {
+        max-width: 40px;
+        max-height: 40px;
+        width: 100%;
+        height: 100%;
+        opacity: 40%;
+      }
+      .txt-menu {
+        margin-left: 16px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+  }
+  .text-menu {
+    margin-left: 16px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .right-content {
+    width: 85%;
+    margin-left: 15%;
+  }
   .overview {
     background: url('../assets/img/italian-cuisine-2378729_1280.webp') repeat transparent;
     background-size: 100%;
@@ -26,46 +89,20 @@ page-dashboard {
       }
     }
   }
+  .menu-dashboard {
+    display: flex;
+  }
   .second {
-    .content-align {
-      display: grid;
-      justify-items: center;
-    }
     .title-dashboard-sec {
-      width: 80%;
       font-size: 22px;
       font-weight: bold;
       margin-top: 22px;
-      display: flex;
-      justify-content: center;
+      // display: flex;
+      // justify-content: center;
       width: auto;
-      max-width: 1024px;
     }
     .content-initial {
-      display: flex;
-      align-items: center;
       width: auto;
-      max-width: 1024px;
-      justify-content: center;
-      .second-content {
-        padding: 30px;
-        background-color: white;
-        width: 80%;
-        height: auto;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-      }
-      .third-img {
-        // width: 40%;
-        .third {
-          background: url('../assets/img/analytics-3265840_1280.jpg') no-repeat;
-          background-size: 100%;
-          height: 330px;
-          width: 500px;
-          border-radius: 4px;
-        }
-      }
       .second-content-button {
         width: 20%;
       }
@@ -89,7 +126,7 @@ page-dashboard {
     display: flex;
     justify-content: row;
     // background-color: map-get($colors, acie-border);
-    background-color: #e2e2e27a;
+    // background-color: #e2e2e27a;
   }
   .chart-content {
     display: flex;
@@ -106,6 +143,8 @@ page-dashboard {
     .canvas-graph {
       max-width: 600px !important;
       max-height: 300px !important;
+      width: 100% !important;
+      height: 100% !important;
     }
   }
   .bar-content {

@@ -24,6 +24,7 @@ export class DashboardPage {
 
   // Variables
   public calendars = [];
+  public newDate = new Date();
 
   // Obtenga el elemento dom del lienzo correspondiente
 	@ViewChild('pieCanvas') pieCanvas;
@@ -81,16 +82,14 @@ export class DashboardPage {
   }
 
   getPieChart() {
-    const DATA_COUNT = 5;
-    const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
 
     const data = {
-      labels: ['Peso en Kilogramos', 'Altura en Centímetros', 'IMC'],
+      labels: ['Peso en Kilogramos', 'Altura en cm.', '% Graso', '% Muscular', 'Cintura en cm.', 'Cadera en cm.', 'Abdomen en cm.'],
       datasets: [
         {
-          data: [90, 185, 26],
-          backgroundColor: ['#6cd5c0', '#a4c5df', '#009fbf'],
-          hoverBackgroundColor: ['#6cd5c0', '#a4c5df', '#009fbf']
+          data: [76, 176, 19.3, 52.4, 62.3, 74.5, 68,2],
+          backgroundColor: ['#6cd5c0', '#a4c5df', '#009fbf', '#73ba9c', '#00b4ff', '#9fefcc', '#395c9c'],
+          hoverBackgroundColor: ['#6cd5c0', '#a4c5df', '#009fbf', '#73ba9c', '#00b4ff', '#9fefcc', '#395c9c']
         }]
     };
 
@@ -98,24 +97,22 @@ export class DashboardPage {
   }
 
   getBarChart() {
-    const DATA_COUNT = 7;
-    const NUMBER_CFG = {count: DATA_COUNT, min: -100, max: 100};
 
     const data = {
       labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
       datasets: [
-        {
-          label: 'Objetivo',
-          data: [110, 110, 105, 100, 100, 95, 95, 90, 90, 90, 90, 88],
-          borderColor: ['#a4c5df'],
-          // backgroundColor: ['#a4c5df50']
-        },
+        // {
+        //   label: 'Objetivo',
+        //   data: [110, 110, 105, 100, 100, 95, 95, 90, 90, 90, 90, 88],
+        //   borderColor: ['#a4c5df'],
+        //   // backgroundColor: ['#a4c5df50']
+        // },
         {
           label: 'Evolución del peso mensual',
           data: [115, 112, 108, 100, 105, 99, 95, 96, 94, 92, 93, 92],
-          borderColor: ['#009fbf'],
+          borderColor: ['#6cd5c0'],
           type: 'line',
-          backgroundColor: ['#a4c5df20']
+          backgroundColor: ['#6cd5c040']
         }]
     };
 

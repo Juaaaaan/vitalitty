@@ -30,70 +30,146 @@
         </div>
         <div class="profile-css-2">
           <img class="img-menu" src="../../assets/icon/icons8-arrow-24.png">
-          <p class="txt-menu" (click)="goToPage('MyProfilePage')">Cerrar sesión</p>
+          <p class="txt-menu" (click)="closeApp('WelcomePage')">Cerrar sesión</p>
         </div>
       </div>
   
     </div>
-    <div class="right-content">
-      <div class="overview">
-        <div padding>
-          <div class="content-initial">
-            <div class="first-content">
-                <writter class="title-dashboard" value="Bienvenida Natalia, ¿Qué tal estás?"></writter>
-                <!-- <writter class="subtitle-dashboard" value="Aquí vas a poder ver la evolución de tus pacientes"></writter> -->
-                <!-- <p>La siguiente cita la tendrás {{newDate}}</p> -->
-                <p>Tú próxima revisión es: 1/12/2021 a las 16:40</p>
-                <!-- <writter class="subtitle-dashboard" value="Podrás gestionar tus citas y enviarselas"></writter>
-                <writter class="subtitle-dashboard" value="Disfruta, te lo mereces"></writter> -->
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="second">
-        <div padding class="content-align">
-          <writter class="title-dashboard-sec" value="Tus últimos datos"></writter>
-          <p>Este gráfico explica, según los datos tomados en la consulta, tu nivel metabólico. Cuanta más continuidad exista, mejores serán los datos y los gráficos tendrán más exactiud</p>
-          <!-- <div class="content-initial">
-            <div class="second-content">
-              <writter class="subtitle-dashboard-sec" value="Cuentanos más de tí, tu perfil lo verán todos los pacientes trata de que sea elegante áun así, si quieres cambiar algo de tu perfil, modificar algún dato puedes hacerlo en cualquier momento"></writter>
-            </div>
-            <div class="second-content-button">
-              <button ion-button block color="primary" (click)="goToPage('MyProfilePage')">{{ 'MY_PROFILE_BUTTON' | translate }}</button>
-          </div>
-          </div> -->
-        </div>
-      </div>
-      <div class="info-content" padding>
-        <div class="chart-content" padding>
-          <ion-card>
-            <ion-card-header>Evolución</ion-card-header>
-            <ion-card-content>
-              <canvas #pieCanvas class="canvas-graph"></canvas>
-            </ion-card-content>
-          </ion-card>
-        </div>
-        <div class="bar-content" padding>
-          <ion-card>
-            <ion-card-header>Evolución</ion-card-header>
-            <ion-card-content>
-              <p></p>
-              <!-- <! - Debido a que el gráfico se dibuja a través del lienzo, debe tener una etiqueta de lienzo y obtener el dom a través de #barCanvas -> -->
-              <canvas #barCanvas class="canvas-graph-bar"></canvas>
-            </ion-card-content>
-          </ion-card>
-        </div>
-      </div>
-      <div class="second">
-        <div padding class="content-align">
-          <writter class="title-dashboard-sec" value="Tus últimas dietas"></writter>
-          <p>Este gráfico explica, según los datos tomados en la consulta, tu nivel metabólico. Cuanta más continuidad exista, mejores serán los datos y los gráficos tendrán más exactiud</p>
-        </div>
-      </div>
-
-    </div>
   </div>
+
+  <ng-container *ngIf="isAdmin">
+
+    <div class="content-dashboard">
+      <div class="right-content">
+        <div class="overview">
+          <div padding>
+            <div class="content-initial">
+              <div class="first-content">
+                  <writter class="title-dashboard" value="Bienvenida Jesús, ¿Qué tal estás?"></writter>
+                  <!-- <writter class="subtitle-dashboard" value="Aquí vas a poder ver la evolución de tus pacientes"></writter> -->
+                  <!-- <p>La siguiente cita la tendrás {{newDate}}</p> -->
+                  <p>Tienes actualmente 684 clientes</p>
+                  <!-- <writter class="subtitle-dashboard" value="Podrás gestionar tus citas y enviarselas"></writter>
+                  <writter class="subtitle-dashboard" value="Disfruta, te lo mereces"></writter> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="second">
+          <div padding class="content-align">
+            <writter class="title-dashboard-sec" value="Esta es tu agenda de hoy"></writter>
+            <p>Tienes 15 pacientes</p>
+            <ion-slides pager="true" dir="{{dir}}" (ionSlideWillChange)="onSlideChangeStart($event)">
+              <ion-slide *ngFor="let slide of slides; let i = index">
+                <div class="slides-content">
+                  <ion-card class="all-pacients" (click)="checkClient(i)">
+                    <ion-card-header [innerHTML]="slide.header"></ion-card-header>
+                    <ion-card-content>
+                      <div class=first-card-pacient-content>
+                        <p [innerHTML]="slide.age"></p>
+                        <p [innerHTML]="slide.weightHeight"></p>
+                        <p [innerHTML]="slide.objectives"></p>
+                      </div>
+                      <div class=first-card-pacient-content>
+                        <p [innerHTML]="slide.vitalitty_time"></p>
+                        <p [innerHTML]="slide.evolution"></p>
+                        <p [innerHTML]="slide.email"></p>
+                      </div>
+                      <!-- <canvas #pieCanvas class="canvas-graph"></canvas> -->
+                    </ion-card-content>
+                  </ion-card>
+                  <div padding>
+                    <p class="text-slide">Para ver las dietas que le has puesto a tus pacientes, puedes pinchar en cada una de las fichas de pacientes. Para ver la última, también puedes hacer click en el icono para descargarla</p>
+                    <img class="img-pdf-slide" src="../../assets/icon/pdf.png">
+                    <p class="text-slide" [innerHTML]="slide.observations"></p>
+                  </div>
+
+                </div>
+                <div>
+                </div>
+              </ion-slide>
+            </ion-slides>
+          </div>
+        </div>
+        <div class="info-content" padding>
+          <div class="bar-content" padding>
+            <ion-card>
+              <ion-card-header>Evolución de clientes</ion-card-header>
+              <ion-card-content>
+                <p>Este gráfico indica la cantidad de clientes que se han registrado en Vitalitty</p>
+                <!-- <! - Debido a que el gráfico se dibuja a través del lienzo, debe tener una etiqueta de lienzo y obtener el dom a través de #barCanvas -> -->
+                <canvas #barCanvas class="canvas-graph-bar"></canvas>
+              </ion-card-content>
+            </ion-card>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ng-container>
+
+  <ng-container *ngIf="!isAdmin">
+    <div class="content-dashboard">
+      <div class="right-content">
+        <div class="overview">
+          <div padding>
+            <div class="content-initial">
+              <div class="first-content">
+                  <writter class="title-dashboard" value="Bienvenida Natalia, ¿Qué tal estás?"></writter>
+                  <!-- <writter class="subtitle-dashboard" value="Aquí vas a poder ver la evolución de tus pacientes"></writter> -->
+                  <!-- <p>La siguiente cita la tendrás {{newDate}}</p> -->
+                  <p>Tú próxima revisión es: 1/12/2021 a las 16:40</p>
+                  <!-- <writter class="subtitle-dashboard" value="Podrás gestionar tus citas y enviarselas"></writter>
+                  <writter class="subtitle-dashboard" value="Disfruta, te lo mereces"></writter> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <div class="second">
+          <div padding class="content-align">
+            <writter class="title-dashboard-sec" value="Tus últimos datos"></writter>
+            <p>Este gráfico explica, según los datos tomados en la consulta, tu nivel metabólico. Cuanta más continuidad exista, mejores serán los datos y los gráficos tendrán más exactiud</p>
+            <!-- <div class="content-initial">
+              <div class="second-content">
+                <writter class="subtitle-dashboard-sec" value="Cuentanos más de tí, tu perfil lo verán todos los pacientes trata de que sea elegante áun así, si quieres cambiar algo de tu perfil, modificar algún dato puedes hacerlo en cualquier momento"></writter>
+              </div>
+              <div class="second-content-button">
+                <button ion-button block color="primary" (click)="goToPage('MyProfilePage')">{{ 'MY_PROFILE_BUTTON' | translate }}</button>
+            </div>
+            </div> -->
+          </div>
+        </div>
+        <div class="info-content" padding>
+          <div class="chart-content" padding>
+            <ion-card>
+              <ion-card-header>Evolución</ion-card-header>
+              <ion-card-content>
+                <canvas #pieCanvas class="canvas-graph"></canvas>
+              </ion-card-content>
+            </ion-card>
+          </div>
+          <div class="bar-content" padding>
+            <ion-card>
+              <ion-card-header>Evolución</ion-card-header>
+              <ion-card-content>
+                <p></p>
+                <!-- <! - Debido a que el gráfico se dibuja a través del lienzo, debe tener una etiqueta de lienzo y obtener el dom a través de #barCanvas -> -->
+                <canvas #barCanvas class="canvas-graph-bar"></canvas>
+              </ion-card-content>
+            </ion-card>
+          </div>
+        </div>
+        <div class="second">
+          <div padding class="content-align">
+            <writter class="title-dashboard-sec" value="Tus últimas dietas"></writter>
+            <p>Este gráfico explica, según los datos tomados en la consulta, tu nivel metabólico. Cuanta más continuidad exista, mejores serán los datos y los gráficos tendrán más exactiud</p>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </ng-container>
 
   <!-- <vitalitty-footer></vitalitty-footer> -->
 </ion-content>

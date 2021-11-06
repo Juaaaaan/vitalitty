@@ -128,6 +128,26 @@ page-dashboard {
     // background-color: map-get($colors, acie-border);
     // background-color: #e2e2e27a;
   }
+
+  .slides-content {
+    display: flex !important;
+  }
+  .text-slide {
+    font-size: 13px;
+    font-weight: lighter;
+  }
+
+  .img-pdf-slide {
+    cursor:pointer;
+  }
+
+  .all-pacients {
+    display: flex;
+    flex-direction: column;
+    max-width: 45%;
+    width: 100%;
+    cursor: pointer;
+  }
   .chart-content {
     display: flex;
     width: 40%;

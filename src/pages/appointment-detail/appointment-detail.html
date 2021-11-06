@@ -6,31 +6,44 @@
 -->
 <ion-header>
   <ion-navbar>
-    <!-- <ion-title>appointment-detail</ion-title> -->
-    <ion-title>{{cal.name}}</ion-title>
+    <ion-title>appointment-detail</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
-  <ion-card *ngFor="let ev of events">
-    <ion-card-header>
-      {{ev.title}}
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item>
-        <ion-icon name="calendar"></ion-icon> Start: {{ev.startDate}}
-      </ion-item>
-
-      <ion-item>
-        <ion-icon name="calendar"></ion-icon> Start: {{ev.endDate}}
-      </ion-item>
-
-      <ion-item>
-        <ion-icon name="locate"></ion-icon> Start: {{ev.location}}
-      </ion-item>
-    </ion-card-content>
-
-  </ion-card>
-
+  <div>
+    <vitalitty-calendar></vitalitty-calendar>
+  </div>
+  <div>
+    <!-- <div class="month">
+      <ul>
+        <li class="prev">&#10094;</li>
+        <li class="next">&#10095;</li>
+        <li>August<br><p style="font-size:18px">{{nowYear}}</p></li>
+      </ul>
+    </div>
+    <ul class="weekdays">
+      <li>Lunes</li>
+      <li>Martes</li>
+      <li>Miércoles</li>
+      <li>Jueves</li>
+      <li>Viernes</li>
+      <li>Sábado</li>
+      <li>Domingo</li>
+    </ul>
+    
+    <ul class="days">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+      <li>9</li>
+      <li><span class="active">10</span></li>
+      <li>11</li>
+    </ul>  -->
+  </div>
 </ion-content>

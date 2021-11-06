@@ -28,6 +28,8 @@ export class AppInterceptorHelper {
     // *******************************************
     public setRequestHeaders(request: HttpRequest<any>) {
 
+        console.log('HOLI');
+
         request = request.clone({
             headers: request.headers
                 .delete('Content-Type')

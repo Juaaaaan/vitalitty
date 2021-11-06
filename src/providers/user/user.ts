@@ -61,7 +61,13 @@ export class User {
               (response: LoginResponseModel) => resolve(response),
               (error) => reject(error)
             );
-          } else {
+          } else if (accountInfo.email === 'client@vitalitty.com' && accountInfo.password === 'Pass1234%') {
+            this.http.get('assets/mocks/login_client.json').subscribe(
+              (response: LoginResponseModel) => resolve(response),
+              (error) => reject(error)
+            );
+          }
+          else {
             this.http.get('assets/mocks/login_KO.json').subscribe(
               (response: LoginResponseModel) => resolve(response),
               (error) => reject(error)

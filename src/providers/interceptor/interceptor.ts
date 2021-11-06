@@ -19,10 +19,14 @@ export class InterceptorProvider implements HttpInterceptor {
 
   constructor(private interceptorHelper: AppInterceptorHelper) {
 
+    console.log('holi')
+
   }
 
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+    console.log('HELLO');
 
     this.interceptorHelper.manageRequestHeaders(request);
     request = this.interceptorHelper.setRequestHeaders(request);
@@ -43,8 +47,10 @@ export class InterceptorProvider implements HttpInterceptor {
       ).do(
         (success: HttpResponse<any>) => {
           this.interceptorHelper.manageSuccessResponse(success);
+          console.log('success');
         },
         (error: HttpErrorResponse) => {
+          console.log('error');
           this.interceptorHelper.manageErrorResponse(error);
         }
       );

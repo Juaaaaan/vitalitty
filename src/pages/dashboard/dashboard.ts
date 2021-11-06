@@ -1,6 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, Platform } from 'ionic-angular';
-import { Calendar } from '@ionic-native/calendar/ngx';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Platform, ViewController } from 'ionic-angular';
 import { StorageProvider } from '../../providers/storage/storage';
 import { Chart } from 'chart.js';
 // import { StorageKeys } from './../../providers/storage/storage.keys';
@@ -20,11 +19,16 @@ import { Chart } from 'chart.js';
     StorageProvider
   ]
 })
-export class DashboardPage {
+export class DashboardPage implements OnInit {
 
   // Variables
-  public calendars = [];
+
+  slides: any[];
+  showSkip = true;
+  dir: string = 'ltr';
+
   public newDate = new Date();
+  public isAdmin: boolean = false;
 
   // Obtenga el elemento dom del lienzo correspondiente
 	@ViewChild('pieCanvas') pieCanvas;
@@ -37,10 +41,11 @@ export class DashboardPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     // private storage: StorageProvider,
-    private viewCtrl: ViewController
-    ) {
-
-  }
+    private viewCtrl: ViewController,
+    public platform: Platform) {
+      this.dir = platform.dir();
+      this.isAdmin = this.navParams.get('isAdmin');
+    }
 
   ngAfterViewInit() {
     // Inicializa el gráfico
@@ -50,6 +55,37 @@ export class DashboardPage {
      setTimeout(() => {
       this.barChart = this.getBarChart();
     }, 350);
+  }
+
+  ngOnInit(): void {
+    if (this.isAdmin) {
+      this.slides = [
+        {
+          header: 'Tienes a Roberto Manrique a las 10:00',
+          age: 'Edad: 33 años',
+          weightHeight: 'Peso y estatura actual: 94,32kg',
+          objectives: 'Objetivo: bajar de peso y pérdida de colesterol',
+          vitalitty_time: 'Tiempo en Vitalitty: 2 años aproximadamente',
+          evolution: 'Evolucion: favorable',
+          email: 'vanesa.martin@vitalitty.com',
+          observations: '<b>* Observaciones del cliente respecto a la dieta:</b> No me gustan los guisantes. Me cuesta cumplir la dieta dado que por temas laborales no puedo acomodarme. Necesito volver a repasarla'
+        },
+        {
+          header: 'Tienes a Vanesa Martín a las 10:30',
+          age: 'Edad: 24 años',
+          weightHeight: 'Peso y altura actual: 51kg, 161cm',
+          objectives: 'Objetivo: subida de peso de forma saludable',
+          vitalitty_time: 'Tiempo en Vitalitty: 5 meses y 3 días',
+          evolution: 'Evolución: satisfactoria',
+          email: 'Email: vanesa.martin@vitalitty.com',
+          observations: '<b>* Observaciones del cliente respecto a la dieta:</b> Estoy encantada, de momento la puedo seguir sin problemas'
+        },
+      ];
+    }
+  }
+
+  onSlideChangeStart(slider) {
+    this.showSkip = !slider.isEnd();
   }
 
   // https://www.chartjs.org/docs/latest/samples/other-charts/doughnut.html PARA CREAR GRÁFICOS
@@ -82,7 +118,6 @@ export class DashboardPage {
   }
 
   getPieChart() {
-
     const data = {
       labels: ['Peso en Kilogramos', 'Altura en cm.', '% Graso', '% Muscular', 'Cintura en cm.', 'Cadera en cm.', 'Abdomen en cm.'],
       datasets: [
@@ -93,30 +128,72 @@ export class DashboardPage {
         }]
     };
 
-    return this.getChartPie(this.pieCanvas.nativeElement, 'doughnut', data);
+    if (this.pieCanvas) {
+      return this.getChartPie(this.pieCanvas.nativeElement, 'doughnut', data);
+    }
+
   }
 
   getBarChart() {
+    if (!this.isAdmin) {
+      let allMonths = [];
+      let monthOrdered = [];
+      let monthOrdererNames = [];
+      const monthLabels: string[] =  ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
-    const data = {
-      labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-      datasets: [
-        // {
-        //   label: 'Objetivo',
-        //   data: [110, 110, 105, 100, 100, 95, 95, 90, 90, 90, 90, 88],
-        //   borderColor: ['#a4c5df'],
-        //   // backgroundColor: ['#a4c5df50']
-        // },
-        {
-          label: 'Evolución del peso mensual',
-          data: [115, 112, 108, 100, 105, 99, 95, 96, 94, 92, 93, 92],
-          borderColor: ['#6cd5c0'],
-          type: 'line',
-          backgroundColor: ['#6cd5c040']
-        }]
-    };
+      const actuallyMonth = new Date().getMonth();
+      for (let index = 0; index < 12; index++) {
+        allMonths.push(index);
+      }
 
-    return this.getChartBar(this.barCanvas.nativeElement, 'bar', data);
+      for (let index = actuallyMonth; index < 12; index++) {
+        monthOrdered.push(index);
+      }
+      for (let index = 0; index < actuallyMonth; index++){
+        monthOrdered.push(index);
+      }
+      for (let index = 0; index < monthOrdered.length; index++) {
+        monthOrdererNames.push(monthLabels[monthOrdered[index]]);
+      }
+
+      console.log(monthOrdererNames);
+
+      const data = {
+        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        // labels: monthOrdererNames,
+        datasets: [
+          {
+            label: 'Objetivo de clientes',
+            data: [0,0,0,0,0,0,0,0,0,0,20, 50],
+            borderColor: ['#a4c5df'],
+            backgroundColor: ['#a4c5df50'],
+            type: 'line'
+          },
+          {
+            label: 'Clientes actuales',
+            data: [0,0,0,0,0,0,0,0,0,1,2,3],
+            borderColor: ['#6cd5c0'],
+            type: 'line',
+            backgroundColor: ['#6cd5c040']
+          }]
+      };
+      return this.getChartBar(this.barCanvas.nativeElement, 'line', data);
+
+    } else {
+      const data = {
+        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        datasets: [
+          {
+            label: 'Evolución del peso mensual',
+            data: [115, 112, 108, 100, 105, 99, 95, 96, 94, 92, 93, 92],
+            borderColor: ['#6cd5c0'],
+            type: 'line',
+            backgroundColor: ['#6cd5c040']
+          }]
+      };
+      return this.getChartBar(this.barCanvas.nativeElement, 'bar', data);
+    }
+
   }
 
 
@@ -124,6 +201,10 @@ export class DashboardPage {
   public goToPage(page: string) {
     this.navCtrl.push(page);
   }
+  
+  public checkClient(client: number) {
+    this.navCtrl.push('AppointmentDetailPage', client);
+  } 
 
   public closeApp(page: string) {
     // window.localStorage.clear();

@@ -9,6 +9,7 @@ import { VitalittyLoggedUserComponent } from './vitalitty-logged-user/vitalitty-
 import { IconTextComponent } from './icon-text/icon-text';
 import { HeaderLogoutComponent } from './header-logout/header-logout';
 import { AccordionComponent } from './accordion/accordion';
+import { VitalittyCalendarComponent } from './vitalitty-calendar/vitalitty-calendar';
 
 @NgModule({
 	declarations: [WritterComponent,
@@ -17,7 +18,8 @@ import { AccordionComponent } from './accordion/accordion';
     VitalittyLoggedUserComponent,
     IconTextComponent,
     HeaderLogoutComponent,
-    AccordionComponent],
+    AccordionComponent,
+    VitalittyCalendarComponent],
 	imports: [
     IonicModule,
     TranslateModule.forChild(),
@@ -29,6 +31,7 @@ import { AccordionComponent } from './accordion/accordion';
     VitalittyLoggedUserComponent,
     IconTextComponent,
     HeaderLogoutComponent,
-    AccordionComponent]
+    AccordionComponent,
+    VitalittyCalendarComponent]
 })
 export class ComponentsModule {}

@@ -48,6 +48,7 @@ export class SignupPage {
       password: new FormControl('', [Validators.required]),
       confirmPassword: new FormControl('', [Validators.required]),
       observations: new FormControl(''),
+      tel: new FormControl('', [Validators.required]),
       accept: new FormControl('', [Validators.required])
     });
   }

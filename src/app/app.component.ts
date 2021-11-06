@@ -100,7 +100,7 @@ export class MyApp {
   }
 
   ngOnInit() {
-    console.log(this.currentPage);
+    // console.log(this.currentPage);
     // registerLocaleData(es);
     this.navHelper.setNavController(this.navCtrl);
     this.listenUserMenuChanges();

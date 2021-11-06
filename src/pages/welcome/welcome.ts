@@ -6,7 +6,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { FormHelperProvider } from './../../providers/form-helper/form-helper';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PATTERNS } from '../../providers/validators/validators.patterns';
-import { StorageKeys } from './../../providers/storage/storage.keys';
 import { LoginServiceModel } from '../../providers/auth/auth.model';
 import { AuthServiceParser } from '../../providers/auth/auth.parser';
 import { KeyValueModel } from '../../providers/ui/ui.models';
@@ -71,6 +70,14 @@ export class WelcomePage implements OnInit {
 
      }
 
+    //  ionViewCanEnter(): boolean{
+    //   if(this.storage.get('responseAdmin')){
+    //     return false;
+    //   } else {
+    //     return true;
+    //   }
+    //  }
+
      ngOnInit() {
       this.loginForm = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.pattern(PATTERNS.PATTERN_EMAIL)]),
@@ -107,8 +114,8 @@ export class WelcomePage implements OnInit {
         this.access_token = response.body['X-Authorization'] ? response.body['X-Authorization'] : 'no tiene x-authorization' ;
         this.storageProvider.set('access_token', this.access_token);
         if (response.body) {
-          this.storage.set(response.body.isAdmin, StorageKeys.USER_INFO);
-          this.navCtrl.push('DashboardPage', {isAdmin: response.body.isAdmin});
+          this.storageProvider.set('responseAdmin', 1);
+          this.navCtrl.setRoot('DashboardPage', {isAdmin: response.body.isAdmin});
         }
       } else {
         if (this.countError === 3) {

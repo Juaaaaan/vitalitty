@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform, ViewController } from 'ionic-angular';
-import { StorageProvider } from '../../providers/storage/storage';
+import { StorageProvider } from '../../shared/storage';
 import { Chart } from 'chart.js';
 // import { StorageKeys } from './../../providers/storage/storage.keys';
 
@@ -40,12 +40,20 @@ export class DashboardPage implements OnInit {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    // private storage: StorageProvider,
+    private storage: StorageProvider,
     private viewCtrl: ViewController,
     public platform: Platform) {
       this.dir = platform.dir();
       this.isAdmin = this.navParams.get('isAdmin');
     }
+
+    ionViewCanEnter(): boolean{
+      if(this.storage.get('responseAdmin') === 1){
+         return true;
+       } else {
+         return false;
+       }
+     }
 
   ngAfterViewInit() {
     // Inicializa el gráfico
@@ -208,6 +216,7 @@ export class DashboardPage implements OnInit {
 
   public closeApp(page: string) {
     // window.localStorage.clear();
+    this.storage.remove(['responseAdmin']);
     this.navCtrl.push(page).then(() => {
       const index = this.viewCtrl.index;
       this.navCtrl.remove(index);

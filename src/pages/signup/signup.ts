@@ -5,6 +5,7 @@ import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
 import { User } from '../../providers';
 import { NavHelperProvider } from '../../providers/ui/nav-helper';
+import { StorageProvider } from '../../shared/storage';
 
 @IonicPage()
 @Component({
@@ -33,7 +34,8 @@ export class SignupPage {
     public toastCtrl: ToastController,
     public translate: TranslateService,
     private formBuilder: FormBuilder,
-    private navHelper: NavHelperProvider) {
+    private navHelper: NavHelperProvider,
+    private storage: StorageProvider) {
 
     this.translate.get('SIGNUP_ERROR').subscribe((value) => {
       this.signupErrorString = value;
@@ -41,6 +43,7 @@ export class SignupPage {
   }
 
   ngOnInit() {
+    this.storage.remove(['responseAdmin']);
     this.recoverForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required]),
@@ -91,7 +94,7 @@ export class SignupPage {
     //   animate: true,
     //   direction: 'backward'
     // });
-    this.navHelper.popToPage('WelcomePage', {}, {animate:true, direction:'backward'});
+    this.navHelper.setRoot('WelcomePage', {}, {animate:true, direction:'backward'});
   }
   
   public downloadPrivacy() {

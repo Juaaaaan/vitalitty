@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, MenuController, NavController, NavParams } from 'ionic-angular';
 
 /**
  * Generated class for the AppointmentDetailPage page.
@@ -18,7 +18,8 @@ export class AppointmentDetailPage implements OnInit {
   public events = [];
 
   constructor(public navCtrl: NavController,
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    private menuCtrl: MenuController) {
   }
 
   ionViewDidLoad() {
@@ -27,6 +28,10 @@ export class AppointmentDetailPage implements OnInit {
 
 
   ngOnInit(): void {
+  }
+
+  menuDesplegable() {
+    this.menuCtrl.toggle()
   }
 
 }

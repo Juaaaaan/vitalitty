@@ -59,11 +59,10 @@ page-dashboard {
     cursor: pointer;
   }
   .right-content {
-    width: 85%;
-    margin-left: 15%;
+    width: 100%;
   }
   .overview {
-    background: url('../assets/img/italian-cuisine-2378729_1280.webp') repeat transparent;
+    background: url('../../assets/img/watercolour-1325656_1280.jpg') repeat transparent;
     background-size: 100%;
     .content-initial {
       display: flex;
@@ -124,9 +123,17 @@ page-dashboard {
 
   .info-content {
     display: flex;
-    justify-content: row;
-    // background-color: map-get($colors, acie-border);
-    // background-color: #e2e2e27a;
+    flex-direction: column;
+    max-width: 1600px;
+    margin: 0 auto;
+    .info-container {
+      display: flex;
+      flex-direction: row;
+    }
+    .title-card {
+      font-size: 20px;
+      font-weight: bold;
+    }
   }
 
   .slides-content {
@@ -150,7 +157,7 @@ page-dashboard {
   }
   .chart-content {
     display: flex;
-    width: 40%;
+    width: 32.5%;
     .description-chart-pie {
       margin: 4px;
       font-weight: lighter;
@@ -169,7 +176,7 @@ page-dashboard {
   }
   .bar-content {
     display: flex;
-    width: 60%;
+    width: 35%;
     .canvas-graph-bar {
       width: auto;
       max-height: 400px;

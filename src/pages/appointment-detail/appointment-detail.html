@@ -5,9 +5,14 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <button ion-button (click)="menuDesplegable()">
+        <ion-icon slot="icon-only" name="menu"></ion-icon>
+      </button>
+  </ion-buttons>
     <ion-title>appointment-detail</ion-title>
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>

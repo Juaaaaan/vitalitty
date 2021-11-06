@@ -4,16 +4,18 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<!-- <ion-header>
-  <ion-navbar hideBackButton>
-    <ion-buttons end>
-      <button ion-button (click)="closeApp('WelcomePage')" color="primary">Cerrar Sesión</button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header> -->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <button ion-button (click)="menuDesplegable()">
+        <ion-icon slot="icon-only" name="menu"></ion-icon>
+      </button>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
-  <div class="content-dashboard">
+  <!-- <div class="content-dashboard">
     <div class="left-menu">
       <div>
         <img>
@@ -35,7 +37,7 @@
       </div>
   
     </div>
-  </div>
+  </div> -->
 
   <ng-container *ngIf="isAdmin">
 
@@ -126,44 +128,44 @@
           </div>
         </div>
       
-        <div class="second">
-          <div padding class="content-align">
-            <writter class="title-dashboard-sec" value="Tus últimos datos"></writter>
-            <p>Este gráfico explica, según los datos tomados en la consulta, tu nivel metabólico. Cuanta más continuidad exista, mejores serán los datos y los gráficos tendrán más exactiud</p>
-            <!-- <div class="content-initial">
-              <div class="second-content">
-                <writter class="subtitle-dashboard-sec" value="Cuentanos más de tí, tu perfil lo verán todos los pacientes trata de que sea elegante áun así, si quieres cambiar algo de tu perfil, modificar algún dato puedes hacerlo en cualquier momento"></writter>
-              </div>
-              <div class="second-content-button">
-                <button ion-button block color="primary" (click)="goToPage('MyProfilePage')">{{ 'MY_PROFILE_BUTTON' | translate }}</button>
-            </div>
-            </div> -->
-          </div>
-        </div>
         <div class="info-content" padding>
-          <div class="chart-content" padding>
-            <ion-card>
-              <ion-card-header>Evolución</ion-card-header>
-              <ion-card-content>
-                <canvas #pieCanvas class="canvas-graph"></canvas>
-              </ion-card-content>
-            </ion-card>
+          <div class="second">
+            <div padding class="content-align">
+              <writter class="title-dashboard-sec" value="Tus últimos datos"></writter>
+              <p>Este gráfico explica, según los datos tomados en la consulta, tu nivel metabólico. Cuanta más continuidad exista, mejores serán los datos y los gráficos tendrán más exactiud</p>
+            </div>
           </div>
-          <div class="bar-content" padding>
-            <ion-card>
-              <ion-card-header>Evolución</ion-card-header>
-              <ion-card-content>
-                <p></p>
-                <!-- <! - Debido a que el gráfico se dibuja a través del lienzo, debe tener una etiqueta de lienzo y obtener el dom a través de #barCanvas -> -->
-                <canvas #barCanvas class="canvas-graph-bar"></canvas>
-              </ion-card-content>
-            </ion-card>
-          </div>
-        </div>
-        <div class="second">
-          <div padding class="content-align">
-            <writter class="title-dashboard-sec" value="Tus últimas dietas"></writter>
-            <p>Este gráfico explica, según los datos tomados en la consulta, tu nivel metabólico. Cuanta más continuidad exista, mejores serán los datos y los gráficos tendrán más exactiud</p>
+          <div class="info-container">
+            <div class="bar-content" padding>
+              <ion-card>
+                <ion-card-header class="title-card">Evolución</ion-card-header>
+                <ion-card-content>
+                  <p>El gráfico hace referencia a toda la evolución desde que llevas con Vitalitty. </p>
+                  <canvas #barCanvas class="canvas-graph-bar"></canvas>
+                </ion-card-content>
+              </ion-card>
+            </div>
+            <div class="chart-content" padding>
+              <ion-card>
+                <ion-card-header class="title-card">Datos importantes</ion-card-header>
+                <ion-card-content>
+                  <p>Estos son tus datos actuales más relevantes para que conozcas un poco más sobre tí</p>
+                  <canvas #pieCanvas class="canvas-graph"></canvas>
+                </ion-card-content>
+              </ion-card>
+            </div>
+            <div class="chart-content" padding>
+              <ion-card>
+                <ion-card-header class="title-card">Tus últimas dietas</ion-card-header>
+                <ion-card-content>
+                  <div class="second">
+                    <div padding class="content-align">
+                      <p>Este gráfico explica, según los datos tomados en la consulta, tu nivel metabólico. Cuanta más continuidad exista, mejores serán los datos y los gráficos tendrán más exactiud</p>
+                    </div>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </div>
           </div>
         </div>
   
@@ -171,5 +173,5 @@
     </div>
   </ng-container>
 
-  <!-- <vitalitty-footer></vitalitty-footer> -->
+  <vitalitty-footer></vitalitty-footer>
 </ion-content>

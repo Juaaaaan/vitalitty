@@ -1,5 +1,5 @@
 import { Storage } from '@ionic/storage';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { User } from '../../providers/user/user';
 import { TranslateService } from '@ngx-translate/core';
@@ -114,7 +114,7 @@ export class WelcomePage implements OnInit {
         this.access_token = response.body['X-Authorization'] ? response.body['X-Authorization'] : 'no tiene x-authorization' ;
         this.storageProvider.set('access_token', this.access_token);
         if (response.body) {
-          this.storageProvider.set('responseAdmin', 1);
+          this.storageProvider.set('responseAdmin', response.body.isAdmin ? 1 : 2);
           this.navCtrl.setRoot('DashboardPage', {isAdmin: response.body.isAdmin});
         }
       } else {

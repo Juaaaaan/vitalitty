@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, ViewController } from 'ionic-angular';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { IonicPage, MenuController, NavController, NavParams, Platform, ViewController } from 'ionic-angular';
 import { StorageProvider } from '../../shared/storage';
 import { Chart } from 'chart.js';
 // import { StorageKeys } from './../../providers/storage/storage.keys';
@@ -19,7 +19,7 @@ import { Chart } from 'chart.js';
     StorageProvider
   ]
 })
-export class DashboardPage implements OnInit {
+export class DashboardPage implements OnInit, OnDestroy {
 
   // Variables
 
@@ -42,7 +42,8 @@ export class DashboardPage implements OnInit {
     public navParams: NavParams,
     private storage: StorageProvider,
     private viewCtrl: ViewController,
-    public platform: Platform) {
+    public platform: Platform,
+    private menuCtrl: MenuController) {
       this.dir = platform.dir();
       this.isAdmin = this.navParams.get('isAdmin');
     }
@@ -50,8 +51,10 @@ export class DashboardPage implements OnInit {
     ionViewCanEnter(): boolean{
       if(this.storage.get('responseAdmin') === 1){
          return true;
+       } else if (this.storage.get('responseAdmin') === 2) {
+         return true;
        } else {
-         return false;
+        return false;
        }
      }
 
@@ -90,6 +93,11 @@ export class DashboardPage implements OnInit {
         },
       ];
     }
+  }
+
+
+  menuDesplegable() {
+    this.menuCtrl.toggle()
   }
 
   onSlideChangeStart(slider) {
@@ -143,7 +151,7 @@ export class DashboardPage implements OnInit {
   }
 
   getBarChart() {
-    if (!this.isAdmin) {
+    if (this.isAdmin) {
       let allMonths = [];
       let monthOrdered = [];
       let monthOrdererNames = [];
@@ -164,7 +172,7 @@ export class DashboardPage implements OnInit {
         monthOrdererNames.push(monthLabels[monthOrdered[index]]);
       }
 
-      console.log(monthOrdererNames);
+      // console.log(monthOrdererNames);
 
       const data = {
         labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
@@ -221,6 +229,10 @@ export class DashboardPage implements OnInit {
       const index = this.viewCtrl.index;
       this.navCtrl.remove(index);
     })
+  }
+
+  ngOnDestroy():void {
+    this.closeApp('WelcomePage');
   }
 
 }

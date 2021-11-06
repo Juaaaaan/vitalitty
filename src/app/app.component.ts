@@ -12,12 +12,13 @@ import { VitalittyHeaderComponent } from '../components/vitalitty-header/vitalit
 import { HeaderOption } from '../components/vitalitty-logged-user/vitalitty-logged-user';
 import { UserHeaderViewModel } from './../components/vitalitty-logged-user/viewModel';
 import { CheckEnvDirective } from '../directives/check-env/check-env';
+import { StorageProvider } from '../shared/storage';
 
 export interface KeyValueModelWithPage extends KeyValueModel {
   page?: string;
 }
 @Component({
-  template: `<ion-menu [content]="content" type="overlay">
+  template: `<ion-menu [content]="content" side="start" menuId="first" contentId="main" type="overlay">
   <ion-header>
     <ion-toolbar>
       <ion-title>Pages</ion-title>
@@ -87,7 +88,8 @@ export class MyApp {
     private config: Config,
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
-    private navHelper: NavHelperProvider) {
+    private navHelper: NavHelperProvider,
+    private storage: StorageProvider) {
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -106,6 +108,12 @@ export class MyApp {
     this.listenUserMenuChanges();
     this.listenNavChanges();
     this.checkAutoLogout();
+    console.log(this.storage.get('responseAdmin'));
+    if (this.storage.get('responseAdmin') === 1) {
+      this.loadMenuPages('admin');
+    } else {
+      this.loadMenuPages('client');
+    }
   }
 
   // *******************************************
@@ -113,6 +121,27 @@ export class MyApp {
   // *******************************************
   private listenNavChanges() {
     this.navCtrl.viewWillEnter.subscribe((view: ViewController) => this.currentPage = view.name);
+  }
+
+  private loadMenuPages (typeUser: string) {
+    switch (typeUser) {
+      case 'admin':
+        this.pages = [
+          { title: 'Welcome', component: 'WelcomePage' },
+          { title: 'Tutorial', component: 'TutorialPage' },
+          { title: 'Cerrar sesión', component: 'WelcomePage' }
+        ]
+        break;
+      case 'client': 
+      this.pages = [
+        { title: 'Tabs', component: 'TabsPage' },
+        { title: 'Cards', component: 'CardsPage' },
+        { title: 'Cerrar sesión', component: 'WelcomePage' }
+      ]
+        break;
+      default:
+        break;
+    }
   }
 
   private listenUserMenuChanges() {
@@ -248,6 +277,11 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.navCtrl.setRoot(page.component);
+    if (page) {
+      if (page.component === 'WelcomePage') {
+        this.storage.remove(['responseAdmin']);
+      }
+      this.navCtrl.setRoot(page.component);
+    }
   }
 }

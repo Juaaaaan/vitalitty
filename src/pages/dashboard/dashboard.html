@@ -15,30 +15,6 @@
 </ion-header>
 
 <ion-content>
-  <!-- <div class="content-dashboard">
-    <div class="left-menu">
-      <div>
-        <img>
-        <p>María Sánchez</p>
-      </div>
-      <div>
-        <div class="profile-css">
-          <img class="img-menu" src="../../assets/icon/user.png">
-          <p class="txt-menu" (click)="goToPage('MyProfilePage')">Perfil</p>
-        </div>
-        <div class="profile-css-2">
-          <img class="img-menu" src="../../assets/icon/google-docs.png">
-          <p class="txt-menu" (click)="goToPage('MyProfilePage')">Documentos</p>
-        </div>
-        <div class="profile-css-2">
-          <img class="img-menu" src="../../assets/icon/icons8-arrow-24.png">
-          <p class="txt-menu" (click)="closeApp('WelcomePage')">Cerrar sesión</p>
-        </div>
-      </div>
-  
-    </div>
-  </div> -->
-
   <ng-container *ngIf="isAdmin">
 
     <div class="content-dashboard">
@@ -159,8 +135,13 @@
                 <ion-card-header class="title-card">Tus últimas dietas</ion-card-header>
                 <ion-card-content>
                   <div class="second">
-                    <div padding class="content-align">
-                      <p>Este gráfico explica, según los datos tomados en la consulta, tu nivel metabólico. Cuanta más continuidad exista, mejores serán los datos y los gráficos tendrán más exactiud</p>
+                    <p>En este apartado puedes ver tu última dieta</p>
+                    <div class="last-diet" padding>
+                      <img class="pdf-img" src="../../assets/icon/pdf.png">
+                      <p>Puedes revisar la última dieta, pinchando en el icono<br>Puedes revisar todas las dietas pinchando en el siguiente botón</p>
+                    </div>
+                    <div class="all-diets">
+                      <button ion-button>Ver todas las dietas</button>
                     </div>
                   </div>
                 </ion-card-content>

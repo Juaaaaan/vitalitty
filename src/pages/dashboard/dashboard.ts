@@ -109,7 +109,14 @@ export class DashboardPage implements OnInit, OnDestroy {
   getChartPie(context, chartType, data, options?) {
     return new Chart(context, {
       data,
-      options,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+          },
+        }
+      },
       type: chartType,
     });
   }
@@ -135,7 +142,7 @@ export class DashboardPage implements OnInit, OnDestroy {
 
   getPieChart() {
     const data = {
-      labels: ['Peso en Kilogramos', 'Altura en cm.', '% Graso', '% Muscular', 'Cintura en cm.', 'Cadera en cm.', 'Abdomen en cm.'],
+      labels: ['Peso en Kilogramos', 'Altura en cm', '% Graso', '% Muscular', 'Cintura en cm', 'Cadera en cm', 'Abdomen en cm'],
       datasets: [
         {
           data: [76, 176, 19.3, 52.4, 62.3, 74.5, 68,2],

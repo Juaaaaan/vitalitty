@@ -134,8 +134,7 @@ export class MyApp {
         break;
       case 'client': 
       this.pages = [
-        { title: 'Tabs', component: 'TabsPage' },
-        { title: 'Cards', component: 'CardsPage' },
+        { title: 'Clientes', component: 'ClientsPage' },
         { title: 'Cerrar sesión', component: 'WelcomePage' }
       ]
         break;

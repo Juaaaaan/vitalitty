@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { IonicPage, MenuController, NavController, NavParams, Platform, ViewController } from 'ionic-angular';
 import { StorageProvider } from '../../shared/storage';
 import { Chart } from 'chart.js';
+import { Item } from '../../models/item';
+import { Items } from '../../providers';
 // import { StorageKeys } from './../../providers/storage/storage.keys';
 
 /**
@@ -23,9 +25,10 @@ export class DashboardPage implements OnInit, OnDestroy {
 
   // Variables
 
-  slides: any[];
+  public slides: any[];
   showSkip = true;
   dir: string = 'ltr';
+  currentItems: any = [];
 
   public newDate = new Date();
   public isAdmin: boolean = false;
@@ -43,7 +46,8 @@ export class DashboardPage implements OnInit, OnDestroy {
     private storage: StorageProvider,
     private viewCtrl: ViewController,
     public platform: Platform,
-    private menuCtrl: MenuController) {
+    private menuCtrl: MenuController,
+    public items: Items) {
       this.dir = platform.dir();
       this.isAdmin = this.navParams.get('isAdmin');
     }
@@ -72,27 +76,60 @@ export class DashboardPage implements OnInit, OnDestroy {
     if (this.isAdmin) {
       this.slides = [
         {
-          header: 'Tienes a Roberto Manrique a las 10:00',
+          header: 'Tienes a <b>Roberto Manrique</b> a las <b>10:00</b>',
           age: 'Edad: 33 años',
-          weightHeight: 'Peso y estatura actual: 94,32kg',
-          objectives: 'Objetivo: bajar de peso y pérdida de colesterol',
-          vitalitty_time: 'Tiempo en Vitalitty: 2 años aproximadamente',
-          evolution: 'Evolucion: favorable',
           email: 'vanesa.martin@vitalitty.com',
           observations: '<b>* Observaciones del cliente respecto a la dieta:</b> No me gustan los guisantes. Me cuesta cumplir la dieta dado que por temas laborales no puedo acomodarme. Necesito volver a repasarla'
         },
         {
-          header: 'Tienes a Vanesa Martín a las 10:30',
+          header: 'Tienes a <b>Vanesa Martín</b> a las <b>10:30</b>',
           age: 'Edad: 24 años',
-          weightHeight: 'Peso y altura actual: 51kg, 161cm',
-          objectives: 'Objetivo: subida de peso de forma saludable',
-          vitalitty_time: 'Tiempo en Vitalitty: 5 meses y 3 días',
-          evolution: 'Evolución: satisfactoria',
           email: 'Email: vanesa.martin@vitalitty.com',
           observations: '<b>* Observaciones del cliente respecto a la dieta:</b> Estoy encantada, de momento la puedo seguir sin problemas'
         },
+        {
+          header: 'Tienes a <b>Roberto Manrique</b> a las <b>11:00</b>',
+          age: 'Edad: 33 años',
+          email: 'vanesa.martin@vitalitty.com',
+          observations: '<b>* Observaciones del cliente respecto a la dieta:</b> No me gustan los guisantes. Me cuesta cumplir la dieta dado que por temas laborales no puedo acomodarme. Necesito volver a repasarla'
+        },
+        {
+          header: 'Tienes a <b>Roberto Manrique</b> a las <b>11:30</b>',
+          age: 'Edad: 33 años',
+          email: 'vanesa.martin@vitalitty.com',
+          observations: '<b>* Observaciones del cliente respecto a la dieta:</b> No me gustan los guisantes. Me cuesta cumplir la dieta dado que por temas laborales no puedo acomodarme. Necesito volver a repasarla'
+        },
+        {
+          header: 'Tienes a <b>Roberto Manrique</b> a las <b>12:00</b>',
+          age: 'Edad: 33 años',
+          email: 'vanesa.martin@vitalitty.com',
+          observations: '<b>* Observaciones del cliente respecto a la dieta:</b> No me gustan los guisantes. Me cuesta cumplir la dieta dado que por temas laborales no puedo acomodarme. Necesito volver a repasarla'
+        },
+        {
+          header: 'Tienes a <b>Roberto Manrique</b> a las <b>12:30</b>',
+          age: 'Edad: 33 años',
+          email: 'vanesa.martin@vitalitty.com',
+          observations: '<b>* Observaciones del cliente respecto a la dieta:</b> No me gustan los guisantes. Me cuesta cumplir la dieta dado que por temas laborales no puedo acomodarme. Necesito volver a repasarla'
+        },
       ];
     }
+  }
+
+  getItems(ev) {
+    let val = ev.target.value;
+    if (!val || !val.trim()) {
+      this.currentItems = [];
+      return;
+    }
+    this.currentItems = this.items.query({
+      name: val
+    });
+  }
+
+  openItem(item: Item) {
+    this.navCtrl.push('ItemDetailPage', {
+      item: item
+    });
   }
 
 
@@ -158,51 +195,7 @@ export class DashboardPage implements OnInit, OnDestroy {
   }
 
   getBarChart() {
-    if (this.isAdmin) {
-      let allMonths = [];
-      let monthOrdered = [];
-      let monthOrdererNames = [];
-      const monthLabels: string[] =  ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-
-      const actuallyMonth = new Date().getMonth();
-      for (let index = 0; index < 12; index++) {
-        allMonths.push(index);
-      }
-
-      for (let index = actuallyMonth; index < 12; index++) {
-        monthOrdered.push(index);
-      }
-      for (let index = 0; index < actuallyMonth; index++){
-        monthOrdered.push(index);
-      }
-      for (let index = 0; index < monthOrdered.length; index++) {
-        monthOrdererNames.push(monthLabels[monthOrdered[index]]);
-      }
-
-      // console.log(monthOrdererNames);
-
-      const data = {
-        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-        // labels: monthOrdererNames,
-        datasets: [
-          {
-            label: 'Objetivo de clientes',
-            data: [0,0,0,0,0,0,0,0,0,0,20, 50],
-            borderColor: ['#a4c5df'],
-            backgroundColor: ['#a4c5df50'],
-            type: 'line'
-          },
-          {
-            label: 'Clientes actuales',
-            data: [0,0,0,0,0,0,0,0,0,1,2,3],
-            borderColor: ['#6cd5c0'],
-            type: 'line',
-            backgroundColor: ['#6cd5c040']
-          }]
-      };
-      return this.getChartBar(this.barCanvas.nativeElement, 'line', data);
-
-    } else {
+    if (!this.isAdmin) {
       const data = {
         labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
         datasets: [

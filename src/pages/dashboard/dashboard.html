@@ -36,31 +36,27 @@
         <div class="second">
           <div padding class="content-align">
             <writter class="title-dashboard-sec" value="Esta es tu agenda de hoy"></writter>
-            <p>Tienes 15 pacientes</p>
-            <ion-slides pager="true" dir="{{dir}}" (ionSlideWillChange)="onSlideChangeStart($event)">
-              <ion-slide *ngFor="let slide of slides; let i = index">
+            <p>Tienes 15 pacientes. Para acceder a cada detalle de la cita, puedes pinchar directamente en la tarjeta del paciente</p>
+            <ion-slides pager="false" dir="{{dir}}" (ionSlideWillChange)="onSlideChangeStart($event)">
+              <ion-slide class="slides-container" *ngFor="let slide of slides; let i = index">
                 <div class="slides-content">
                   <ion-card class="all-pacients" (click)="checkClient(i)">
                     <ion-card-header [innerHTML]="slide.header"></ion-card-header>
                     <ion-card-content>
                       <div class=first-card-pacient-content>
                         <p [innerHTML]="slide.age"></p>
-                        <p [innerHTML]="slide.weightHeight"></p>
-                        <p [innerHTML]="slide.objectives"></p>
                       </div>
                       <div class=first-card-pacient-content>
-                        <p [innerHTML]="slide.vitalitty_time"></p>
-                        <p [innerHTML]="slide.evolution"></p>
                         <p [innerHTML]="slide.email"></p>
                       </div>
                       <!-- <canvas #pieCanvas class="canvas-graph"></canvas> -->
                     </ion-card-content>
                   </ion-card>
-                  <div padding>
+                  <!-- <div padding>
                     <p class="text-slide">Para ver las dietas que le has puesto a tus pacientes, puedes pinchar en cada una de las fichas de pacientes. Para ver la última, también puedes hacer click en el icono para descargarla</p>
                     <img class="img-pdf-slide" src="../../assets/icon/pdf.png">
                     <p class="text-slide" [innerHTML]="slide.observations"></p>
-                  </div>
+                  </div> -->
 
                 </div>
                 <div>
@@ -69,18 +65,34 @@
             </ion-slides>
           </div>
         </div>
-        <div class="info-content" padding>
+        <div class="second">
+          <div padding class="content-align">
+            <writter class="title-dashboard-sec" value="Buscador de pacientes"></writter>
+            <p>Jesús, puedes buscar a todos tus pacientes. Pinchando en cada resultado podrás acceder a la ficha de dicho paciente</p> 
+          </div>
+          <ion-searchbar (ionInput)="getItems($event)" placeholder="Nombre o email del paciente"></ion-searchbar>
+          <ion-list>
+            <button ion-item (click)="openItem(item)" *ngFor="let item of currentItems">
+              <ion-avatar item-start>
+                <img [src]="item.profilePic" />
+              </ion-avatar>
+              <h2>{{item.name}}</h2>
+              <p>{{item.about}}</p>
+              <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
+            </button>
+          </ion-list>
+        </div>
+        <!-- <div class="info-content" padding>
           <div class="bar-content" padding>
             <ion-card>
               <ion-card-header>Evolución de clientes</ion-card-header>
               <ion-card-content>
-                <p>Este gráfico indica la cantidad de clientes que se han registrado en Vitalitty</p>
-                <!-- <! - Debido a que el gráfico se dibuja a través del lienzo, debe tener una etiqueta de lienzo y obtener el dom a través de #barCanvas -> -->
+                <p>Este gráfico indica la cantidad de pacientes que se han registrado en Vitalitty</p>
                 <canvas #barCanvas class="canvas-graph-bar"></canvas>
               </ion-card-content>
             </ion-card>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 

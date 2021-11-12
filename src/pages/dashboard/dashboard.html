@@ -41,7 +41,7 @@
               <ion-slide class="slides-container" *ngFor="let slide of slides; let i = index">
                 <div class="slides-content">
                   <ion-card class="all-pacients" (click)="checkClient(i)">
-                    <ion-card-header [innerHTML]="slide.header"></ion-card-header>
+                    <ion-card-header class="header-slide-text" [innerHTML]="slide.header"></ion-card-header>
                     <ion-card-content>
                       <div class=first-card-pacient-content>
                         <p [innerHTML]="slide.age"></p>

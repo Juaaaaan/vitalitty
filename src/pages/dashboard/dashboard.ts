@@ -76,37 +76,37 @@ export class DashboardPage implements OnInit, OnDestroy {
     if (this.isAdmin) {
       this.slides = [
         {
-          header: 'Tienes a <b>Roberto Manrique</b> a las <b>10:00</b>',
+          header: 'Tienes a <b> &nbsp;Roberto Manrique&nbsp;</b> a las <b>&nbsp;10:00</b>',
           age: 'Edad: 33 años',
           email: 'vanesa.martin@vitalitty.com',
           observations: '<b>* Observaciones del cliente respecto a la dieta:</b> No me gustan los guisantes. Me cuesta cumplir la dieta dado que por temas laborales no puedo acomodarme. Necesito volver a repasarla'
         },
         {
-          header: 'Tienes a <b>Vanesa Martín</b> a las <b>10:30</b>',
+          header: 'Tienes a <b>&nbsp;Vanesa Martín&nbsp;</b> a las <b>&nbsp;10:30</b>',
           age: 'Edad: 24 años',
           email: 'Email: vanesa.martin@vitalitty.com',
           observations: '<b>* Observaciones del cliente respecto a la dieta:</b> Estoy encantada, de momento la puedo seguir sin problemas'
         },
         {
-          header: 'Tienes a <b>Roberto Manrique</b> a las <b>11:00</b>',
+          header: 'Tienes a <b>&nbsp;Roberto Manrique&nbsp;</b> a las <b>&nbsp;11:00&nbsp;</b>',
           age: 'Edad: 33 años',
           email: 'vanesa.martin@vitalitty.com',
           observations: '<b>* Observaciones del cliente respecto a la dieta:</b> No me gustan los guisantes. Me cuesta cumplir la dieta dado que por temas laborales no puedo acomodarme. Necesito volver a repasarla'
         },
         {
-          header: 'Tienes a <b>Roberto Manrique</b> a las <b>11:30</b>',
+          header: 'Tienes a <b>&nbsp;Roberto Manrique&nbsp;</b> a las <b>&nbsp;11:30&nbsp;</b>',
           age: 'Edad: 33 años',
           email: 'vanesa.martin@vitalitty.com',
           observations: '<b>* Observaciones del cliente respecto a la dieta:</b> No me gustan los guisantes. Me cuesta cumplir la dieta dado que por temas laborales no puedo acomodarme. Necesito volver a repasarla'
         },
         {
-          header: 'Tienes a <b>Roberto Manrique</b> a las <b>12:00</b>',
+          header: 'Tienes a <b>&nbsp;Roberto Manrique&nbsp;</b> a las <b>&nbsp;12:00&nbsp;</b>',
           age: 'Edad: 33 años',
           email: 'vanesa.martin@vitalitty.com',
           observations: '<b>* Observaciones del cliente respecto a la dieta:</b> No me gustan los guisantes. Me cuesta cumplir la dieta dado que por temas laborales no puedo acomodarme. Necesito volver a repasarla'
         },
         {
-          header: 'Tienes a <b>Roberto Manrique</b> a las <b>12:30</b>',
+          header: 'Tienes a <b>&nbsp;Roberto Manrique&nbsp;</b> a las <b>&nbsp;12:30&nbsp;</b>',
           age: 'Edad: 33 años',
           email: 'vanesa.martin@vitalitty.com',
           observations: '<b>* Observaciones del cliente respecto a la dieta:</b> No me gustan los guisantes. Me cuesta cumplir la dieta dado que por temas laborales no puedo acomodarme. Necesito volver a repasarla'

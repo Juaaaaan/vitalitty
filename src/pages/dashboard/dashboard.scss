@@ -252,5 +252,11 @@ page-dashboard {
         }
       }
     }
+    .slides-container {
+      width: 100% !important;
+    }
+    .header-slide-text {
+      display: flex;
+    }
   }
 }

@@ -1,0 +1,1145 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Swagger for Vitalitty APP",
+    "version": "1.0.0",
+    "title": "Swagger Vitalitty APP",
+    "termsOfService": "",
+    "contact": {
+      "email": "suarezramirezjuanjose@hotmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "petstore.swagger.io",
+  "basePath": "/v2",
+  "tags": [
+    {
+        "name": "usuarios",
+        "description": "Estructura API para los usuarios"
+    },
+    {
+        "name": "clientes",
+        "description": "Estructura API para los clientes"
+    },
+    {
+        "name": "citas",
+        "description": "Estructura API para las citas"
+    },
+    {
+        "name": "dietas",
+        "description": "Estructura API para las dietas"
+    },
+    {
+        "name": "evolucion",
+        "description": "Estructura API para las evoluciones"
+    }
+    
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/usuarios": {
+      "get": {
+        "tags": [
+          "usuarios"
+        ],
+        "summary": "obtener todos los usuarios",
+        "description": "",
+        "operationId": "getUsers",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/allUsers"
+            }
+          },
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "usuarios/{id_user}": {
+      "put": {
+        "tags": [
+          "usuarios"
+        ],
+        "summary": "Modificar usuarios",
+        "description": "El administrador podrá modificar usuarios",
+        "operationId": "modifyusuarios",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id_user",
+            "in": "path",
+            "description": "name that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/usuarios"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"Todo correcto"
+          },
+          "400": {
+            "description": "Invalid user supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "usuarios"
+        ],
+        "summary": "Eliminar usuarios",
+        "description": "El administrador podrá eliminar usuarios",
+        "operationId": "deleteusuarios",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id_user",
+            "in": "path",
+            "description": "name that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "delete user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/usuarios"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"Todo correcto"
+          },
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/usuarios/login": {
+        "post": {
+          "tags": [
+            "usuarios"
+          ],
+          "summary": "Logs usuarios into the system",
+          "description": "",
+          "operationId": "loginusuarios",
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "userEmail",
+              "in": "query",
+              "description": "El mail de usuario para hacer login",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "userPassword",
+              "in": "query",
+              "description": "La contraseña del usuario para hacer login",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+                "description":"holi"
+            },
+            "400": {
+              "description": "Invalid usuariosname/password supplied"
+            }
+          }
+        }
+      },
+    "/usuarios/register": {
+      "post": {
+        "tags": [
+          "usuarios"
+        ],
+        "summary": "Registro de usuarios",
+        "description": "Esta url se usará para cuando un usuario se registre en Vitalitty",
+        "operationId": "createusuarios",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created usuarios object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/usuarios"
+            }
+          }
+        ],
+        "responses": {
+            "200": {
+                "description":"Todo correcto"
+            },
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "Pet not found"
+            },
+            "405": {
+              "description": "Validation exception"
+            }
+          }
+      }
+    },
+    "/clientes": {
+        "get": {
+          "tags": [
+            "clientes"
+          ],
+          "summary": "Get all clientes",
+          "description": "",
+          "operationId": "getclientesByName",
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+          ],
+          "responses": {
+            "200": {
+                "description":"Todo correcto",
+                "schema": {
+                    "$ref": "#/definitions/clientes"
+                }
+            }
+          }
+        }
+      },
+    "/clientes/{id_cliente}": {
+      "get": {
+        "tags": [
+          "clientes"
+        ],
+        "summary": "obtener la información de un cliente",
+        "description": "",
+        "operationId": "getClient",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "description": "id_cliente para saber cual es el cliente del que queremos recoger información",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/clientes_id_cliente"
+            }
+          },
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "clientes"
+        ],
+        "summary": "Modificar perfil cliente",
+        "description": "El cliente podrá modificar su perfil",
+        "operationId": "modifyClientProfile",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "description": "name that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/clientes_modificar_perfil"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"Todo correcto"
+          },
+          "400": {
+            "description": "Invalid user supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/clientes/observaciones": {
+        "get": {
+            "tags": [
+            "clientes"
+            ],
+            "summary": "Get all clientes observaciones",
+            "description": "",
+            "operationId": "getobservacionesclientes",
+            "produces": [
+            "application/xml",
+            "application/json"
+            ],
+            "parameters": [
+            ],
+            "responses": {
+                "200": {
+                    "description":"Todo correcto",
+                    "schema": {
+                        "$ref": "#/definitions/clientes_observaciones"
+                    }
+                }
+            }
+        },
+        "post": {
+          "tags": [
+            "clientes"
+          ],
+          "summary": "Responder a las observaciones",
+          "description": "El administrador podrá responder al las observaciones del usuario",
+          "operationId": "responderObservaciones",
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Created usuarios object",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/observaciones_responder"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description":"Todo correcto"
+            },
+              "400": {
+                "description": "Invalid ID supplied"
+              },
+              "404": {
+                "description": "Pet not found"
+              },
+              "405": {
+                "description": "Validation exception"
+              }
+            }
+        }
+    },
+    "/dietas": {
+        "get": {
+            "tags": [
+            "dietas"
+            ],
+            "summary": "Get all dietas",
+            "description": "",
+            "operationId": "getdietasByName",
+            "produces": [
+            "application/xml",
+            "application/json"
+            ],
+            "parameters": [
+            ],
+            "responses": {
+                "200": {
+                    "description":"Todo correcto",
+                    "schema": {
+                        "$ref": "#/definitions/dietas"
+                    }
+                }
+            }
+        }
+    },
+    "/dietas/{id_cliente}": {
+      "get": {
+        "tags": [
+          "dietas"
+        ],
+        "summary": "obtener las dietas de un cliente",
+        "description": "",
+        "operationId": "getClientDiet",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "description": "id_cliente para saber cual es el cliente del que queremos recoger información",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/dietas"
+            }
+          },
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "dietas"
+        ],
+        "summary": "Subir dieta a cliente",
+        "description": "Subir una dieta a un cliente",
+        "operationId": "Upload client's diet",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "description": "id_cliente para saber cual es el cliente del que queremos recoger información",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created usuarios object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/dieta_cliente"
+            }
+          }
+        ],
+        "responses": {
+            "200": {
+                "description":"Todo correcto"
+            },
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "Pet not found"
+            },
+            "405": {
+              "description": "Validation exception"
+            }
+          }
+      },
+      "put": {
+        "tags": [
+          "dietas"
+        ],
+        "summary": "Modificar dietas cliente",
+        "description": "El administrador podrá modificar dietas",
+        "operationId": "modifydietas",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "description": "name that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/dieta_cliente"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"Todo correcto"
+          },
+          "400": {
+            "description": "Invalid user supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "dietas"
+        ],
+        "summary": "Eliminar dietas usuario",
+        "description": "El administrador podrá eliminar dietas de clientes",
+        "operationId": "deleteDietas",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "description": "name that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/dieta_cliente"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"Todo correcto"
+          },
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/citas": {
+      "get": {
+        "tags": [
+        "citas"
+        ],
+        "summary": "Get all clientes citas",
+        "description": "",
+        "operationId": "getcitasclientes",
+        "produces": [
+        "application/xml",
+        "application/json"
+        ],
+        "parameters": [
+        ],
+        "responses": {
+            "200": {
+                "description":"Todo correcto",
+                "schema": {
+                    "$ref": "#/definitions/citas"
+                }
+            }
+        }
+      },
+      "post": {
+      "tags": [
+        "citas"
+      ],
+      "summary": "Crear citas",
+      "description": "El administrador podrá crear citas",
+      "operationId": "crearCitas",
+      "produces": [
+        "application/xml",
+        "application/json"
+      ],
+      "parameters": [
+        {
+          "in": "body",
+          "name": "body",
+          "description": "Crear citas para clientes",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/citas_create"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description":"Todo correcto"
+        },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/citas/{id_cliente}": {
+      "get": {
+        "tags": [
+          "citas"
+        ],
+        "summary": "obtener las citas de un cliente",
+        "description": "",
+        "operationId": "getClientMeet",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "description": "id_cliente para saber cual es el cliente del que queremos recoger información",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/citas"
+            }
+          },
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "citas"
+        ],
+        "summary": "Modificar citas",
+        "description": "El administrador podrá modificar citas",
+        "operationId": "modifyCitas",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "description": "name that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/citas"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"Todo correcto"
+          },
+          "400": {
+            "description": "Invalid user supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "citas"
+        ],
+        "summary": "Eliminar citas usuario",
+        "description": "El administrador podrá eliminar citas de clientes",
+        "operationId": "deleteCitas",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "description": "name that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/citas"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"Todo correcto"
+          },
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    } 
+  },
+  "securityDefinitions": {
+    "petstore_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+      "flow": "implicit",
+      "scopes": {
+        "write:pets": "modify pets in your account",
+        "read:pets": "read your pets"
+      }
+    },
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "allUsers": {
+      "type":"array",
+      "items": {
+        "$ref": "#/definitions/usuarios"
+      }
+  },
+    "usuarios": {
+      "type": "object",
+      "properties": {
+        "userFirstName": {
+          "type": "string"
+        },
+        "userLastName": {
+          "type": "string"
+        },
+        "userEmail": {
+          "type": "string"
+        },
+        "userPhone": {
+          "type": "string"
+        },
+        "userGender": {
+            "type":"string"
+        },
+        "userPassword": {
+          "type": "string"
+        },
+        "userAcceptPolicies": {
+            "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "usuarios"
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "clientes": {
+        "type":"object",
+        "properties": {
+            "id_client": {
+              "type": "number"
+            },
+            "nombre": {
+              "type": "string"
+            },
+            "apellidos": {
+            "type": "string"
+            },
+            "email": {
+            "type": "string"
+            },
+            "teléfono": {
+            "type": "number"
+            },
+            "genero": {
+            "type": "string"
+            },
+            "observaciones": {
+                "type": "string"
+            },
+            "fecha_nacimiento": {
+            "type": "string"
+            },
+            "fecha_creacion": {
+            "type": "string"
+            }
+          }
+    },
+    "clientes_id_cliente": {
+      "type":"object",
+      "properties": {
+          "id_client": {
+            "type": "number"
+          },
+          "nombre":{
+            "type":"string"
+          },
+          "apellidos":{
+            "type":"string"
+          },
+          "email": {
+            "type":"string"
+          },
+          "dietas": {
+            "type":"array",
+            "items": {
+              "$ref":"#/definitions/dieta_cliente"
+            }
+          },
+          "citas": {
+            "type":"array",
+            "items":{
+              "$ref":"#/definitions/citas_cliente"
+            }
+          },
+          "proxima_cita": {
+            "type":"array",
+            "items": {
+              "$ref":"#/definitions/proximas_citas"
+            }
+          },
+          "objetivos": {
+            "type":"array",
+            "items": {
+              "$ref":"#/definitions/objetivos"
+            }
+          },
+          "evolucion": {
+            "type":"array",
+            "items": {
+              "$ref":"#/definitions/evolucion"
+            }
+          }
+      }
+    },
+    "clientes_modificar_perfil": {
+      "type":"object",
+      "properties": {
+          "id_client": {
+            "type": "number"
+          },
+          "nombre":{
+            "type":"string"
+          },
+          "apellidos":{
+            "type":"string"
+          },
+          "email": {
+            "type":"string"
+          }
+        }
+    },
+    "clientes_observaciones": {
+        "type":"object",
+        "properties": {
+            "id_client": {
+              "type": "number"
+            },
+            "observaciones": {
+                "type":"array",
+                "items": {
+                    "$ref": "#/definitions/observaciones"
+                  }
+            }
+        }
+    },
+    "dietas": {
+        "type":"object",
+        "properties": {
+            "id_cliente": {
+              "type": "number"
+            },
+            "dieta_cliente": {
+                "type":"array",
+                "items": {
+                    "$ref": "#/definitions/dieta_cliente"
+                  }
+            }
+        }
+    },
+    "dieta_cliente": {
+        "type":"object",
+        "properties": {
+            "id_dieta":{
+                "type":"number"
+            },
+            "dieta_historica": {
+                "type":"boolean"
+            },
+            "url_dieta": {
+                "type":"string"
+            },
+            "fecha_subida_pdf": {
+                "type":"string"
+            },
+            "id_dieta_user": {
+                "type":"string"
+            }
+        }
+    },
+    "citas": {
+      "type":"object",
+      "properties": {
+          "id_cliente": {
+            "type": "number"
+          },
+          "cita_cliente": {
+              "type":"array",
+              "items": {
+                  "$ref": "#/definitions/citas_cliente"
+                }
+          }
+      }
+    },
+    "citas_cliente": {
+      "type":"object",
+      "properties": {
+          "id_cita":{
+              "type":"number"
+          },
+          "id_dieta": {
+            "type":"number"
+          },
+          "notas_cita":{
+            "type":"string"
+          },
+          "fecha_cita": {
+            "type":"string"
+          },
+          "cita_con_dieta": {
+            "type":"boolean"
+          }
+      }
+    },
+    "citas_create": {
+      "type":"object",
+      "properties": {
+        "id_cliente": {
+          "type":"number"
+        },
+        "id_cita":{
+            "type":"number"
+        },
+        "notas_cita":{
+          "type":"string"
+        },
+        "fecha_cita": {
+          "type":"string"
+        },
+        "cita_con_dieta": {
+          "type":"boolean"
+        },
+        "id_dieta": {
+          "type":"number"
+        }
+      }
+    },
+    "proximas_citas": {
+      "type":"object",
+      "properties": {
+        "id_cita": {
+          "type":"number"
+        },
+        "fecha_cita":{
+          "type":"string"
+        }
+      }
+    },
+    "observaciones":{
+        "type":"object",
+        "properties":{
+            "id_dieta": {
+                "type":"number"
+            },
+            "url_dieta" : {
+                "type":"string"
+            },
+            "fecha_subida_url": {
+                "type":"string"
+            },
+            "id_dieta_user": {
+                "type":"string"
+            }
+        }
+    },
+    "observaciones_responder": {
+        "type":"object",
+        "properties":{
+            "id_cliente":{
+                "type":"number"
+            },
+            "id_dieta": {
+                "type":"number"
+            },
+            "url_dieta" : {
+                "type":"string"
+            },
+            "fecha_subida_url": {
+                "type":"string"
+            },
+            "id_dieta_user": {
+                "type":"string"
+            },
+            "mensaje_observacion": {
+                "type":"string"
+            },
+            "fecha_mensaje_observacion": {
+              "type": "string"
+            }
+        }
+    },
+    "objetivos": {
+      "type":"object",
+      "properties": {
+        "id_objetivo": {
+          "type":"number"
+        },
+        "status_objetivo": {
+          "type":"string"
+        },
+        "objetivo": {
+          "type":"string"
+        },
+        "fecha_objetivo": {
+          "type":"string"
+        }
+      }
+    },
+    "evolucion": {
+      "type":"object",
+      "properties": {
+        "id_evolucion": {
+          "type":"number"
+        },
+        "peso": {
+          "type": "number"
+        },
+        "altura": {
+          "type": "number"
+        },
+        "grasa": {
+          "type": "number"
+        },
+        "musculatura": {
+          "type": "number"
+        },
+        "cintura": {
+          "type": "number"
+        },
+        "cadera": {
+          "type": "number"
+        },
+        "abdomen": {
+          "type": "number"
+        },
+        "fecha_evolucion": {
+          "type":"string"
+        }
+
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}

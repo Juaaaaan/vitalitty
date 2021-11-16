@@ -17,26 +17,25 @@
   "basePath": "/v2",
   "tags": [
     {
-        "name": "usuarios",
-        "description": "Estructura API para los usuarios"
+      "name": "usuarios",
+      "description": "Estructura API para los usuarios"
     },
     {
-        "name": "clientes",
-        "description": "Estructura API para los clientes"
+      "name": "clientes",
+      "description": "Estructura API para los clientes"
     },
     {
-        "name": "citas",
-        "description": "Estructura API para las citas"
+      "name": "citas",
+      "description": "Estructura API para las citas"
     },
     {
-        "name": "dietas",
-        "description": "Estructura API para las dietas"
+      "name": "dietas",
+      "description": "Estructura API para las dietas"
     },
     {
-        "name": "evolucion",
-        "description": "Estructura API para las evoluciones"
+      "name": "evolucion",
+      "description": "Estructura API para las evoluciones"
     }
-    
   ],
   "schemes": [
     "https",
@@ -55,8 +54,7 @@
           "application/xml",
           "application/json"
         ],
-        "parameters": [
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful operation",
@@ -73,7 +71,7 @@
         }
       }
     },
-    "usuarios/{id_user}": {
+    "/usuarios/{id_user}": {
       "put": {
         "tags": [
           "usuarios"
@@ -104,8 +102,8 @@
           }
         ],
         "responses": {
-          "200":{
-            "description":"Todo correcto"
+          "200": {
+            "description": "Todo correcto"
           },
           "400": {
             "description": "Invalid user supplied"
@@ -145,8 +143,8 @@
           }
         ],
         "responses": {
-          "200":{
-            "description":"Todo correcto"
+          "200": {
+            "description": "Todo correcto"
           },
           "400": {
             "description": "Invalid username supplied"
@@ -158,43 +156,43 @@
       }
     },
     "/usuarios/login": {
-        "post": {
-          "tags": [
-            "usuarios"
-          ],
-          "summary": "Logs usuarios into the system",
-          "description": "",
-          "operationId": "loginusuarios",
-          "produces": [
-            "application/xml",
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "name": "userEmail",
-              "in": "query",
-              "description": "El mail de usuario para hacer login",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "name": "userPassword",
-              "in": "query",
-              "description": "La contraseña del usuario para hacer login",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-                "description":"holi"
-            },
-            "400": {
-              "description": "Invalid usuariosname/password supplied"
-            }
+      "post": {
+        "tags": [
+          "usuarios"
+        ],
+        "summary": "Logs usuarios into the system",
+        "description": "",
+        "operationId": "loginusuarios",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userEmail",
+            "in": "query",
+            "description": "El mail de usuario para hacer login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userPassword",
+            "in": "query",
+            "description": "La contraseña del usuario para hacer login",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "holi"
+          },
+          "400": {
+            "description": "Invalid usuariosname/password supplied"
           }
         }
-      },
+      }
+    },
     "/usuarios/register": {
       "post": {
         "tags": [
@@ -219,45 +217,44 @@
           }
         ],
         "responses": {
-            "200": {
-                "description":"Todo correcto"
-            },
-            "400": {
-              "description": "Invalid ID supplied"
-            },
-            "404": {
-              "description": "Pet not found"
-            },
-            "405": {
-              "description": "Validation exception"
-            }
+          "200": {
+            "description": "Todo correcto"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          },
+          "405": {
+            "description": "Validation exception"
           }
+        }
       }
     },
     "/clientes": {
-        "get": {
-          "tags": [
-            "clientes"
-          ],
-          "summary": "Get all clientes",
-          "description": "",
-          "operationId": "getclientesByName",
-          "produces": [
-            "application/xml",
-            "application/json"
-          ],
-          "parameters": [
-          ],
-          "responses": {
-            "200": {
-                "description":"Todo correcto",
-                "schema": {
-                    "$ref": "#/definitions/clientes"
-                }
+      "get": {
+        "tags": [
+          "clientes"
+        ],
+        "summary": "Get all clientes",
+        "description": "",
+        "operationId": "getclientesByName",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Todo correcto",
+            "schema": {
+              "$ref": "#/definitions/clientes"
             }
           }
         }
-      },
+      }
+    },
     "/clientes/{id_cliente}": {
       "get": {
         "tags": [
@@ -324,8 +321,8 @@
           }
         ],
         "responses": {
-          "200":{
-            "description":"Todo correcto"
+          "200": {
+            "description": "Todo correcto"
           },
           "400": {
             "description": "Invalid user supplied"
@@ -336,95 +333,122 @@
         }
       }
     },
-    "/clientes/observaciones": {
-        "get": {
-            "tags": [
-            "clientes"
-            ],
-            "summary": "Get all clientes observaciones",
-            "description": "",
-            "operationId": "getobservacionesclientes",
-            "produces": [
-            "application/xml",
-            "application/json"
-            ],
-            "parameters": [
-            ],
-            "responses": {
-                "200": {
-                    "description":"Todo correcto",
-                    "schema": {
-                        "$ref": "#/definitions/clientes_observaciones"
-                    }
-                }
-            }
-        },
-        "post": {
-          "tags": [
-            "clientes"
-          ],
-          "summary": "Responder a las observaciones",
-          "description": "El administrador podrá responder al las observaciones del usuario",
-          "operationId": "responderObservaciones",
-          "produces": [
-            "application/xml",
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "body",
-              "name": "body",
-              "description": "Created usuarios object",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/observaciones_responder"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description":"Todo correcto"
-            },
-              "400": {
-                "description": "Invalid ID supplied"
-              },
-              "404": {
-                "description": "Pet not found"
-              },
-              "405": {
-                "description": "Validation exception"
-              }
-            }
-        }
-    },
-    "/dietas": {
-        "get": {
-            "tags": [
-            "dietas"
-            ],
-            "summary": "Get all dietas",
-            "description": "",
-            "operationId": "getdietasByName",
-            "produces": [
-            "application/xml",
-            "application/json"
-            ],
-            "parameters": [
-            ],
-            "responses": {
-                "200": {
-                    "description":"Todo correcto",
-                    "schema": {
-                        "$ref": "#/definitions/dietas"
-                    }
-                }
-            }
-        }
-    },
-    "/dietas/{id_cliente}": {
+    "/clientes/{id_cliente}/observaciones": {
       "get": {
         "tags": [
-          "dietas"
+          "clientes"
+        ],
+        "summary": "Get all clientes observaciones",
+        "description": "",
+        "operationId": "getobservacionesclientes",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "description": "name that need to be updated",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Todo correcto",
+            "schema": {
+              "$ref": "#/definitions/clientes_observaciones"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "clientes"
+        ],
+        "summary": "Responder a las observaciones",
+        "description": "El administrador podrá responder al las observaciones del usuario",
+        "operationId": "responderObservaciones",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "description": "name that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created usuarios object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/observaciones_responder"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Todo correcto"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/clientes/{id_cliente}/citas": {
+      "get": {
+        "tags": [
+          "clientes"
+        ],
+        "summary": "obtener las citas de un cliente",
+        "description": "",
+        "operationId": "getClientMeet",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "description": "id_cliente para saber cual es el cliente del que queremos recoger información",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/citas"
+            }
+          },
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/clientes/{id_cliente}/dietas": {
+      "get": {
+        "tags": [
+          "clientes"
         ],
         "summary": "obtener las dietas de un cliente",
         "description": "",
@@ -454,6 +478,29 @@
           },
           "404": {
             "description": "User not found"
+          }
+        }
+      }
+    },
+    "/dietas": {
+      "get": {
+        "tags": [
+          "dietas"
+        ],
+        "summary": "Get all dietas",
+        "description": "",
+        "operationId": "getdietasByName",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Todo correcto",
+            "schema": {
+              "$ref": "#/definitions/dietas"
+            }
           }
         }
       },
@@ -487,20 +534,22 @@
           }
         ],
         "responses": {
-            "200": {
-                "description":"Todo correcto"
-            },
-            "400": {
-              "description": "Invalid ID supplied"
-            },
-            "404": {
-              "description": "Pet not found"
-            },
-            "405": {
-              "description": "Validation exception"
-            }
+          "200": {
+            "description": "Todo correcto"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          },
+          "405": {
+            "description": "Validation exception"
           }
-      },
+        }
+      }
+    },
+    "/dietas/{id_dieta}": {
       "put": {
         "tags": [
           "dietas"
@@ -531,8 +580,8 @@
           }
         ],
         "responses": {
-          "200":{
-            "description":"Todo correcto"
+          "200": {
+            "description": "Todo correcto"
           },
           "400": {
             "description": "Invalid user supplied"
@@ -572,8 +621,8 @@
           }
         ],
         "responses": {
-          "200":{
-            "description":"Todo correcto"
+          "200": {
+            "description": "Todo correcto"
           },
           "400": {
             "description": "Invalid username supplied"
@@ -587,52 +636,51 @@
     "/citas": {
       "get": {
         "tags": [
-        "citas"
+          "citas"
         ],
         "summary": "Get all clientes citas",
         "description": "",
         "operationId": "getcitasclientes",
         "produces": [
-        "application/xml",
-        "application/json"
+          "application/xml",
+          "application/json"
         ],
-        "parameters": [
-        ],
+        "parameters": [],
         "responses": {
-            "200": {
-                "description":"Todo correcto",
-                "schema": {
-                    "$ref": "#/definitions/citas"
-                }
+          "200": {
+            "description": "Todo correcto",
+            "schema": {
+              "$ref": "#/definitions/citas"
             }
+          }
         }
       },
       "post": {
-      "tags": [
-        "citas"
-      ],
-      "summary": "Crear citas",
-      "description": "El administrador podrá crear citas",
-      "operationId": "crearCitas",
-      "produces": [
-        "application/xml",
-        "application/json"
-      ],
-      "parameters": [
-        {
-          "in": "body",
-          "name": "body",
-          "description": "Crear citas para clientes",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/citas_create"
+        "tags": [
+          "citas"
+        ],
+        "summary": "Crear citas",
+        "description": "El administrador podrá crear citas",
+        "operationId": "crearCitas",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Crear citas para clientes",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/citas_create"
+            }
           }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description":"Todo correcto"
-        },
+        ],
+        "responses": {
+          "200": {
+            "description": "Todo correcto"
+          },
           "400": {
             "description": "Invalid ID supplied"
           },
@@ -645,12 +693,12 @@
         }
       }
     },
-    "/citas/{id_cliente}": {
+    "/citas/{id_cita}": {
       "get": {
         "tags": [
           "citas"
         ],
-        "summary": "obtener las citas de un cliente",
+        "summary": "obtener el detalle de una cita",
         "description": "",
         "operationId": "getClientMeet",
         "produces": [
@@ -711,8 +759,8 @@
           }
         ],
         "responses": {
-          "200":{
-            "description":"Todo correcto"
+          "200": {
+            "description": "Todo correcto"
           },
           "400": {
             "description": "Invalid user supplied"
@@ -752,8 +800,8 @@
           }
         ],
         "responses": {
-          "200":{
-            "description":"Todo correcto"
+          "200": {
+            "description": "Todo correcto"
           },
           "400": {
             "description": "Invalid username supplied"
@@ -763,7 +811,7 @@
           }
         }
       }
-    } 
+    }
   },
   "securityDefinitions": {
     "petstore_auth": {
@@ -783,11 +831,11 @@
   },
   "definitions": {
     "allUsers": {
-      "type":"array",
+      "type": "array",
       "items": {
         "$ref": "#/definitions/usuarios"
       }
-  },
+    },
     "usuarios": {
       "type": "object",
       "properties": {
@@ -804,13 +852,13 @@
           "type": "string"
         },
         "userGender": {
-            "type":"string"
+          "type": "string"
         },
         "userPassword": {
           "type": "string"
         },
         "userAcceptPolicies": {
-            "type": "boolean"
+          "type": "boolean"
         }
       },
       "xml": {
@@ -833,282 +881,282 @@
       }
     },
     "clientes": {
-        "type":"object",
-        "properties": {
-            "id_client": {
-              "type": "number"
-            },
-            "nombre": {
-              "type": "string"
-            },
-            "apellidos": {
-            "type": "string"
-            },
-            "email": {
-            "type": "string"
-            },
-            "teléfono": {
-            "type": "number"
-            },
-            "genero": {
-            "type": "string"
-            },
-            "observaciones": {
-                "type": "string"
-            },
-            "fecha_nacimiento": {
-            "type": "string"
-            },
-            "fecha_creacion": {
-            "type": "string"
-            }
-          }
+      "type": "object",
+      "properties": {
+        "id_client": {
+          "type": "number"
+        },
+        "nombre": {
+          "type": "string"
+        },
+        "apellidos": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "teléfono": {
+          "type": "number"
+        },
+        "genero": {
+          "type": "string"
+        },
+        "observaciones": {
+          "type": "string"
+        },
+        "fecha_nacimiento": {
+          "type": "string"
+        },
+        "fecha_creacion": {
+          "type": "string"
+        }
+      }
     },
     "clientes_id_cliente": {
-      "type":"object",
+      "type": "object",
       "properties": {
-          "id_client": {
-            "type": "number"
-          },
-          "nombre":{
-            "type":"string"
-          },
-          "apellidos":{
-            "type":"string"
-          },
-          "email": {
-            "type":"string"
-          },
-          "dietas": {
-            "type":"array",
-            "items": {
-              "$ref":"#/definitions/dieta_cliente"
-            }
-          },
-          "citas": {
-            "type":"array",
-            "items":{
-              "$ref":"#/definitions/citas_cliente"
-            }
-          },
-          "proxima_cita": {
-            "type":"array",
-            "items": {
-              "$ref":"#/definitions/proximas_citas"
-            }
-          },
-          "objetivos": {
-            "type":"array",
-            "items": {
-              "$ref":"#/definitions/objetivos"
-            }
-          },
-          "evolucion": {
-            "type":"array",
-            "items": {
-              "$ref":"#/definitions/evolucion"
-            }
+        "id_client": {
+          "type": "number"
+        },
+        "nombre": {
+          "type": "string"
+        },
+        "apellidos": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "dietas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dieta_cliente"
           }
+        },
+        "citas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/citas_cliente"
+          }
+        },
+        "proxima_cita": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/proximas_citas"
+          }
+        },
+        "objetivos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/objetivos"
+          }
+        },
+        "evolucion": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/evolucion"
+          }
+        }
       }
     },
     "clientes_modificar_perfil": {
-      "type":"object",
+      "type": "object",
       "properties": {
-          "id_client": {
-            "type": "number"
-          },
-          "nombre":{
-            "type":"string"
-          },
-          "apellidos":{
-            "type":"string"
-          },
-          "email": {
-            "type":"string"
-          }
+        "id_client": {
+          "type": "number"
+        },
+        "nombre": {
+          "type": "string"
+        },
+        "apellidos": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
         }
+      }
     },
     "clientes_observaciones": {
-        "type":"object",
-        "properties": {
-            "id_client": {
-              "type": "number"
-            },
-            "observaciones": {
-                "type":"array",
-                "items": {
-                    "$ref": "#/definitions/observaciones"
-                  }
-            }
+      "type": "object",
+      "properties": {
+        "id_client": {
+          "type": "number"
+        },
+        "observaciones": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/observaciones"
+          }
         }
+      }
     },
     "dietas": {
-        "type":"object",
-        "properties": {
-            "id_cliente": {
-              "type": "number"
-            },
-            "dieta_cliente": {
-                "type":"array",
-                "items": {
-                    "$ref": "#/definitions/dieta_cliente"
-                  }
-            }
+      "type": "object",
+      "properties": {
+        "id_cliente": {
+          "type": "number"
+        },
+        "dieta_cliente": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dieta_cliente"
+          }
         }
+      }
     },
     "dieta_cliente": {
-        "type":"object",
-        "properties": {
-            "id_dieta":{
-                "type":"number"
-            },
-            "dieta_historica": {
-                "type":"boolean"
-            },
-            "url_dieta": {
-                "type":"string"
-            },
-            "fecha_subida_pdf": {
-                "type":"string"
-            },
-            "id_dieta_user": {
-                "type":"string"
-            }
+      "type": "object",
+      "properties": {
+        "id_dieta": {
+          "type": "number"
+        },
+        "dieta_historica": {
+          "type": "boolean"
+        },
+        "url_dieta": {
+          "type": "string"
+        },
+        "fecha_subida_pdf": {
+          "type": "string"
+        },
+        "id_dieta_user": {
+          "type": "string"
         }
+      }
     },
     "citas": {
-      "type":"object",
+      "type": "object",
       "properties": {
-          "id_cliente": {
-            "type": "number"
-          },
-          "cita_cliente": {
-              "type":"array",
-              "items": {
-                  "$ref": "#/definitions/citas_cliente"
-                }
+        "id_cliente": {
+          "type": "number"
+        },
+        "cita_cliente": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/citas_cliente"
           }
+        }
       }
     },
     "citas_cliente": {
-      "type":"object",
+      "type": "object",
       "properties": {
-          "id_cita":{
-              "type":"number"
-          },
-          "id_dieta": {
-            "type":"number"
-          },
-          "notas_cita":{
-            "type":"string"
-          },
-          "fecha_cita": {
-            "type":"string"
-          },
-          "cita_con_dieta": {
-            "type":"boolean"
-          }
+        "id_cita": {
+          "type": "number"
+        },
+        "id_dieta": {
+          "type": "number"
+        },
+        "notas_cita": {
+          "type": "string"
+        },
+        "fecha_cita": {
+          "type": "string"
+        },
+        "cita_con_dieta": {
+          "type": "boolean"
+        }
       }
     },
     "citas_create": {
-      "type":"object",
+      "type": "object",
       "properties": {
         "id_cliente": {
-          "type":"number"
+          "type": "number"
         },
-        "id_cita":{
-            "type":"number"
+        "id_cita": {
+          "type": "number"
         },
-        "notas_cita":{
-          "type":"string"
+        "notas_cita": {
+          "type": "string"
         },
         "fecha_cita": {
-          "type":"string"
+          "type": "string"
         },
         "cita_con_dieta": {
-          "type":"boolean"
+          "type": "boolean"
         },
         "id_dieta": {
-          "type":"number"
+          "type": "number"
         }
       }
     },
     "proximas_citas": {
-      "type":"object",
+      "type": "object",
       "properties": {
         "id_cita": {
-          "type":"number"
+          "type": "number"
         },
-        "fecha_cita":{
-          "type":"string"
+        "fecha_cita": {
+          "type": "string"
         }
       }
     },
-    "observaciones":{
-        "type":"object",
-        "properties":{
-            "id_dieta": {
-                "type":"number"
-            },
-            "url_dieta" : {
-                "type":"string"
-            },
-            "fecha_subida_url": {
-                "type":"string"
-            },
-            "id_dieta_user": {
-                "type":"string"
-            }
+    "observaciones": {
+      "type": "object",
+      "properties": {
+        "id_dieta": {
+          "type": "number"
+        },
+        "url_dieta": {
+          "type": "string"
+        },
+        "fecha_subida_url": {
+          "type": "string"
+        },
+        "id_dieta_user": {
+          "type": "string"
         }
+      }
     },
     "observaciones_responder": {
-        "type":"object",
-        "properties":{
-            "id_cliente":{
-                "type":"number"
-            },
-            "id_dieta": {
-                "type":"number"
-            },
-            "url_dieta" : {
-                "type":"string"
-            },
-            "fecha_subida_url": {
-                "type":"string"
-            },
-            "id_dieta_user": {
-                "type":"string"
-            },
-            "mensaje_observacion": {
-                "type":"string"
-            },
-            "fecha_mensaje_observacion": {
-              "type": "string"
-            }
+      "type": "object",
+      "properties": {
+        "id_cliente": {
+          "type": "number"
+        },
+        "id_dieta": {
+          "type": "number"
+        },
+        "url_dieta": {
+          "type": "string"
+        },
+        "fecha_subida_url": {
+          "type": "string"
+        },
+        "id_dieta_user": {
+          "type": "string"
+        },
+        "mensaje_observacion": {
+          "type": "string"
+        },
+        "fecha_mensaje_observacion": {
+          "type": "string"
         }
+      }
     },
     "objetivos": {
-      "type":"object",
+      "type": "object",
       "properties": {
         "id_objetivo": {
-          "type":"number"
+          "type": "number"
         },
         "status_objetivo": {
-          "type":"string"
+          "type": "string"
         },
         "objetivo": {
-          "type":"string"
+          "type": "string"
         },
         "fecha_objetivo": {
-          "type":"string"
+          "type": "string"
         }
       }
     },
     "evolucion": {
-      "type":"object",
+      "type": "object",
       "properties": {
         "id_evolucion": {
-          "type":"number"
+          "type": "number"
         },
         "peso": {
           "type": "number"
@@ -1132,9 +1180,8 @@
           "type": "number"
         },
         "fecha_evolucion": {
-          "type":"string"
+          "type": "string"
         }
-
       }
     }
   },

@@ -46,6 +46,7 @@ export class SignupPage {
     this.storage.remove(['responseAdmin']);
     this.recoverForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
+      surname: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required]),
       gender: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
@@ -58,9 +59,9 @@ export class SignupPage {
 
   change(ev: Event) {
     if(ev) {
-      console.log(this.recoverForm);
+      // console.log(this.recoverForm);
     } else {
-      console.log(this.recoverForm);
+      // console.log(this.recoverForm);
     }
   }
 

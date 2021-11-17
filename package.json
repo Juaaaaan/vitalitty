@@ -1,6 +1,6 @@
 {
   "name": "vitalitty",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Juan José Suárez Ramírez",
   "homepage": "http://ionicframework.com/",
   "private": true,
@@ -14,7 +14,7 @@
     "run:android": "ionic cordova run android --device"
   },
   "dependencies": {
-    "@angular/animations": "5.2.11",
+    "@angular/animations": "^5.2.11",
     "@angular/common": "5.2.11",
     "@angular/compiler": "5.2.11",
     "@angular/compiler-cli": "^12.2.12",
@@ -32,6 +32,8 @@
     "@ngx-translate/core": "8.0.0",
     "@ngx-translate/http-loader": "^2.0.0",
     "aes256": "^1.0.4",
+    "angular-calendar": "^0.28.28",
+    "angular-calendar-week-hours-view": "^1.0.2",
     "chart.js": "^2.9.4",
     "cordova-android": "^10.1.1",
     "cordova-ios": "6.2.0",

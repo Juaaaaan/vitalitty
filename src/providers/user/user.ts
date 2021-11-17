@@ -4,32 +4,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Api } from '../api/api';
 import { LoginResponseModel, LoginServiceModel } from '../auth/auth.model';
+import { registerPostUser, registerUser, responseRegisterUser } from './modules.user';
+import { Alert, AlertController } from 'ionic-angular';
+import { UtilsProvider } from '../../shared/utils';
 
-/**
- * Most apps have the concept of a User. This is a simple provider
- * with stubs for login/signup/etc.
- *
- * This User provider makes calls to our API at the `login` and `signup` endpoints.
- *
- * By default, it expects `login` and `signup` to return a JSON object of the shape:
- *
- * ```json
- * {
- *   status: 'success',
- *   user: {
- *     // User fields your app needs, like "id", "name", "email", etc.
- *   }
- * }Ø
- * ```
- *
- * If the `status` field is not `success`, then an error is detected and returned.
- */
 @Injectable()
 export class User {
   _user: any;
 
+  myAlert: Alert;
+
   constructor(public api: Api,
-    public http: HttpClient) { }
+    public http: HttpClient,
+    public alertCtrl: AlertController,
+    public utils: UtilsProvider) { }
 
   /**
    * Send a POST request to our login endpoint with the data
@@ -91,20 +79,38 @@ export class User {
    * Send a POST request to our signup endpoint with the data
    * the user entered on the form.
    */
-  signup(accountInfo: any) {
-    console.log('flag');
-    let seq = this.http.get('../../assets/mocks/register.json', accountInfo).share();
-    // let seq = this.http.post('../../assets/mocks/register.json', accountInfo).share();
-    seq.subscribe((res: any) => {
-      // If the API returned a successful response, mark the user as logged in
+  signup(accountInfo: registerUser) {
+    let bodyAccount = this.parseAccountInfo(accountInfo);
+    console.log(bodyAccount);
+    let seq = this.http.post('https://qnw4290ez9.execute-api.eu-west-3.amazonaws.com/v1Prueba/usuarios/register', bodyAccount).share();
+    seq.subscribe((res: responseRegisterUser) => {
       if (res.status == 'OK') {
-        this._loggedIn(res);
+        console.log('flag');
       }
     }, err => {
       console.error('ERROR', err);
+      this.myAlert = this.utils.createBasicAlert('Error en el registro', 'Puedes intentarlo dentro de unos minutos');
+      this.myAlert.present();
+
     });
 
     return seq;
+  }
+
+  parseAccountInfo(account: registerUser) {
+    let accountpost: registerPostUser = {
+      body: {
+        name: account.name,
+        surname: account.surname,
+        email: account.email,
+        gender: account.gender,
+        password: btoa(account.password),
+        tel: account.tel,
+        accept: account.accept,
+        rol: 'cliente'
+      }
+    }
+    return accountpost;
   }
 
   /**

@@ -17,6 +17,14 @@ export class AppointmentDetailPage implements OnInit {
 
   public events = [];
 
+  viewDate: Date = new Date();
+  view = 'week';
+  locale = 'es';
+  isDragging = false;
+
+
+  // refresh = new Subject<any> = new Subject
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private menuCtrl: MenuController) {

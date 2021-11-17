@@ -15,11 +15,16 @@
     </div>
     <div class="right-container" padding>
       <p class="title-right-continer">Rellena tus datos</p>
-      <form [formGroup]="recoverForm" class="formRegister" (keydown.enter)="doSignup()" (submit)="doSignup()" (change)="change($ev)">
+      <form [formGroup]="recoverForm" class="formRegister" (submit)="doSignup()" (change)="change($ev)">
         <ion-list>
-          <ion-item class="form-input-register">
-            <ion-input class="input-form" placeholder="* Nombre y apellidos" type="text" name="name" formControlName="name"></ion-input>
-          </ion-item>
+          <div class="first-content-form">
+            <ion-item class="form-input-register">
+              <ion-input class="input-form" placeholder="* Nombre" type="text" name="name" formControlName="name"></ion-input>
+            </ion-item>
+            <ion-item class="form-input-register">
+              <ion-input class="input-form" placeholder="* Apellidos" type="text" name="surname" formControlName="surname"></ion-input>
+            </ion-item>
+          </div>
           <ion-item class="form-input-register">
             <ion-input class="input-form" placeholder="* Email" type="email" name="email" formControlName="email"></ion-input>
           </ion-item>
@@ -47,7 +52,7 @@
 
           <ion-item class="form-input-register">
             <ion-label class="check-text">Debes aceptar la política de privacidad</ion-label>
-            <ion-checkbox class="input-form" color="primary" slot="end" formControlName="accept"></ion-checkbox>
+            <ion-checkbox class="input-form" color="primary" checked="false" slot="end" formControlName="accept"></ion-checkbox>
           </ion-item>
           <div class="privacy-container">
             <p class="text-privacy">* Para ver la política de privacidad puedes darle</p>

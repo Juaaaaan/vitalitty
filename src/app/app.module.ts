@@ -16,8 +16,11 @@ import { ComponentsModule } from '../components/components.module';
 import { AppHttpInterceptor } from '../providers/AppHttpInterceptor';
 import { StorageProvider } from '../shared/storage';
 import { UtilsProvider } from '../shared/utils';
+import { CustomEventTitleFormatterProvider } from '../providers/custom-event-title-formatter/custom-event-title-formatter';
+import { CustomDateFormatterProvider } from '../providers/custom-date-formatter/custom-date-formatter';
 // import { ChartsModule } from 'ng2-charts';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -46,8 +49,10 @@ export function provideSettings(storage: Storage) {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     ComponentsModule,
+    // CalendarModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -75,7 +80,9 @@ export function provideSettings(storage: Storage) {
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
     // Keep this to enable Ionic's runtime error handling during development
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    CustomEventTitleFormatterProvider,
+    CustomDateFormatterProvider
   ]
 })
 export class AppModule { }

@@ -16,7 +16,9 @@ page-signup {
       box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2); 
       border-radius: 8px;
     }
-  
+  .first-content-form {
+    display: flex;
+  }
     .right-container {
       width: 100%;
       position: relative;

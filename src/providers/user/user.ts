@@ -3,7 +3,7 @@ import 'rxjs/add/operator/toPromise';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Api } from '../api/api';
-import { LoginResponseModel, LoginServiceModel } from '../auth/auth.model';
+import { LoginPost, LoginResponseModel, LoginServiceModel } from '../auth/auth.model';
 import { registerPostUser, registerUser, responseRegisterUser } from './modules.user';
 import { Alert, AlertController } from 'ionic-angular';
 import { UtilsProvider } from '../../shared/utils';
@@ -39,17 +39,17 @@ export class User {
   //   return seq;
   // }
 
-  login(accountInfo: LoginServiceModel) {
-    const useMock: boolean = true;
+  login(accountInfoLogin: LoginServiceModel) {
+    const useMock: boolean = false;
     return new Promise<any>(
       (resolve, reject) => {
         if (useMock) {
-          if (accountInfo.email === 'admin@vitalitty.com' && accountInfo.password === 'Pass1234%') {
+          if (accountInfoLogin.email === 'admin@vitalitty.com' && accountInfoLogin.password === 'Pass1234%') {
             this.http.get('assets/mocks/login.json').subscribe(
               (response: LoginResponseModel) => resolve(response),
               (error) => reject(error)
             );
-          } else if (accountInfo.email === 'client@vitalitty.com' && accountInfo.password === 'Pass1234%') {
+          } else if (accountInfoLogin.email === 'client@vitalitty.com' && accountInfoLogin.password === 'Pass1234%') {
             this.http.get('assets/mocks/login_client.json').subscribe(
               (response: LoginResponseModel) => resolve(response),
               (error) => reject(error)
@@ -61,12 +61,9 @@ export class User {
               (error) => reject(error)
             );
           }
-          // let seq = this.api.post('login', accountInfo).subscribe(
-          //   (response: any) => resolve(response),
-          //   (error) => reject(error)
-          // );
         } else {
-          this.http.post('www.google.es', accountInfo).subscribe(
+          let bodyLogin = this.parseBodyLogin(accountInfoLogin);
+          this.http.post('https://qnw4290ez9.execute-api.eu-west-3.amazonaws.com/v1Prueba/usuarios/login', bodyLogin).subscribe(
             (response: any) => resolve(response),
             (error) => reject(error)
           );
@@ -81,7 +78,6 @@ export class User {
    */
   signup(accountInfo: registerUser) {
     let bodyAccount = this.parseAccountInfo(accountInfo);
-    console.log(bodyAccount);
     let seq = this.http.post('https://qnw4290ez9.execute-api.eu-west-3.amazonaws.com/v1Prueba/usuarios/register', bodyAccount).share();
     seq.subscribe((res: responseRegisterUser) => {
       if (res.status == 'OK') {
@@ -112,6 +108,17 @@ export class User {
     }
     return accountpost;
   }
+
+  parseBodyLogin(account: LoginServiceModel) {
+    let accountlogin: LoginPost = {
+      body: {
+        email: account.email,
+        password: btoa(account.password)
+      }
+    }
+    return accountlogin;
+  }
+
 
   /**
    * Log the user out, which forgets the session

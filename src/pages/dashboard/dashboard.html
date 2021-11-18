@@ -15,7 +15,7 @@
 </ion-header>
 
 <ion-content>
-  <ng-container *ngIf="isAdmin">
+  <ng-container *ngIf="isAdmin && isAdmin === 1">
 
     <div class="content-dashboard">
       <div class="right-content">
@@ -98,7 +98,7 @@
 
   </ng-container>
 
-  <ng-container *ngIf="!isAdmin">
+  <ng-container *ngIf="isAdmin && isAdmin === 2">
     <div class="content-dashboard">
       <div class="right-content">
         <div class="overview">

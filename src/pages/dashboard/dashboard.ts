@@ -31,7 +31,7 @@ export class DashboardPage implements OnInit, OnDestroy {
   currentItems: any = [];
 
   public newDate = new Date();
-  public isAdmin: boolean = false;
+  public isAdmin: number;
 
   // Obtenga el elemento dom del lienzo correspondiente
 	@ViewChild('pieCanvas') pieCanvas;
@@ -73,7 +73,7 @@ export class DashboardPage implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (this.isAdmin) {
+    if (this.isAdmin === 1) {
       this.slides = [
         {
           header: 'Tienes a <b> &nbsp;Roberto Manrique&nbsp;</b> a las <b>&nbsp;10:00</b>',

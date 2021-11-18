@@ -105,25 +105,23 @@ export class WelcomePage implements OnInit {
   login(numberLog: boolean) {
     this.isLogin = numberLog;
   }
-
   async doLogin() {
     if (this.loginForm.valid) {
       const bodyAccount = this.auth.parserAdmin(this.loginForm.value);
       const response = await this.user.login(bodyAccount).catch(err => console.log(err)) || null;
-      if (response && response.status === 'OK') {
+      
+      if (response && response.body && response.user_log_vitalitty) {
         this.access_token = response.body['X-Authorization'] ? response.body['X-Authorization'] : 'no tiene x-authorization' ;
         this.storageProvider.set('access_token', this.access_token);
-        if (response.body) {
-          this.storageProvider.set('responseAdmin', response.body.isAdmin ? 1 : 2);
-          this.navCtrl.setRoot('DashboardPage', {isAdmin: response.body.isAdmin});
-        }
+        this.storageProvider.set('responseAdmin', response.body.user_rol);
+        this.navCtrl.setRoot('DashboardPage', {isAdmin: response.body.user_rol});
       } else {
         if (this.countError === 3) {
           this.goBack(response);
         } else {
           this.countError++ ;
           let toast = this.toastCtrl.create({
-            message: response.status_code === 'LGN_001' ? this.translate.instant('LOGIN_ERROR_001') : this.translate.instant('LOGIN_ERROR'),
+            message: this.translate.instant('LOGIN_ERROR'),
             duration: 3000,
             position: 'bottom'
           });

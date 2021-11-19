@@ -109,12 +109,12 @@ export class WelcomePage implements OnInit {
     if (this.loginForm.valid) {
       const bodyAccount = this.auth.parserAdmin(this.loginForm.value);
       const response = await this.user.login(bodyAccount).catch(err => console.log(err)) || null;
-      
       if (response && response.body && response.user_log_vitalitty) {
         this.access_token = response.body['X-Authorization'] ? response.body['X-Authorization'] : 'no tiene x-authorization' ;
         this.storageProvider.set('access_token', this.access_token);
         this.storageProvider.set('responseAdmin', response.body.user_rol);
-        this.navCtrl.setRoot('DashboardPage', {isAdmin: response.body.user_rol});
+        this.chargeAllInfoClient(response.body.user_rol);
+        // this.navCtrl.setRoot('DashboardPage', {isAdmin: response.body.user_rol});
       } else {
         if (this.countError === 3) {
           this.goBack(response);
@@ -131,6 +131,16 @@ export class WelcomePage implements OnInit {
     }
   }
 
+  async chargeAllInfoClient(rolUser) {
+    const response = await this.user.getInfo();
+    if (response) {
+      // Necesito llamar al usuario para recoger toda su información, recoger sus dietas, todo lo posible para pintar el dashboard de cliente
+
+      // NECESITO LLAMAR A EVOLUCIÓN, NECESITO LLAMAR A DATOS IMPORTANTES (Peso, altura... actual) y recoger la última dieta
+      this.navCtrl.setRoot('DashboardPage', {isAdmin: rolUser});
+    }
+  }
+
   public passwordForgotten() {
     let toast = this.toastCtrl.create({
       message: 'Se ha enviado un enlace para recuperar la contraseña al email que nos has indicado',
@@ -141,10 +151,6 @@ export class WelcomePage implements OnInit {
     setTimeout(() => {
       this.isLockedAccount = false;
     }, 3000);
-    // setTimeout(() => {
-    //   this.navCtrl.push('RecoverPasswordPage');
-    //   this.isLockedAccount = false;
-    // }, 500);
   }
 
   private goBack(errorResponse) {

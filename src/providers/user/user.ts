@@ -93,6 +93,22 @@ export class User {
     return seq;
   }
 
+  getInfo() {
+    let seq = this.http.get('').share();
+    seq.subscribe((res: any) => {
+      if (res.status == 'OK') {
+        console.log('flag');
+      }
+    }, err => {
+      console.error('ERROR', err);
+      this.myAlert = this.utils.createBasicAlert('Error al recuperar los datos', 'No ha sido imposible recuperar toda tu información. Intentelo más tarde');
+      this.myAlert.present();
+
+    });
+
+    return seq;
+  }
+
   parseAccountInfo(account: registerUser) {
     let accountpost: registerPostUser = {
       body: {

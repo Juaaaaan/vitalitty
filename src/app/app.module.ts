@@ -52,7 +52,6 @@ export function provideSettings(storage: Storage) {
     BrowserAnimationsModule,
     HttpClientModule,
     ComponentsModule,
-    // CalendarModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

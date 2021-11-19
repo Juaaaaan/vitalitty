@@ -1,40 +1,62 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, Nav, NavController } from 'ionic-angular';
+import { App, IonicPage, Nav, NavController, NavParams } from 'ionic-angular';
+import { AuthProvider } from '../../providers/auth/auth';
 
-interface PageItem {
-  title: string
-  component: any
-}
-type PageList = PageItem[]
+/**
+ * Generated class for the MenuPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
 @IonicPage()
 @Component({
   selector: 'page-menu',
-  templateUrl: 'menu.html'
+  templateUrl: 'menu.html',
 })
 export class MenuPage {
-  // A reference to the ion-nav in our component
+
+  username: string = '';
+  pages = [];
+
+
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = 'ContentPage';
-
-  pages: PageList;
-
-  constructor(public navCtrl: NavController) {
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Sign in', component: 'LoginPage' },
-      { title: 'Signup', component: 'SignupPage' }
-    ];
+  constructor(public navCtrl: NavController,
+    private auth: AuthProvider, 
+    private appCtrl: App) {
   }
 
-  ionViewDidLoad() {
-    console.log('Hello MenuPage Page');
+  ionViewWillEnter(){
+    if (this.auth.isAdmin()) {
+      this.pages = [
+        { title: 'Admin Dashboard', page: 'AdminPage', icon: 'home'},
+        { title: 'Admin Second Page', page: 'AdminSecondPage', icon: 'planet'},
+      ];
+      this.openPage('AdminPage');
+    } else {
+      this.pages = [
+        { title: 'User Dashboard', page: 'UserPage', icon: 'home'},
+        { title: 'User Second Page', page: 'UserSecondPage', icon: 'planet'},
+      ];
+      this.openPage('UserPage'); 
+    }
+    this.username = this.auth.currentUser.name;
   }
 
-  openPage(page: PageItem) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+  openPage(page) {
+    this.nav.setRoot(page);
   }
+
+  logout() {
+    this.auth.logout();
+    // this.nav.setRoot('LoginPage'); // Wrong
+    this.appCtrl.getRootNav().setRoot('LoginPage'); // Right
+  }
+
+
+  ionViewCanEnter(){
+    this.auth.isLoggedIn();
+  }
+
 }

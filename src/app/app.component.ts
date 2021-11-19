@@ -35,7 +35,7 @@ export interface KeyValueModelWithPage extends KeyValueModel {
 
 </ion-menu>
 <ion-nav #content [root]="rootPage"></ion-nav>`,
-  // templateUrl: 'app.html',
+  // templateUrl: '../pages/menu/menu.html',
   providers: [
     CheckEnvDirective,
     NavHelperProvider
@@ -109,11 +109,11 @@ export class MyApp {
     this.listenNavChanges();
     this.checkAutoLogout();
     console.log(this.storage.get('responseAdmin'));
-    if (this.storage.get('responseAdmin') === 1) {
-      this.loadMenuPages('admin');
-    } else {
-      this.loadMenuPages('client');
-    }
+    // if (this.storage.get('responseAdmin') === 1) {
+    //   this.loadMenuPages('admin');
+    // } else {
+    //   this.loadMenuPages('client');
+    // }
   }
 
   // *******************************************

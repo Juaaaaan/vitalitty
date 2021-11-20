@@ -1,4 +1,9 @@
 page-item-detail {
+
+  .item-content {
+    height: 100%;
+  }
+
   .item-profile {
     width: 100%;
     background-position: center center;
@@ -9,6 +14,22 @@ page-item-detail {
   .item-detail {
     width: 100%;
     background: white;
-    position: absolute;
+    // position: absolute;
+  }
+
+  .second-item-content {
+    display: flex;
+    .card-container {
+      max-width: 50%;
+      width: 100%;
+    }
+  }
+  .list-content {
+    display: flex;
+    align-items: center;
+    .img-pdf {
+      width: 40px;
+      margin: 16px;
+    }
   }
 }

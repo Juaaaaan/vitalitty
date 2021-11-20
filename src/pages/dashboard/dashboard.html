@@ -24,11 +24,7 @@
             <div class="content-initial">
               <div class="first-content">
                   <writter class="title-dashboard" value="Bienvenida Jesús, ¿Qué tal estás?"></writter>
-                  <!-- <writter class="subtitle-dashboard" value="Aquí vas a poder ver la evolución de tus pacientes"></writter> -->
-                  <!-- <p>La siguiente cita la tendrás {{newDate}}</p> -->
-                  <p>Tienes actualmente 684 clientes</p>
-                  <!-- <writter class="subtitle-dashboard" value="Podrás gestionar tus citas y enviarselas"></writter>
-                  <writter class="subtitle-dashboard" value="Disfruta, te lo mereces"></writter> -->
+                  <p *ngIf="userDataToSearch">Jesús, actualmente en vitalitty, tienes {{userDataToSearch.allUsers.length}} usuarios</p>
               </div>
             </div>
           </div>
@@ -70,14 +66,16 @@
             <writter class="title-dashboard-sec" value="Buscador de pacientes"></writter>
             <p>Jesús, puedes buscar a todos tus pacientes. Pinchando en cada resultado podrás acceder a la ficha de dicho paciente</p> 
           </div>
-          <ion-searchbar (ionInput)="getItems($event)" placeholder="Nombre o email del paciente"></ion-searchbar>
+          <ion-searchbar (ionInput)="getItems($event)" placeholder="Nombre del paciente"></ion-searchbar>
           <ion-list>
             <button ion-item (click)="openItem(item)" *ngFor="let item of currentItems">
               <ion-avatar item-start>
                 <img [src]="item.profilePic" />
               </ion-avatar>
-              <h2>{{item.name}}</h2>
-              <p>{{item.about}}</p>
+              <h2>{{item.name}} {{item.surname}}</h2>
+              <p>Esta en <b>Vitalitty</b> desde {{item.dataIn}}</p>
+              <p>{{item.mail}}</p>
+              <p>{{item.tel}}</p>
               <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
             </button>
           </ion-list>

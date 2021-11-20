@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Api } from '../api/api';
 import { LoginPost, LoginResponseModel, LoginServiceModel } from '../auth/auth.model';
-import { registerPostUser, registerUser, responseRegisterUser } from './modules.user';
+import { clientData, registerPostUser, registerUser, responseRegisterUser } from './modules.user';
 import { Alert, AlertController } from 'ionic-angular';
 import { UtilsProvider } from '../../shared/utils';
 
@@ -94,22 +94,22 @@ export class User {
   }
 
   getInfo() {
-    let seq = this.http.get('').share();
-    seq.subscribe((res: any) => {
-      if (res.status == 'OK') {
-        console.log('flag');
+    let seq = this.http.get('https://qnw4290ez9.execute-api.eu-west-3.amazonaws.com/v1Prueba/clientes').share();
+    seq.subscribe((res: clientData) => {
+      if (res) {
+        return res;
       }
     }, err => {
       console.error('ERROR', err);
       this.myAlert = this.utils.createBasicAlert('Error al recuperar los datos', 'No ha sido imposible recuperar toda tu información. Intentelo más tarde');
       this.myAlert.present();
-
+      return err;
     });
-
     return seq;
   }
 
   parseAccountInfo(account: registerUser) {
+    console.log(account);
     let accountpost: registerPostUser = {
       body: {
         name: account.name,
@@ -119,6 +119,7 @@ export class User {
         password: btoa(account.password),
         tel: account.tel,
         accept: account.accept,
+        observations: account.observations,
         rol: 'cliente'
       }
     }

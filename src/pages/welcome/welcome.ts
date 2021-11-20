@@ -10,6 +10,7 @@ import { LoginServiceModel } from '../../providers/auth/auth.model';
 import { AuthServiceParser } from '../../providers/auth/auth.parser';
 import { KeyValueModel } from '../../providers/ui/ui.models';
 import { StorageProvider } from '../../shared/storage';
+import { clientData } from '../../providers/user/modules.user';
 
 
 /**
@@ -113,8 +114,15 @@ export class WelcomePage implements OnInit {
         this.access_token = response.body['X-Authorization'] ? response.body['X-Authorization'] : 'no tiene x-authorization' ;
         this.storageProvider.set('access_token', this.access_token);
         this.storageProvider.set('responseAdmin', response.body.user_rol);
-        this.chargeAllInfoClient(response.body.user_rol);
-        // this.navCtrl.setRoot('DashboardPage', {isAdmin: response.body.user_rol});
+        if (response.body.user_rol === 1) {
+          this.user.getInfo().subscribe((res: clientData) => {
+            if (res) {
+              this.navCtrl.setRoot('DashboardPage', {isAdmin: response.body.user_rol, allDataUser: res.body});
+            }
+          })
+        } else {
+          this.navCtrl.setRoot('DashboardPage', {isAdmin: response.body.user_rol});
+        }
       } else {
         if (this.countError === 3) {
           this.goBack(response);
@@ -128,16 +136,6 @@ export class WelcomePage implements OnInit {
           toast.present();
         }
       }
-    }
-  }
-
-  async chargeAllInfoClient(rolUser) {
-    const response = await this.user.getInfo();
-    if (response) {
-      // Necesito llamar al usuario para recoger toda su información, recoger sus dietas, todo lo posible para pintar el dashboard de cliente
-
-      // NECESITO LLAMAR A EVOLUCIÓN, NECESITO LLAMAR A DATOS IMPORTANTES (Peso, altura... actual) y recoger la última dieta
-      this.navCtrl.setRoot('DashboardPage', {isAdmin: rolUser});
     }
   }
 

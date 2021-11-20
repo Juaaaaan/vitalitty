@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-
 import { Item } from '../../models/item';
-
 @Injectable()
 export class Items {
   items: Item[] = [];
+  dataClientsArr: Item = [];
 
   defaultItem: any = {
     "name": "Burt Bear",
@@ -14,47 +13,54 @@ export class Items {
 
 
   constructor() {
-    let items = [
-      {
-        "name": "Burt Bear",
-        "profilePic": "assets/img/speakers/bear.jpg",
-        "about": "Burt is a Bear."
-      },
-      {
-        "name": "Charlie Cheetah",
-        "profilePic": "assets/img/speakers/cheetah.jpg",
-        "about": "Charlie is a Cheetah."
-      },
-      {
-        "name": "Donald Duck",
-        "profilePic": "assets/img/speakers/duck.jpg",
-        "about": "Donald is a Duck."
-      },
-      {
-        "name": "Eva Eagle",
-        "profilePic": "assets/img/speakers/eagle.jpg",
-        "about": "Eva is an Eagle."
-      },
-      {
-        "name": "Ellie Elephant",
-        "profilePic": "assets/img/speakers/elephant.jpg",
-        "about": "Ellie is an Elephant."
-      },
-      {
-        "name": "Molly Mouse",
-        "profilePic": "assets/img/speakers/mouse.jpg",
-        "about": "Molly is a Mouse."
-      },
-      {
-        "name": "Paul Puppy",
-        "profilePic": "assets/img/speakers/puppy.jpg",
-        "about": "Paul is a Puppy."
-      }
-    ];
+    // let items = [
+    //   {
+    //     "name": "Burt Bear",
+    //     "profilePic": "assets/img/speakers/bear.jpg",
+    //     "about": "Burt is a Bear.",
+    //     "pepe": "JEJEJEEJEE"
+    //   },
+    //   {
+    //     "name": "Charlie Cheetah",
+    //     "profilePic": "assets/img/speakers/cheetah.jpg",
+    //     "about": "Charlie is a Cheetah.",
+    //     "pepe": "pepe"
+    //   },
+    //   {
+    //     "name": "Donald Duck",
+    //     "profilePic": "assets/img/speakers/duck.jpg",
+    //     "about": "Donald is a Duck.",
+    //     "pepe": "pepe"
+    //   },
+    //   {
+    //     "name": "Eva Eagle",
+    //     "profilePic": "assets/img/speakers/eagle.jpg",
+    //     "about": "Eva is an Eagle.",
+    //     "pepe": "pepe"
+    //   },
+    //   {
+    //     "name": "Ellie Elephant",
+    //     "profilePic": "assets/img/speakers/elephant.jpg",
+    //     "about": "Ellie is an Elephant.",
+    //     "pepe": "pepe"
+    //   },
+    //   {
+    //     "name": "Molly Mouse",
+    //     "profilePic": "assets/img/speakers/mouse.jpg",
+    //     "about": "Molly is a Mouse.",
+    //     "pepe": "pepe"
+    //   },
+    //   {
+    //     "name": "Paul Puppy",
+    //     "profilePic": "assets/img/speakers/puppy.jpg",
+    //     "about": "Paul is a Puppy.",
+    //     "pepe": "pepe"
+    //   }
+    // ];
 
-    for (let item of items) {
-      this.items.push(new Item(item));
-    }
+    // for (let item of items) {
+    //   this.items.push(new Item(item));
+    // }
   }
 
   query(params?: any) {
@@ -81,5 +87,25 @@ export class Items {
 
   delete(item: Item) {
     this.items.splice(this.items.indexOf(item), 1);
+  }
+
+  getDataClients(dataClients) {
+    if (dataClients && dataClients.allUsers.length > 0) {
+      for (let index = 0; index < dataClients.allUsers.length; index++) {
+        const element = dataClients.allUsers[index];
+        const realItemElement = {
+          "name": element[2],
+          "surname": element[3],
+          "dataIn": element[4],
+          "mail": element[6],
+          "tel": element[7],
+          "gender": element[8],
+          // FEMENINO
+          // MASCULINO
+          "profilePic": element[8].toUpperCase().includes('MA') ? 'assets/img/icons8-male-48.png' : 'assets/img/icons8-female-48.png'
+        }
+        this.add(realItemElement);
+      }
+    }
   }
 }

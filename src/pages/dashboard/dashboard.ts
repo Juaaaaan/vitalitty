@@ -4,6 +4,7 @@ import { StorageProvider } from '../../shared/storage';
 import { Chart } from 'chart.js';
 import { Item } from '../../models/item';
 import { Items } from '../../providers';
+import { clientData, clientSearch } from '../../providers/user/modules.user';
 // import { StorageKeys } from './../../providers/storage/storage.keys';
 
 /**
@@ -32,6 +33,8 @@ export class DashboardPage implements OnInit, OnDestroy {
 
   public newDate = new Date();
   public isAdmin: number;
+  public userDataToSearch: clientData;
+  private arrUsers: clientSearch[] = [];
 
   // Obtenga el elemento dom del lienzo correspondiente
 	@ViewChild('pieCanvas') pieCanvas;
@@ -50,11 +53,14 @@ export class DashboardPage implements OnInit, OnDestroy {
     public items: Items) {
       this.dir = platform.dir();
       this.isAdmin = this.navParams.get('isAdmin');
+      this.userDataToSearch = this.navParams.get('allDataUser');
     }
 
     ionViewCanEnter(): boolean{
       if(this.storage.get('responseAdmin') === 1){
-         return true;
+        if (this.userDataToSearch) { 
+          return true;
+        }
        } else if (this.storage.get('responseAdmin') === 2) {
          return true;
        } else {
@@ -112,8 +118,16 @@ export class DashboardPage implements OnInit, OnDestroy {
           observations: '<b>* Observaciones del cliente respecto a la dieta:</b> No me gustan los guisantes. Me cuesta cumplir la dieta dado que por temas laborales no puedo acomodarme. Necesito volver a repasarla'
         },
       ];
+      this.parseItemsUser();
     }
   }
+
+
+  private parseItemsUser() {
+    this.items.getDataClients(this.userDataToSearch);
+  }
+
+
 
   getItems(ev) {
     let val = ev.target.value;

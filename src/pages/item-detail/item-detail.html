@@ -1,5 +1,4 @@
 <ion-header>
-
   <ion-navbar>
     <ion-toolbar>
       <ion-buttons slot="start">
@@ -13,13 +12,58 @@
 
 
 <ion-content>
-  <div padding>
+  <div class="item-content">
     <div class="item-detail" padding>
-      <h2>{{item.name}}</h2>
-      <p>{{item.about}}</p>
+      <h2>Ficha de Cliente</h2>
+      <p>A continuación, podrás encontrar <b>la evolución </b> de {{item.name}} {{item.surname}},<b>
+        el histórico de citas</b> para conocer con que frecuencia pasa por revisión y <b>todas sus dietas</b>.</p>
+        <div class="second-item-content">
+          <div class="card-container">
+            <ion-card>
+              <img src="../../assets/img/advance-card-bttf.png"/>
+              <ion-card-content>
+                <ion-card-title>
+                  Nine Inch Nails Live
+                  </ion-card-title>
+                <p>
+                  The most popular industrial group ever, and largely
+                  responsible for bringing the music to a mass audience.
+                </p>
+              </ion-card-content>
+            </ion-card>
+          </div>
+          <div class="card-container">
+            <ion-card>
+              <ion-card-header class="title-card">Tus últimas dietas</ion-card-header>
+              <ion-card-content>
+                <div class="second">
+                  <p>En este apartado puedes ver tu última dieta</p>
+                  <ion-list>
+                    <button ion-item *ngFor="let diet of diets" (click)="itemSelected(diet)">
+                      <div class="list-content">
+                        <!-- <ion-icon name="document-text-outline"></ion-icon> -->
+                        <img class="img-pdf" src="../../assets/icon/google-docs.png" >
+                        <div>
+                          <p>Dieta con fecha: {{ diet.name }}</p>
+                          <p>Obsevaciones: {{diet.observations}}</p>
+                        </div>
+                      </div>
+                    </button> 
+                  </ion-list>
+                  <div class="all-diets">
+                    <button ion-button>Ver todas las dietas</button>
+                  </div>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </div>
+        </div>
     </div>
+    <div class="item-profile" text-center>
+      <p>QUE PASA</p>
+      <p>Si quieres darle cita, pincha aquí</p>
+      <button ion-button>Crear cita</button>
+    </div>
+    <vitalitty-footer></vitalitty-footer>
   </div>
-  <!-- <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.profilePic + ')'">
-  </div> -->
-  <!-- <vitalitty-footer></vitalitty-footer> -->
 </ion-content>

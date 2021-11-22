@@ -5,10 +5,7 @@ page-item-detail {
   }
 
   .item-profile {
-    width: 100%;
-    background-position: center center;
-    background-size: cover;
-    height: 250px;
+    width: 40%;
   }
 
   .item-detail {
@@ -19,17 +16,52 @@ page-item-detail {
 
   .second-item-content {
     display: flex;
-    .card-container {
-      max-width: 50%;
+    .card-container-first {
+      max-width: 30%;
+      width: 100%;
+    }
+    .card-container-second {
+      max-width: 30%;
+      width: 100%;
+    }
+    .card-container-third {
+      max-width: 40%;
       width: 100%;
     }
   }
   .list-content {
     display: flex;
     align-items: center;
+    white-space: normal !important;
     .img-pdf {
       width: 40px;
       margin: 16px;
     }
+  }
+  .card-canvas {
+    max-height: 500px;
+    height: auto;
+  }
+  .card-diets {
+    max-height: 500px;
+    height: auto;
+    overflow: scroll;
+  }
+
+  .title-card {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .subtitle-card-diets {
+    padding: 0px 16px;
+    .text-subtitle {
+      font-size: 13px;
+    }
+  }
+
+  .observations-content {
+    white-space: normal !important;
+    font-size: 12px;
   }
 }

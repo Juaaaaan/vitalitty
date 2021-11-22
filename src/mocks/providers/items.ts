@@ -6,9 +6,12 @@ export class Items {
   dataClientsArr: Item = [];
 
   defaultItem: any = {
-    "name": "Burt Bear",
-    "profilePic": "assets/img/speakers/bear.jpg",
-    "about": "Burt is a Bear.",
+    "name": "Juan José",
+    "surname": "Suárez",
+    "dataIn":"10/10/2010",
+    "mail": "suarezramirezjuanjose@hotmail.com",
+    "tel": "697856543",
+    "gender":"Masculino"
   };
 
 
@@ -102,7 +105,9 @@ export class Items {
           "gender": element[8],
           // FEMENINO
           // MASCULINO
-          "profilePic": element[8].toUpperCase().includes('MA') ? 'assets/img/icons8-male-48.png' : 'assets/img/icons8-female-48.png'
+          "profilePic": element[8].toUpperCase().includes('MA') ? 'assets/img/icons8-male-48.png' : 'assets/img/icons8-female-48.png',
+          "id_client": element[0],
+          "id_user": element[1]
         }
         this.add(realItemElement);
       }

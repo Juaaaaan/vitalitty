@@ -5,7 +5,8 @@ import { Chart } from 'chart.js';
 import { Item } from '../../models/item';
 import { Items } from '../../providers';
 import { clientData, clientSearch } from '../../providers/user/modules.user';
-// import { StorageKeys } from './../../providers/storage/storage.keys';
+import { EvolucionesProvider } from '../../providers/evoluciones/evoluciones';
+import { allEvolucionCliente, evolucionClient } from '../../providers/evoluciones/modules.evoluciones';
 
 /**
  * Generated class for the DashboardPage page.
@@ -50,7 +51,8 @@ export class DashboardPage implements OnInit, OnDestroy {
     private viewCtrl: ViewController,
     public platform: Platform,
     private menuCtrl: MenuController,
-    public items: Items) {
+    public items: Items,
+    public evolucionesProvider: EvolucionesProvider) {
       this.dir = platform.dir();
       this.isAdmin = this.navParams.get('isAdmin');
       this.userDataToSearch = this.navParams.get('allDataUser');
@@ -60,7 +62,7 @@ export class DashboardPage implements OnInit, OnDestroy {
       if(this.storage.get('responseAdmin') === 1){
         if (this.userDataToSearch) { 
           return true;
-        }
+        } 
        } else if (this.storage.get('responseAdmin') === 2) {
          return true;
        } else {
@@ -127,8 +129,6 @@ export class DashboardPage implements OnInit, OnDestroy {
     this.items.getDataClients(this.userDataToSearch);
   }
 
-
-
   getItems(ev) {
     let val = ev.target.value;
     if (!val || !val.trim()) {
@@ -140,12 +140,41 @@ export class DashboardPage implements OnInit, OnDestroy {
     });
   }
 
-  openItem(item: Item) {
-    this.navCtrl.push('ItemDetailPage', {
-      item: item
-    });
+  async openItem(item: Item) {
+    let responseParsed: evolucionClient[];
+    await this.evolucionesProvider.getClientEvolucion(item).subscribe((res: allEvolucionCliente) => {
+      console.log(res);
+      if (res) {
+        responseParsed = this.parseEvoluciones(res.body);
+        this.navCtrl.push('ItemDetailPage', {
+          item: item,
+          evolucion: responseParsed
+        });
+      }
+    })
   }
 
+
+  parseEvoluciones(body) {
+    let bodyParsed: evolucionClient[] = [];
+    for (let index = 0; index < body.evoluciones.length; index++) {
+      const element = body.evoluciones[index];
+      bodyParsed.push({
+        id_evolucion: element[0],
+        id_cita: element[1],
+        id_cliente: element[2],
+        peso: element[3],
+        altura: element[4],
+        porcentaje_graso: element[5],
+        porcentaje_muscular: element[6],
+        cintura: element[7],
+        cadera: element[8],
+        abdomen: element[9],
+        fecha_evolucion: element[10]
+      })
+    }
+    return bodyParsed
+  }
 
   menuDesplegable() {
     this.menuCtrl.toggle()

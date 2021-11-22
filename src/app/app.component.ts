@@ -127,8 +127,6 @@ export class MyApp {
     switch (typeUser) {
       case 'admin':
         this.pages = [
-          { title: 'Welcome', component: 'WelcomePage' },
-          { title: 'Tutorial', component: 'TutorialPage' },
           { title: 'Cerrar sesión', component: 'WelcomePage' }
         ]
         break;
@@ -147,21 +145,6 @@ export class MyApp {
     this.headerOptions.unshift({ id: 'dashboard', name: 'ACIE_MENU_OPTIONS.PROFILE.DASHBOARD', page: 'DashboardPage' });
     this.headerOptions.unshift({ id: 'profile', name: 'ACIE_MENU_OPTIONS.PROFILE.PROFILE', page: 'MyProfilePage' });
     this.headerOptions.push({ id: 'logout', name: 'ACIE_MENU_OPTIONS.PROFILE.LOGOUT' });
-    // this.user.userInfoChanges().subscribe(user => {
-    //   this.populateNotLoggedOptions();
-
-    //   if (user) {
-    //     // this.userHeader = this.userParser.parseMenuUserHeader(user);
-    //     if (user.role === 'legal-representative') {
-    //       // this.headerOptions.unshift({ id: 'management', name: 'ACIE_MENU_OPTIONS.PROFILE.USERS_MANAGEMENT', page: 'UserManagementPage' });
-    //     }
-
-    //   } else {
-    //     this.userHeader = undefined;
-    //   }
-    //   this.parsedHeaderOptions = this.headerOptions.map(opt => this.parseOptions(opt));
-    //   this.orderOptions();
-    // });
   }
 
   populateNotLoggedOptions() {

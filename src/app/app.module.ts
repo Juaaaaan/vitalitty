@@ -21,6 +21,7 @@ import { CustomDateFormatterProvider } from '../providers/custom-date-formatter/
 // import { ChartsModule } from 'ng2-charts';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EvolucionesProvider } from '../providers/evoluciones/evoluciones';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -81,7 +82,8 @@ export function provideSettings(storage: Storage) {
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     CustomEventTitleFormatterProvider,
-    CustomDateFormatterProvider
+    CustomDateFormatterProvider,
+    EvolucionesProvider
   ]
 })
 export class AppModule { }

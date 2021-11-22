@@ -19,26 +19,6 @@ export class User {
     public alertCtrl: AlertController,
     public utils: UtilsProvider) { }
 
-  /**
-   * Send a POST request to our login endpoint with the data
-   * the user entered on the form.
-   */
-  // login(accountInfo: any) {
-  //   let seq = this.api.post('login', accountInfo).share();
-
-  //   seq.subscribe((res: any) => {
-  //     // If the API returned a successful response, mark the user as logged in
-  //     if (res.status == 'success') {
-  //       this._loggedIn(res);
-  //     } else {
-  //     }
-  //   }, err => {
-  //     console.error('ERROR', err);
-  //   });
-
-  //   return seq;
-  // }
-
   login(accountInfoLogin: LoginServiceModel) {
     const useMock: boolean = false;
     return new Promise<any>(

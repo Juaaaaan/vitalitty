@@ -3,7 +3,7 @@ import { HttpRequest, HttpResponse, HttpErrorResponse } from '@angular/common/ht
 import { AlertHelperProvider, AlertModel } from '../ui/alert';
 import { LoaderHelperProvider } from '../ui/loader';
 import { TimeoutError } from 'rxjs/util/TimeoutError';
-import moment from 'moment';
+// import moment from 'moment';
 
 
 
@@ -11,7 +11,7 @@ import moment from 'moment';
 @Injectable()
 export class AppInterceptorHelper {
 
-    private isIE: boolean = false;
+    public isIE: boolean = false;
     private requestedAlertURLs: string[] = [];
     private requestAllURLs: string[] = [];
 
@@ -28,37 +28,35 @@ export class AppInterceptorHelper {
     // *******************************************
     public setRequestHeaders(request: HttpRequest<any>) {
 
-        console.log('HOLI');
-
         request = request.clone({
             headers: request.headers
                 .delete('Content-Type')
-                .append('Content-Type', 'application/json')
-                .append('utc', moment().format('DD/M/YYYY HH:mm:ss'))
+                // .append('Content-Type', 'application/json')
+                // .append('utc', moment().format('DD/M/YYYY HH:mm:ss'))
                 .delete('show-error-alert')
                 .delete('show-loading')
                 .delete('loader-message')
         });
 
 
-        if (this.isIE) {
-            request = request.clone({
-                headers: request.headers
-                    .append('Cache-Control', 'no-cache,no-store')
-                    .append('Pragma', 'no-cache')
-                    .append('Expires', 'Sat, 01 Jan 2100 00:00:00 GMT')
-            });
-        }
+        // if (this.isIE) {
+        //     request = request.clone({
+        //         headers: request.headers
+        //             // .append('Cache-Control', 'no-cache,no-store')
+        //             // .append('Pragma', 'no-cache')
+        //             // .append('Expires', 'Sat, 01 Jan 2100 00:00:00 GMT')
+        //     });
+        // }
 
 
-        if (request.url.includes('mapfre.com/srv/api/consentreceipts')) {
-            request = request.clone({
-                headers: request.headers
-                    .append('Authorization', 'Basic ' + btoa('APPACIE:e6XdQJNOF'))
-                    .delete('utc')
-                    .delete('env')
-            });
-        }
+        // if (request.url.includes('mapfre.com/srv/api/consentreceipts')) {
+        //     request = request.clone({
+        //         headers: request.headers
+        //             // .append('Authorization', 'Basic ' + btoa('APPACIE:e6XdQJNOF'))
+        //             .delete('utc')
+        //             .delete('env')
+        //     });
+        // }
 
 
         return request;

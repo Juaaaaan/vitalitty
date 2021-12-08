@@ -1,14 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
 import { Chart } from 'chart.js';
-import { Items } from '../../providers';
+import { Items, User } from '../../providers';
 import { FormHelperProvider } from './../../providers/form-helper/form-helper';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { PATTERNS } from '../../providers/validators/validators.patterns';
-import { KeyValueModel } from '../../providers/ui/ui.models';
+// import { PATTERNS } from '../../providers/validators/validators.patterns';
+// import { KeyValueModel } from '../../providers/ui/ui.models';
 import { allEvolucionCliente, evolucionClient } from '../../providers/evoluciones/modules.evoluciones';
 import { StorageProvider } from '../../shared/storage';
-// import { ModalPage } from './modal-page';
 @IonicPage()
 @Component({
   selector: 'page-item-detail',
@@ -30,14 +29,15 @@ export class ItemDetailPage implements OnInit {
   // Form Var
   public modifyInfoUser: FormGroup;
   // Control Vars
-  private modifyInfoUserFormErrors = new Map<string, KeyValueModel[]>();
+  // public modifyInfoUserFormErrors = new Map<string, KeyValueModel[]>();
 
   constructor(public navCtrl: NavController, 
     navParams: NavParams,
     items: Items,
     private modalCtrl: ModalController,
-    private formHelper: FormHelperProvider,
-    private storage: StorageProvider) {
+    // private formHelper: FormHelperProvider,
+    private storage: StorageProvider,
+    private user: User) {
 
     this.item = navParams.get('item') || items.defaultItem;
     this.evo = navParams.get('evolucion') ? navParams.get('evolucion') : null;
@@ -94,8 +94,37 @@ export class ItemDetailPage implements OnInit {
     this.dietsComplete = this.diets.length;
   }
 
-  itemSelected(item) {
-    window.open('www.google.es', '_blank');
+
+  letPdf(index: number) {
+    console.log(index);
+    if (index) {
+      console.log(index);
+      window.open('https://vitalitty-s3-dietas.s3.eu-west-3.amazonaws.com/JUAN+JOSE+SUAREZ+RAMIREZ+31-5-20.pdf', '_blank');
+    }
+  }
+
+
+  async createCalendarEvent() {
+   const URL: string = 'https://www.googleapis.com/calendar/v3/calendars/juan11857@gmail.com/events';
+   let eventBody: object = {
+      "end": {
+        "dateTime": "2021-12-6T17:00:00-07:00",
+        "timeZone": "America/Los_Angeles"
+      },
+      "start": {
+        "dateTime": "2021-05-5T09:00:00-07:00",
+        "timeZone": "America/Los_Angeles"
+      },
+      "attendees": [
+        {
+          "email": "suarezramirezjuanjose@hotmail.com"
+        }
+      ],
+      "description": "ESTO ES OTRA PRUEBA"
+   }
+    await this.user.createEventCalendarUser(eventBody).subscribe((res) => {
+     console.log(res);
+   })
   }
 
   modifyUser() {

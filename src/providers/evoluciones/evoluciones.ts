@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Alert, AlertController} from 'ionic-angular';
 import { UtilsProvider } from '../../shared/utils';
-import { allEvolucionCliente, evolucionClient } from './modules.evoluciones';
-import { Item } from '../../models/item';
+import { allEvolucionCliente } from './modules.evoluciones';
+// import { Item } from '../../models/item';
 
 /*
   Generated class for the EvolucionesProvider provider.

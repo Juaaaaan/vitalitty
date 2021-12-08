@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavHelperProvider } from './../../providers/ui/nav-helper';
 
 /**
  * Generated class for the VitalittyFooterComponent component.

@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Output, EventEmitter, Input, ViewChild, ElementRef, Renderer2, Renderer, AfterViewInit, OnChanges } from '@angular/core';
+import { Component, OnInit, HostListener, Output, EventEmitter, Input, ViewChild, ElementRef, AfterViewInit} from '@angular/core';
 import { UserHeaderViewModel } from './../vitalitty-logged-user/viewModel';
 import { KeyValueModelWithPage } from '../../app/app.component';
 

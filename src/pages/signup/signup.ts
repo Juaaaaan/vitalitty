@@ -33,7 +33,6 @@ export class SignupPage {
     public user: User,
     public toastCtrl: ToastController,
     public translate: TranslateService,
-    private formBuilder: FormBuilder,
     private navHelper: NavHelperProvider,
     private storage: StorageProvider) {
 

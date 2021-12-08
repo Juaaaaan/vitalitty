@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { CurrencyService } from './currency.service';
 
 /**

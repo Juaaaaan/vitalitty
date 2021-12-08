@@ -1,8 +1,8 @@
-import { KeyValueModel } from './ui.models';
+// import { KeyValueModel } from './ui.models';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { TranslateService } from '@ngx-translate/core';
-import { AlertController, AlertButton, Platform, ModalController, Modal, Alert } from 'ionic-angular';
+import {AlertButton, Platform, Modal, Alert } from 'ionic-angular';
 // import { AcieAlertComponent } from '../../components/acie/acie-alert/acie-alert';
 
 export interface AlertModel {
@@ -38,14 +38,14 @@ export class AlertHelperProvider {
 
   // Control Vars
   private isWeb: boolean = false;
-  private isIE: boolean = false;
-  private isEdge: boolean = false;
+  public isIE: boolean = false;
+  public isEdge: boolean = false;
 
 
 
 
 
-  constructor(private alertCtrl: AlertController, private modalCtrl: ModalController, private translate: TranslateService, private platform: Platform) {
+  constructor(private translate: TranslateService, private platform: Platform) {
     this.initialize();
   }
 
@@ -98,15 +98,15 @@ export class AlertHelperProvider {
   // *******************************************
   // PARSE Methods
   // *******************************************
-  private translateButtons(): AlertButton[] {
-    let buttons: AlertButton[] = [];
-    const translatedButtons: AlertButton[] = [];
+  // private translateButtons(): AlertButton[] {
+  //   let buttons: AlertButton[] = [];
+  //   const translatedButtons: AlertButton[] = [];
 
-    this.buttons.length !== 0 ? buttons = this.buttons : buttons.push(this.defaultButton);
-    buttons.forEach(b => translatedButtons.push({ text: this.translate.instant(b.text), handler: b.handler, role: b.role }));
+  //   this.buttons.length !== 0 ? buttons = this.buttons : buttons.push(this.defaultButton);
+  //   buttons.forEach(b => translatedButtons.push({ text: this.translate.instant(b.text), handler: b.handler, role: b.role }));
 
-    return translatedButtons;
-  }
+  //   return translatedButtons;
+  // }
 
 
 

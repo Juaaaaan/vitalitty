@@ -4,7 +4,7 @@ import { StorageProvider } from '../../shared/storage';
 import { Chart } from 'chart.js';
 import { Item } from '../../models/item';
 import { Items } from '../../providers';
-import { clientData, clientSearch } from '../../providers/user/modules.user';
+import { clientData } from '../../providers/user/modules.user';
 import { EvolucionesProvider } from '../../providers/evoluciones/evoluciones';
 import { allEvolucionCliente, evolucionClient } from '../../providers/evoluciones/modules.evoluciones';
 
@@ -35,7 +35,6 @@ export class DashboardPage implements OnInit, OnDestroy {
   public newDate = new Date();
   public isAdmin: number;
   public userDataToSearch: clientData;
-  private arrUsers: clientSearch[] = [];
 
   // Obtenga el elemento dom del lienzo correspondiente
 	@ViewChild('pieCanvas') pieCanvas;

@@ -3,7 +3,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
 import { User } from '../../providers';
-import { MainPage } from '../';
 
 @IonicPage()
 @Component({
@@ -20,7 +19,7 @@ export class LoginPage {
   };
 
   // Our translated text strings
-  private loginErrorString: string;
+  public loginErrorString: string;
 
   constructor(public navCtrl: NavController,
     public user: User,

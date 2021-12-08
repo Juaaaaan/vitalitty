@@ -73,6 +73,24 @@ export class User {
     return seq;
   }
 
+
+  createEventCalendarUser(allEventInfo) {
+    let bodyAccount = this.parseAccountInfo(allEventInfo);
+    let seq = this.http.post('https://www.googleapis.com/calendar/v3/calendars/juan11857@gmail.com/events', bodyAccount).share();
+    seq.subscribe((res: any) => {
+      if (res.status == 'OK') {
+        console.log('flag');
+      }
+    }, err => {
+      console.error('ERROR', err);
+      this.myAlert = this.utils.createBasicAlert('Error en el registro', 'Puedes intentarlo dentro de unos minutos');
+      this.myAlert.present();
+
+    });
+
+    return seq;
+  }
+
   getInfo() {
     let seq = this.http.get('https://qnw4290ez9.execute-api.eu-west-3.amazonaws.com/v1Prueba/clientes').share();
     seq.subscribe((res: clientData) => {

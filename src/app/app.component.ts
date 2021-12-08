@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, HostListener } from '@angular/core';
+import { Component, ViewChild, HostListener } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
@@ -56,7 +56,7 @@ export class MyApp {
 
   // Control Vars
   private currentPage: string;
-  private isUserInactive: boolean = false;
+  public isUserInactive: boolean = false;
   private loggoutInterval: number = 600000;
 
 
@@ -206,15 +206,15 @@ export class MyApp {
   }
 
 
-  private parseOptions(option: HeaderOption): KeyValueModelWithPage {
-    const parsedOption = <KeyValueModelWithPage>{};
+  // private parseOptions(option: HeaderOption): KeyValueModelWithPage {
+  //   const parsedOption = <KeyValueModelWithPage>{};
 
-    parsedOption.key = option.id;
-    parsedOption.value = option.name;
-    parsedOption.page = option.page;
+  //   parsedOption.key = option.id;
+  //   parsedOption.value = option.name;
+  //   parsedOption.page = option.page;
 
-    return parsedOption;
-  }
+  //   return parsedOption;
+  // }
 
 
   private checkAutoLogout() {

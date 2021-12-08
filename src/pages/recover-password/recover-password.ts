@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormHelperProvider } from './../../providers/form-helper/form-helper';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { PATTERNS } from '../../providers/validators/validators.patterns';
+// import { PATTERNS } from '../../providers/validators/validators.patterns';
 
 /**
  * Generated class for the RecoverPasswordPage page.

@@ -18,76 +18,95 @@
           el histórico de citas</b> para conocer con que frecuencia pasa por revisión y <b>todas sus dietas</b>.</p>
       </div>
       <div class="second-item-content" padding>
-        <div class="card-container-first">
-          <ion-card class="card-canvas">
-            <ion-card-header class="title-card">Puedes modificar esta información</ion-card-header>
-            <ion-card-content>
-              <form [formGroup]="modifyInfoUser" (submit)="modifyUser()">
-                <ion-list class="list-form">
-                  <ion-item>
-                    <ion-input [placeholder]="(firstElement && firstElement.peso) ? firstElement.peso : Peso" type="number" formControlName='peso' name="peso"></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-input  placeholder="altura" type="number" formControlName='altura' name="altura"></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-input  placeholder="grasa" type="number" formControlName='grasa' name="grasa"></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-input  placeholder="musculatura" type="number" formControlName='musculatura' name="musculatura"></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-input  placeholder="cintura" type="number" formControlName='cintura' name="cintura"></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-input  placeholder="abdomen" type="number" formControlName='abdomen' name="abdomen"></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-input  placeholder="observaciones" type="text" formControlName='observaciones' name="observaciones"></ion-input>
-                  </ion-item>
-                </ion-list>
-              </form>
-              <button ion-button>Guardar datos</button>
-            </ion-card-content>
-          </ion-card>
-        </div>
-        <div class="card-container-second">
-          <ion-card class="card-diets">
-            <ion-card-header class="title-card">Citas y dietas de {{item.name}} {{item.surname}}</ion-card-header>
-            <div class="subtitle-card-diets">
-              <p class="text-subtitle">Has tenido un total de <b>{{dietsComplete}} citas</b> con este paciente</p>
-            </div>
-            <ion-card-content>
-              <div class="second">
-                <ion-list>
-                  <button ion-item *ngFor="let diet of diets; let i = index">
-                    <div class="list-content">
-                      <!-- <ion-icon name="document-text-outline"></ion-icon> -->
-                      <img class="img-pdf" src="../../assets/icon/google-docs.png" (click)="letPdf(i)" >
-                      <div>
-                        <p><b>Cita</b> con fecha: {{diet.last_cita}}</p>
-                        <p><b>Dieta</b> con fecha: {{ diet.last_diet }}</p>
-                      </div>
-                    </div>
-                    <p class="observations-content"><b>Obsevaciones</b>: {{diet.observations}}</p>
-                  </button> 
-                </ion-list>
+        <div class="first-item-container">
+          <div class="card-container-first">
+            <ion-card class="card-canvas">
+              <ion-card-header class="title-card">Puedes modificar esta información</ion-card-header>
+              <ion-card-content>
+                <form [formGroup]="modifyInfoUser" (submit)="modifyUser()">
+                  <ion-list class="list-form">
+                    <ion-item>
+                      <ion-label>Peso en Kilogramos * |</ion-label>
+                      <ion-input [placeholder]="(firstElement && firstElement.peso) ? firstElement.peso : Peso" type="number" formControlName='peso' name="peso"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label>Altura en centímetros * |</ion-label>
+                      <ion-input [placeholder]="(firstElement && firstElement.altura) ? firstElement.altura : altura" type="number" formControlName='altura' name="altura"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label>Porcentaje graso * |</ion-label>
+                      <ion-input [placeholder]="(firstElement && firstElement.porcentaje_graso) ? firstElement.porcentaje_graso : porcentaje_graso" type="number" formControlName='grasa' name="grasa"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label>Porcentaje muscular * |</ion-label>
+                      <ion-input [placeholder]="(firstElement && firstElement.porcentaje_muscular) ? firstElement.porcentaje_muscular : porcentaje_muscular" type="number" formControlName='musculatura' name="musculatura"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label>Cintura en centimetros * |</ion-label>
+                      <ion-input [placeholder]="(firstElement && firstElement.cintura) ? firstElement.cintura : cintura" type="number" formControlName='cintura' name="cintura"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label>Abdomen en centimetros * |</ion-label>
+                      <ion-input [placeholder]="(firstElement && firstElement.abdomen) ? firstElement.abdomen : abdomen" type="number" formControlName='abdomen' name="abdomen"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label>Observaciones</ion-label>
+                      <ion-input placeholder="Cualquier anotación" type="text" formControlName='observaciones' name="observaciones"></ion-input>
+                    </ion-item>
+                  </ion-list>
+                </form>
+                <div padding>
+                  <p>Recuerda que si no introduces algun valor, se guarda el anterior dato a esta evolución</p>
+                </div>
+                <div class="form-button">
+                  <button ion-button slot="end" (click)="modifyPacienteInfo()">Modificar datos</button>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </div>
+          <div class="card-container-second">
+            <ion-card class="card-diets">
+              <ion-card-header class="title-card">Citas y dietas de {{item.name}} {{item.surname}}</ion-card-header>
+              <div class="subtitle-card-diets">
+                <p class="text-subtitle">Has tenido un total de <b>{{dietsComplete}} citas</b> con este paciente</p>
               </div>
-            </ion-card-content>
-          </ion-card>
+              <ion-card-content>
+                <div class="second">
+                  <ion-list>
+                    <button ion-item *ngFor="let diet of diets; let i = index">
+                      <div class="list-content">
+                        <!-- <ion-icon name="document-text-outline"></ion-icon> -->
+                        <img class="img-pdf" src="../../assets/icon/google-docs.png" (click)="letPdf(i)" >
+                        <div>
+                          <p><b>Cita</b> con fecha: {{diet.last_cita}}</p>
+                          <p><b>Dieta</b> con fecha: {{ diet.last_diet }}</p>
+                        </div>
+                      </div>
+                      <p class="observations-content"><b>Obsevaciones</b>: {{diet.observations}}</p>
+                    </button> 
+                  </ion-list>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </div>
         </div>
         <div class="card-container-third">
-          <ion-card class="card-canvas">
-            <canvas #barCanvas class="canvas-graph-bar"></canvas>
-            <ion-card-content>
-              <p>En la tabla puedes apreciar la evolución de {{item.name}} {{item.surname}} y el objetivo marcado por el mismo</p>
-            </ion-card-content>
-          </ion-card>
+          <div>
+            <ion-card class="card-canvas">
+              <canvas #barCanvas class="canvas-graph-bar"></canvas>
+              <ion-card-content>
+                <p>En la tabla puedes ver la evolución de {{item.name}} {{item.surname}} así como el peso, porcentaje graso y porcentaje muscular</p>
+              </ion-card-content>
+            </ion-card>
+          </div>
+          <div class="crearCita">
+            <div class="text-content-cita" padding>
+              <p>Para crear una cita, es necesario que rellenes el formulario que tendrás en el popup al hacer click en el botón</p>
+            </div>
+            <button ion-button (click)="createCalendarEvent()">Crear cita</button>
+          </div>
         </div>
       </div>
-    </div>
-    <div>
-      <button ion-button (click)="createCalendarEvent()">https://calendar.google.com/calendar/u/0?cid=anVhbjExODU3QGdtYWlsLmNvbQ</button>
     </div>
     <vitalitty-footer></vitalitty-footer>
   </div>

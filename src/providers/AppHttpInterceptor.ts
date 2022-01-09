@@ -49,6 +49,8 @@ export class AppHttpInterceptor implements HttpInterceptor {
     // Definicón de interceptores. Se pueden llamar en el orden en que se definen los metadata del provider
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
+        req.headers.append('Access-Control-Allow-Origin', '*');
+
         this.updatePendingRequests(1);
 
         const noLoaderHeader = req.headers.get('No-Loader');
@@ -56,63 +58,13 @@ export class AppHttpInterceptor implements HttpInterceptor {
             text: req.headers.get('Loader-Text') || '',
             showLoader: !noLoaderHeader || (noLoaderHeader && noLoaderHeader !== 'true')
         });
-
-        const tkn = localStorage.getItem('access_token');
-        // const c_id = localStorage.getItem('cognito_id');
-
         if (req.headers.get('Content-Type') && req.headers.get('Content-Type') === 'multipart/form-data'
             || req.headers.get('Content-Type') && req.headers.get('Content-Type') === 'application/json') {
             req = req.clone({
                 headers: req.headers
                     .delete('Loader-Text')
-                    .append('utc', new Date().toString())
             });
-            if (tkn) {
-                req = req.clone({ headers: req.headers.append('X-Authorization', `${atob(tkn)}`) });
-            }
-            // if (c_id) {
-            //     req = req.clone({ headers: req.headers.append('cognito_id', atob(c_id)) });
-            // }
-        } else {
-            if (this.checkIsIE()) {
-                req = req.clone({
-                    headers: req.headers
-                        .delete('Loader-Text')
-                        .append('Content-Type', 'application/json')
-                        .append('utc', new Date().toString())
-                        .append('Cache-Control', 'no-cache')
-                        .append('Pragma', 'no-cache')
-                        .append('Expires', 'Sat, 01 Jan 2100 00:00:00 GMT')
-                });
-                if (tkn) {
-                    req = req.clone({ headers: req.headers.append('Authorization', `${atob(tkn)}`) });
-                }
-                // if (c_id) {
-                //     req = req.clone({ headers: req.headers.append('cognito_id', atob(c_id)) });
-                // }
-            } else {
-                req = req.clone({
-                    headers: req.headers
-                        .delete('Loader-Text')
-                        .append('Content-Type', 'application/json')
-                        .append('utc', new Date().toString())
-                });
-                if (tkn) {
-                    req = req.clone({ headers: req.headers.append('Authorization', `${atob(tkn)}`) });
-                }
-                // if (c_id) {
-                //     req = req.clone({ headers: req.headers.append('cognito_id', atob(c_id)) });
-                // }
-            }
         }
-
-        // if (req.url.includes('onetrust.com/api/consentmanager/v1/datasubjects/profiles')) {
-        //     req = req.clone({
-        //         headers: req.headers.delete('utc')
-        //     });
-        // }
-
-
 
         return next.handle(req)
             .map((event: HttpEvent<any>) => {
@@ -180,10 +132,5 @@ export class AppHttpInterceptor implements HttpInterceptor {
                 }
             }, 1000);
         }
-    }
-
-
-    checkIsIE() {
-        return false;
     }
 }

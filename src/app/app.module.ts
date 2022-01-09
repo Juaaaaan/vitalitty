@@ -18,10 +18,9 @@ import { StorageProvider } from '../shared/storage';
 import { UtilsProvider } from '../shared/utils';
 import { CustomEventTitleFormatterProvider } from '../providers/custom-event-title-formatter/custom-event-title-formatter';
 import { CustomDateFormatterProvider } from '../providers/custom-date-formatter/custom-date-formatter';
-// import { ChartsModule } from 'ng2-charts';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EvolucionesProvider } from '../providers/evoluciones/evoluciones';
+import { CitasProvider } from '../providers/citas/citas';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -83,7 +82,8 @@ export function provideSettings(storage: Storage) {
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     CustomEventTitleFormatterProvider,
     CustomDateFormatterProvider,
-    EvolucionesProvider
+    EvolucionesProvider,
+    CitasProvider
   ]
 })
 export class AppModule { }

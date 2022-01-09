@@ -1,7 +1,7 @@
 import 'rxjs/add/operator/toPromise';
 
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Api } from '../api/api';
 import { LoginPost, LoginResponseModel, LoginServiceModel } from '../auth/auth.model';
 import { clientData, registerPostUser, registerUser, responseRegisterUser } from './modules.user';
@@ -18,6 +18,47 @@ export class User {
     public http: HttpClient,
     public alertCtrl: AlertController,
     public utils: UtilsProvider) { }
+
+
+
+
+    // getPreCallGoogle () {
+    //   const url = 'https://accounts.google.com/o/oauth2/auth?response_type=code&scope=https://www.googleapis.com/auth/verifiedaccess&client_id=1071430120392-el307509tli06fkutvitosopushhe5bc.apps.googleusercontent.com&redirect_uri=https://oauth.pstmn.io/v1/callback';
+    //   const client_id = '1071430120392-el307509tli06fkutvitosopushhe5bc.apps.googleusercontent.com';
+    //   const secret_id = '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';
+
+    //   return new Promise<any>(
+    //     (resolve,reject) =>  {
+    //       this.http.get(url, httpOptions).subscribe(
+    //         (response: any) => resolve(response),
+    //         (error) => reject(error)
+    //       );
+    //     }
+    //   )
+
+    // }
+
+    getCalendar(url: string) {      
+      const httpOptions = {
+        headers: new HttpHeaders({
+            'host': 'www.googleapis.com',
+            'Authorization': 'Bearer ya29.a0ARrdaM84PKi9g42Kb8n7R6rJr58Y5Dv8DGyHMYGVXG_C9pAQ3BCNQLbyyj39CEMOWEZJrUtv5tV-qrGuwh0smGdaAx9U6UEaJzPS1hMnY01HKbKPIRmmiqnq-cP1WWPcDpj2Xnr7Y6-kY-aO9-Ot10vDHnkk',
+            'Access-Control-Allow-Origin': '*',
+            'content-type': 'application/json',
+            'Accept': 'application/json'
+        })
+    };
+
+
+      return new Promise<any>(
+        (resolve,reject) =>  {
+          this.http.get(url, httpOptions).subscribe(
+            (response: any) => resolve(response),
+            (error) => reject(error)
+          );
+        }
+      )
+    }
 
   login(accountInfoLogin: LoginServiceModel) {
     const useMock: boolean = false;

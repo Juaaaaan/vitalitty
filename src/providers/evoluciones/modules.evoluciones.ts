@@ -1,5 +1,5 @@
 export interface evolucionClient {
-    id_evolucion: number;
+    id_evolucion?: number;
     id_cita: number;
     id_cliente: number;
     peso: number;
@@ -9,7 +9,7 @@ export interface evolucionClient {
     cintura: number;
     cadera: number;
     abdomen: number;
-    fecha_evolucion: number;
+    fecha_evolucion?: number;
 }
 
 export interface allEvolucionCliente {
@@ -17,4 +17,11 @@ export interface allEvolucionCliente {
     body: {
         arrDataUsers: evolucionClient[];
     }
+}
+
+export interface allEvolutionInChart {
+    fecha: string;
+    peso: string;
+    graso: string;
+    muscular: string;
 }

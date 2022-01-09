@@ -16,17 +16,33 @@ page-item-detail {
 
   .second-item-content {
     display: flex;
-    .card-container-first {
-      max-width: 30%;
-      width: 100%;
-    }
-    .card-container-second {
-      max-width: 30%;
-      width: 100%;
+    flex-direction: column;
+    .first-item-container {
+      display: flex;
+      flex-direction: row;
+      .card-container-first {
+        max-width: 50%;
+        width: 100%;
+      }
+      .card-container-second {
+        max-width: 50%;
+        width: 100%;
+      }
     }
     .card-container-third {
-      max-width: 40%;
+      max-width: 100%;
       width: 100%;
+      display: flex;
+      flex-direction: row;
+      .crearCita {
+        width: 35%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .text-content-cita {
+          width: 80%;
+        }
+      }
     }
   }
   .list-content {
@@ -63,5 +79,81 @@ page-item-detail {
   .observations-content {
     white-space: normal !important;
     font-size: 12px;
+  }
+}
+
+.form-button {
+  display: flex;
+  justify-content: end;
+  margin: 8px;
+}
+
+@media (min-width: 1080px) {
+  .second-item-content {
+    .card-container-third {
+      max-width: 100% !important;
+      .crearCita {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .text-content-cita {
+          width: 80%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1080px) {
+  .second-item-content {
+    .card-container-third {
+      max-width: 100% !important;
+      display: flex;
+      flex-direction: column !important;
+      .crearCita {
+        width: 100% !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .text-content-cita {
+          width: 80%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 760px) {
+  .second-item-content {
+    .card-container-third {
+      max-width: 100% !important;
+      .crearCita {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .text-content-cita {
+          width: 80%;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 480px) {
+  .second-item-content {
+    // background-color: green;
+    .first-item-container {
+      display: flex;
+      flex-direction: column !important;
+      justify-content: center !important;
+      .card-container-first {
+        max-width: 100% !important;
+        .card-canvas {
+          max-height: 100% !important;
+        }
+      }
+      .card-container-second {
+        max-width: 100% !important;
+      }
+    }
   }
 }

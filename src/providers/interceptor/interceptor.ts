@@ -19,15 +19,10 @@ export class InterceptorProvider implements HttpInterceptor {
 
   constructor(private interceptorHelper: AppInterceptorHelper) {
 
-    console.log('holi')
-
   }
 
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-    console.log('HELLO');
-
     this.interceptorHelper.manageRequestHeaders(request);
     request = this.interceptorHelper.setRequestHeaders(request);
 

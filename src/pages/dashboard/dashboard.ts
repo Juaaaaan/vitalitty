@@ -7,6 +7,8 @@ import { Items } from '../../providers';
 import { clientData } from '../../providers/user/modules.user';
 import { EvolucionesProvider } from '../../providers/evoluciones/evoluciones';
 import { allEvolucionCliente, evolucionClient } from '../../providers/evoluciones/modules.evoluciones';
+import { allCitasCliente, citasClient } from '../../providers/citas/modules.citas';
+import { CitasProvider } from '../../providers/citas/citas';
 
 /**
  * Generated class for the DashboardPage page.
@@ -51,7 +53,8 @@ export class DashboardPage implements OnInit, OnDestroy {
     public platform: Platform,
     private menuCtrl: MenuController,
     public items: Items,
-    public evolucionesProvider: EvolucionesProvider) {
+    public evolucionesProvider: EvolucionesProvider,
+    public citasProvider: CitasProvider) {
       this.dir = platform.dir();
       this.isAdmin = this.navParams.get('isAdmin');
       this.userDataToSearch = this.navParams.get('allDataUser');
@@ -141,16 +144,50 @@ export class DashboardPage implements OnInit, OnDestroy {
 
   async openItem(item: Item) {
     let responseParsed: evolucionClient[];
+    let responseCitasParsed: citasClient[];
+    let responseAllParsed: any[];
     await this.evolucionesProvider.getClientEvolucion(item).subscribe((res: allEvolucionCliente) => {
-      console.log(res);
       if (res) {
         responseParsed = this.parseEvoluciones(res.body);
-        this.navCtrl.push('ItemDetailPage', {
-          item: item,
-          evolucion: responseParsed
-        });
       }
+      this.evolucionesProvider.getAllClientEvolucion(item).subscribe((resEvo: allEvolucionCliente) => {
+        if(resEvo) {
+          responseAllParsed = this.parseAllEvoluciones(resEvo.body);
+        }
+      })
+      this.citasProvider.getClientesCitas(item).subscribe((response: allCitasCliente) => {
+        if (response) {
+          responseCitasParsed = this.parseCitas(response.body);
+        }
+      })
     })
+    // this.evolucionesProvider.getAllClientEvolucion(item).subscribe((resEvo: allEvolucionCliente) => {
+    //   if(resEvo) {
+    //     responseAllParsed = this.parseAllEvoluciones(resEvo.body);
+    //   }
+    // })
+    // await this.citasProvider.getClientesCitas(item).subscribe((response: allCitasCliente) => {
+    //   if (response) {
+    //     responseCitasParsed = this.parseCitas(response.body);
+    //   }
+    // })
+    setTimeout(() => {
+      this.goToItemDetail(item, responseParsed, responseAllParsed, responseAllParsed)
+    }, 1000);
+
+
+  }
+
+  goToItemDetail(propioItem, infoUser, evoluciones, citas) {
+    setTimeout(() => {
+      this.navCtrl.push('ItemDetailPage', {
+        item: propioItem,
+        evolucion: infoUser,
+        citas: citas,
+        allEvolucion: evoluciones
+      });
+    }, 1000);
+
   }
 
 
@@ -170,6 +207,43 @@ export class DashboardPage implements OnInit, OnDestroy {
         cadera: element[8],
         abdomen: element[9],
         fecha_evolucion: element[10]
+      })
+    }
+    return bodyParsed
+  }
+
+  parseAllEvoluciones(body) {
+    let bodyAllParsed: evolucionClient[] = [];
+    for (let index = 0; index < body.evolucion.length; index++) {
+      const element = body.evolucion[index];
+      bodyAllParsed.push({
+        id_evolucion: element[0],
+        id_cita: element[1],
+        id_cliente: element[2],
+        peso: element[3],
+        altura: element[4],
+        porcentaje_graso: element[5],
+        porcentaje_muscular: element[6],
+        cintura: element[7],
+        cadera: element[8],
+        abdomen: element[9],
+        fecha_evolucion: element[10]
+      })
+    }
+    return bodyAllParsed;
+  }
+
+  parseCitas(body) {
+    let bodyParsed: citasClient[] = [];
+    for (let index = 0; index < body.citas.length; index++) {
+      const element = body.citas[index];
+      bodyParsed.push({
+        id_cita: element[0],
+        id_cliente: element[1],
+        id_dieta: element[2],
+        notas_cita: element[3],
+        fecha_cita: element[4],
+        cita_con_dieta: element[5],
       })
     }
     return bodyParsed
@@ -249,7 +323,11 @@ export class DashboardPage implements OnInit, OnDestroy {
             backgroundColor: ['#6cd5c040']
           }]
       };
-      return this.getChartBar(this.barCanvas.nativeElement, 'bar', data);
+      if (this.barCanvas) {
+        return this.getChartBar(this.barCanvas.nativeElement, 'bar', data);
+      } else {
+        this.closeApp('WelcomePage');
+      }
     }
 
   }

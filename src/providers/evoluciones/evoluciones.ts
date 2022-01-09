@@ -37,4 +37,47 @@ export class EvolucionesProvider {
     return seq;
   }
 
+  getAllClientEvolucion(item) {
+    let id_cliente_url = ''
+    if (item) {
+      if (item.id_client) {
+        id_cliente_url = item.id_client;
+      } else if (item.id_cliente) {
+        id_cliente_url = item.id_cliente;
+      } else {
+        id_cliente_url = '';
+      }
+    }
+    const url = 'https://qnw4290ez9.execute-api.eu-west-3.amazonaws.com/v1Prueba/evoluciones/' + id_cliente_url;
+    let seq = this.http.get(url).share();
+    seq.subscribe((res: any) => {
+      if (res) {
+        return res;
+      }
+    }, err => {
+      console.error('ERROR', err);
+      this.myAlert = this.utils.createBasicAlert('Error al recuperar los datos de la evolución', 'No hemos podido recuperar la información del usuario. Intentelo más tarde');
+      this.myAlert.present();
+      return err;
+    });
+    return seq;
+  }
+
+  addClientEvolucion(objInfoDataUser) {
+    console.log(objInfoDataUser);
+    const url = 'https://qnw4290ez9.execute-api.eu-west-3.amazonaws.com/v1Prueba/clientes/' + objInfoDataUser.id_cliente
+    let seq = this.http.put(url, objInfoDataUser).share();
+    seq.subscribe((res: allEvolucionCliente) => {
+      if (res) {
+        return res;
+      }
+    }, err => {
+      console.error('ERROR', err);
+      this.myAlert = this.utils.createBasicAlert('Error al recuperar los datos', 'No hemos podido recuperar la información del usuario. Intentelo más tarde');
+      this.myAlert.present();
+      return err;
+    });
+    return seq;
+  }
+
 }

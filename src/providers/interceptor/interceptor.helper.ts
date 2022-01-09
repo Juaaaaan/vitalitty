@@ -30,34 +30,13 @@ export class AppInterceptorHelper {
 
         request = request.clone({
             headers: request.headers
-                .delete('Content-Type')
+                // .delete('Content-Type')
                 // .append('Content-Type', 'application/json')
                 // .append('utc', moment().format('DD/M/YYYY HH:mm:ss'))
-                .delete('show-error-alert')
-                .delete('show-loading')
-                .delete('loader-message')
+                // .delete('show-error-alert')
+                // .delete('show-loading')
+                // .delete('loader-message')
         });
-
-
-        // if (this.isIE) {
-        //     request = request.clone({
-        //         headers: request.headers
-        //             // .append('Cache-Control', 'no-cache,no-store')
-        //             // .append('Pragma', 'no-cache')
-        //             // .append('Expires', 'Sat, 01 Jan 2100 00:00:00 GMT')
-        //     });
-        // }
-
-
-        // if (request.url.includes('mapfre.com/srv/api/consentreceipts')) {
-        //     request = request.clone({
-        //         headers: request.headers
-        //             // .append('Authorization', 'Basic ' + btoa('APPACIE:e6XdQJNOF'))
-        //             .delete('utc')
-        //             .delete('env')
-        //     });
-        // }
-
 
         return request;
     }
@@ -79,11 +58,11 @@ export class AppInterceptorHelper {
                 this.loader.showLoader(' ');
                 // this.loader.showLoader('LOADER_MESSAGES.DEFAULT');
             }
-            this.requestAllURLs.push(request.url);
+            // this.requestAllURLs.push(request.url);
         }
 
         if (showAlert && showAlert === 'YES') {
-            this.requestedAlertURLs.push(request.url);
+            // this.requestedAlertURLs.push(request.url);
         }
     }
 

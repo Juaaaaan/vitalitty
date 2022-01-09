@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
+import { AlertController, IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
 import { Chart } from 'chart.js';
 import { Items, User } from '../../providers';
 import { FormHelperProvider } from './../../providers/form-helper/form-helper';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-// import { PATTERNS } from '../../providers/validators/validators.patterns';
-// import { KeyValueModel } from '../../providers/ui/ui.models';
-import { allEvolucionCliente, evolucionClient } from '../../providers/evoluciones/modules.evoluciones';
+import { FormGroup, FormControl } from '@angular/forms';
+import { allEvolutionInChart, evolucionClient } from '../../providers/evoluciones/modules.evoluciones';
 import { StorageProvider } from '../../shared/storage';
+import { allCitasCliente } from '../../providers/citas/modules.citas';
+import { CitasProvider } from '../../providers/citas/citas';
+import { EvolucionesProvider } from '../../providers/evoluciones/evoluciones';
 @IonicPage()
 @Component({
   selector: 'page-item-detail',
@@ -21,8 +22,10 @@ export class ItemDetailPage implements OnInit {
   diets: any = [];
   dietsComplete: number;
   barChart: any;
-  evo: allEvolucionCliente[];
+  evo: evolucionClient[];
+  citas: allCitasCliente[];
   firstElement: evolucionClient;
+  allEvolution: evolucionClient[];
 
   @ViewChild('barCanvas') barCanvas;
 
@@ -37,10 +40,15 @@ export class ItemDetailPage implements OnInit {
     private modalCtrl: ModalController,
     // private formHelper: FormHelperProvider,
     private storage: StorageProvider,
-    private user: User) {
+    private user: User,
+    private alertCtrl: AlertController,
+    private citasProvider: CitasProvider, 
+    private evolucionesProvider: EvolucionesProvider) {
 
     this.item = navParams.get('item') || items.defaultItem;
     this.evo = navParams.get('evolucion') ? navParams.get('evolucion') : null;
+    this.citas = navParams.get('citas') ? navParams.get('citas') : null;
+    this.allEvolution = navParams.get('allEvolucion') ? navParams.get('allEvolucion') : null;
     // this.modifyInfoUserFormErrors.set('email', [{ key: 'required', value: 'LOGIN.USER.NIF.ERROR' }, { key: 'pattern', value: 'LOGIN.USER.NIF.ERROR.PATTERN' }, { key: 'maxlength', value: 'LOGIN.USER.NIF.ERROR.PATTERN' }]);
   }
 
@@ -60,14 +68,14 @@ export class ItemDetailPage implements OnInit {
       this.navCtrl.popToRoot();
     }
     this.modifyInfoUser = new FormGroup({
-      peso: new FormControl('', [Validators.required]),
-      altura: new FormControl('', [Validators.required]),
-      grasa: new FormControl('', [Validators.required]),
-      musculatura: new FormControl('', [Validators.required]),
-      cintura: new FormControl('', [Validators.required]),
-      cadera: new FormControl('', [Validators.required]),
-      abdomen: new FormControl('', [Validators.required]),
-      observaciones: new FormControl('', [Validators.required])
+      peso: new FormControl('', []),
+      altura: new FormControl('', []),
+      grasa: new FormControl('', []),
+      musculatura: new FormControl('', []),
+      cintura: new FormControl('', []),
+      cadera: new FormControl('', []),
+      abdomen: new FormControl('', []),
+      observaciones: new FormControl('', [])
     });
     this.showSelectInfo();
 
@@ -105,54 +113,107 @@ export class ItemDetailPage implements OnInit {
 
 
   async createCalendarEvent() {
-   const URL: string = 'https://www.googleapis.com/calendar/v3/calendars/juan11857@gmail.com/events';
-   let eventBody: object = {
-      "end": {
-        "dateTime": "2021-12-6T17:00:00-07:00",
-        "timeZone": "America/Los_Angeles"
-      },
-      "start": {
-        "dateTime": "2021-05-5T09:00:00-07:00",
-        "timeZone": "America/Los_Angeles"
-      },
-      "attendees": [
+    let arrDataCita = [];
+    let alert = this.alertCtrl.create({
+      title: 'Concretar una cita',
+      subTitle: 'Al aceptar una cita, se guardará automáticamente en tu calendario que podrás revisar en el dashboard',
+      inputs: [
         {
-          "email": "suarezramirezjuanjose@hotmail.com"
-        }
+          name: 'fecha',
+          placeholder: 'Fecha',
+          type: 'date',
+        },
+        {
+          name: 'hora',
+          placeholder: 'Hora',
+          type: 'time',
+        },
+        {
+          name: 'notasCita',
+          placeholder: '¿Alguna nota para la cita?',
+          type: 'text',
+        },
       ],
-      "description": "ESTO ES OTRA PRUEBA"
-   }
-    await this.user.createEventCalendarUser(eventBody).subscribe((res) => {
-     console.log(res);
-   })
-  }
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'Cancelar',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Crear cita',
+          handler: data => {
+            if (data) {
+              let fechaFin = data.hora;
+              let horafecha = parseInt(data.hora.split(':')[0]);
+              let minuteshora = parseInt(data.hora.split(':')[1]);
+              let minuteshoraFinCita = minuteshora + 30;
 
-  modifyUser() {
-    console.log('modify');
+              if (minuteshoraFinCita >= 60) {
+                horafecha = horafecha + 1;
+                minuteshoraFinCita = minuteshoraFinCita - 60;
+              }
+              
+              fechaFin = horafecha.toString().concat(':').concat(minuteshoraFinCita.toString());
+
+              arrDataCita.push(this.firstElement.id_cliente, data.fecha + "T" + data.hora, data.hora, data.notasCita)
+              this.citasProvider.postClientesCitas(arrDataCita);
+
+
+              // https://calendar.google.com/calendar/u/0?cid=anVhbjExODU3QGdtYWlsLmNvbQ
+              const URL: string = 'https://www.googleapis.com/calendar/v3/calendars/juan11857@gmail.com/events';
+              let eventBody: object = {
+                "end": {
+                  "dateTime": data.fecha + "T" + fechaFin,
+                  "timeZone": "America/Los_Angeles"
+                },
+                "start": {
+                  "dateTime": data.fecha + "T" + data.hora,
+                  "timeZone": "America/Los_Angeles"
+                },
+                "attendees": [
+                  {
+                    "email": "suarezramirezjuanjose@hotmail.com"
+                  }
+                ],
+                "description": "ESTO ES OTRA PRUEBA"
+              }
+              this.user.createEventCalendarUser(eventBody).subscribe((res) => {
+                console.log(res);
+                })
+              // logged in!
+            } else {
+              // invalid login
+              return false;
+            }
+          }
+        }
+      ]
+    });
+    alert.present();
+
   }
 
   showSelectInfo() {
     if (this.evo && this.evo.length > 0) {
-      console.log('PRIMER ELEMENTO:', this.firstElement);
       for (let index = 0; index < this.evo.length; index++) {
         if (index === 0) {
-          console.log('HOLIII');
           const element = this.evo[index];
           this.firstElement = {
-            id_evolucion: element[0],
-            id_cita: element[1],
-            id_cliente: element[2],
-            peso: element[3],
-            altura: element[4],
-            porcentaje_graso: element[5],
-            porcentaje_muscular: element[6],
-            cintura: element[7],
-            cadera: element[8],
-            abdomen: element[9],
-            fecha_evolucion: element[10]
-        }
-        // const element = this.evo[index];
-        console.log(element);
+            id_evolucion: element.id_evolucion,
+            id_cita: element.id_cita,
+            id_cliente: element.id_cliente,
+            peso: element.peso,
+            altura: element.altura,
+            porcentaje_graso: element.porcentaje_graso,
+            porcentaje_muscular: element.porcentaje_muscular,
+            cintura: element.cintura,
+            cadera: element.cadera,
+            abdomen: element.abdomen,
+            fecha_evolucion: element.fecha_evolucion
+          }
         }
       }
     } else {
@@ -161,26 +222,61 @@ export class ItemDetailPage implements OnInit {
     }
   }
 
-  presentModal() {
-    const modal = this.modalCtrl.create('WelcomePage');
-    modal.present();
+  parseAllEvolution(){
+    let parsedAllEvo: allEvolutionInChart[] = [];
+    if (this.allEvolution) {
+      for (let index = 0; index < this.allEvolution.length; index++) {
+        const element = this.allEvolution[index];
+        parsedAllEvo.push({
+          fecha: element.fecha_evolucion ? element.fecha_evolucion.toString() : element[10].toString() ,
+          peso: element.peso ? element.peso.toString() : element[3].toString(),
+          graso: element.porcentaje_graso ? element.porcentaje_graso.toString() : element[5].toString(),
+          muscular: element.porcentaje_muscular ? element.porcentaje_muscular.toString() : element[6].toString()
+        })
+      }
+    }
+    return parsedAllEvo;
   }
 
   getBarChart() {
+    const dataEvo = this.parseAllEvolution();
+    let xLabels: string[] = [];
+    let yLabels: string[] = [];
+    let zLabels: string[] = [];
+    let pLabels: string[] = [];
+    const mockXLabel = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    const mockYLabel = [0, 10, 20, 30, 40, 50, 60, 50, 70, 60, 50, 40];
+    const mockZLabel = [95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95];
+    for (let index = 0; index < dataEvo.length; index++) {
+      const element = dataEvo[index];
+      xLabels.push(element.fecha)
+      yLabels.push(element.peso);
+      zLabels.push(element.graso);
+      pLabels.push(element.muscular);
+    }
     const data = {
-      labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+      labels: xLabels ? xLabels : mockXLabel,
       datasets: [
         {
-          label: 'Evolución del peso mensual',
-          data: [115, 112, 108, 100, 105, 99, 95, 96, 94, 92, 93, 92],
+          label: 'Evolución del peso',
+          data: yLabels ? yLabels : mockYLabel,
           borderColor: ['#6cd5c0'],
           type: 'line',
           backgroundColor: ['#6cd5c040']
         },
         {
-          label: 'Objetivo',
-          data: [95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95],
+          label: 'Porcentaje graso',
+          data: zLabels ? zLabels : mockZLabel,
+          // data: [95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95],
           borderColor: ['#6csd43'],
+          type: 'line',
+          // backgroundColor: ['#6csd4320']
+        },
+        {
+          label: 'Porcentaje muscular',
+          data: pLabels ? pLabels : mockZLabel,
+          // data: [95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95],
+          borderColor: ['#338dff'],
           type: 'line',
           // backgroundColor: ['#6csd4320']
         }]
@@ -205,6 +301,39 @@ export class ItemDetailPage implements OnInit {
         }
       }
     });
+  }
+
+
+  async modifyPacienteInfo() {
+    let objPaciente: evolucionClient = {
+        id_cita: 0,
+        id_cliente: this.firstElement.id_cliente,
+        peso: this.modifyInfoUser.value.peso ? this.modifyInfoUser.value.peso : this.firstElement.peso,
+        altura: this.modifyInfoUser.value.altura ? this.modifyInfoUser.value.altura : this.firstElement.altura,
+        porcentaje_graso: this.modifyInfoUser.value.grasa ? this.modifyInfoUser.value.grasa : this.firstElement.porcentaje_graso,
+        porcentaje_muscular: this.modifyInfoUser.value.musculatura ? this.modifyInfoUser.value.musculatura : this.firstElement.porcentaje_muscular,
+        cintura: this.modifyInfoUser.value.cintura ? this.modifyInfoUser.value.cintura : this.firstElement.cintura,
+        cadera: this.modifyInfoUser.value.cadera ? this.modifyInfoUser.value.cadera : this.firstElement.cadera,
+        abdomen: this.modifyInfoUser.value.abdomen ? this.modifyInfoUser.value.abdomen : this.firstElement.abdomen,
+    }
+    await this.evolucionesProvider.addClientEvolucion(objPaciente).subscribe((res) => {
+      if (res) {
+        this.evolucionesProvider.getAllClientEvolucion(this.firstElement).subscribe((resEvo: any) => {
+          if(resEvo) {
+            this.allEvolution = resEvo.body.evolucion;
+            this.getBarChart();
+            // responseAllParsed = this.parseAllEvoluciones(resEvo.body);
+          }
+        })
+        this.citasProvider.getClientesCitas(this.firstElement).subscribe((response: allCitasCliente) => {
+          if (response) {
+            console.log(response);
+            // responseCitasParsed = this.parseCitas(response.body);
+          }
+        })
+      }
+    })
+
   }
 
 }

@@ -1,5 +1,5 @@
 import { Storage } from '@ionic/storage';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { User } from '../../providers/user/user';
 import { TranslateService } from '@ngx-translate/core';
@@ -63,7 +63,6 @@ export class WelcomePage implements OnInit {
     public storage: Storage,
     public auth: AuthServiceParser) {
 
-
       this.loginFormErrors.set('email', [{ key: 'required', value: 'LOGIN.USER.NIF.ERROR' }, { key: 'pattern', value: 'LOGIN.USER.NIF.ERROR.PATTERN' }, { key: 'maxlength', value: 'LOGIN.USER.NIF.ERROR.PATTERN' }]);
       this.loginFormErrors.set('password', [{ key: 'required', value: 'LOGIN.USER.PASSWORD.ERROR' }, { key: 'pattern', value: 'LOGIN.USER.PASSWORD.ERROR.PATTERN' }, { key: 'maxlength', value: 'LOGIN.USER.MAX_LENGTH' }]);
       this.recoverFormErrors.set('email', [{ key: 'required', value: 'LOGIN.USER.NIF.ERROR' }, { key: 'pattern', value: 'LOGIN.USER.NIF.ERROR.PATTERN' }, { key: 'maxlength', value: 'LOGIN.USER.NIF.ERROR.PATTERN' }]);
@@ -93,19 +92,27 @@ export class WelcomePage implements OnInit {
     this.navCtrl.push(page);
   }
 
-  showPassword() {
-    if (this.passwordInputType === 'password') {
-      this.passwordInputType = 'text';
-      this.passwordIconName = 'md-eye-off';
-    } else {
-      this.passwordInputType = 'password';
-      this.passwordIconName = 'md-eye';
+  showPassword(ev: Event) {
+    if (ev) {
+      if (this.passwordInputType === 'password') {
+        this.passwordInputType = 'text';
+        this.passwordIconName = 'md-eye-off';
+      } else {
+        this.passwordInputType = 'password';
+        this.passwordIconName = 'md-eye';
+      }
     }
   }
 
   login(numberLog: boolean) {
     this.isLogin = numberLog;
   }
+
+  async getCalendar() {
+    const response = await this.user.getCalendar('https://www.googleapis.com/calendar/v3/calendars/primary/events').catch(err => console.log(err)) || null;
+    console.log(response);
+  }
+
   async doLogin() {
     if (this.loginForm.valid) {
       const bodyAccount = this.auth.parserAdmin(this.loginForm.value);

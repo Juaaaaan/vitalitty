@@ -163,6 +163,9 @@ page-dashboard {
   .chart-content {
     display: flex;
     width: 32.5%;
+    .testLandscape {
+      display: none;
+    }
     .description-chart-pie {
       margin: 4px;
       font-weight: lighter;
@@ -185,6 +188,9 @@ page-dashboard {
     .canvas-graph-bar {
       width: auto;
       max-height: 400px;
+    }
+    .testLandscape {
+      display: none;
     }
   }
 
@@ -223,6 +229,39 @@ page-dashboard {
 
 
   @media (max-width: 1080px) {
+    .content-dashboard {
+      .right-content {
+        .info-content {
+          .info-container {
+            display: flex;
+            flex-direction: column-reverse;
+            justify-items: center !important;
+            .bar-content {
+              width: 100%;
+              .title-card {
+                display: none;
+                text-align: center !important;
+              }
+              .testLandscape {
+                font-size: 12px;
+                margin: 4px;
+                display: flex !important;
+                color: black;
+              }
+            }
+            .chart-content {
+              width: 100%;
+              .testLandscape { 
+                display: flex;
+                font-size: 12px;
+                margin:12px;
+                color: black;
+              }
+            }
+          }
+        }
+      }
+    }
     .second {
       .content-initial {
         display: flex;
@@ -230,6 +269,16 @@ page-dashboard {
       }
     }
   }
+  @media (max-width: 760px) {
+    background-color: red !important;
+    .second {
+      .content-initial {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
   @media (max-width: 480px) {
     .second {
       .content-initial {

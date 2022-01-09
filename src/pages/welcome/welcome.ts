@@ -11,6 +11,9 @@ import { AuthServiceParser } from '../../providers/auth/auth.parser';
 import { KeyValueModel } from '../../providers/ui/ui.models';
 import { StorageProvider } from '../../shared/storage';
 import { clientData } from '../../providers/user/modules.user';
+import { EvolucionesProvider } from '../../providers/evoluciones/evoluciones';
+import { DietasProvider } from '../../providers/dietas/dietas';
+import { dietasClient } from '../../providers/citas/modules.citas';
 
 
 /**
@@ -61,7 +64,9 @@ export class WelcomePage implements OnInit {
     public storageProvider: StorageProvider,
     public formHelper: FormHelperProvider,
     public storage: Storage,
-    public auth: AuthServiceParser) {
+    public auth: AuthServiceParser,
+    private evolucionesProvider: EvolucionesProvider,
+    private dietasProvider: DietasProvider) {
 
       this.loginFormErrors.set('email', [{ key: 'required', value: 'LOGIN.USER.NIF.ERROR' }, { key: 'pattern', value: 'LOGIN.USER.NIF.ERROR.PATTERN' }, { key: 'maxlength', value: 'LOGIN.USER.NIF.ERROR.PATTERN' }]);
       this.loginFormErrors.set('password', [{ key: 'required', value: 'LOGIN.USER.PASSWORD.ERROR' }, { key: 'pattern', value: 'LOGIN.USER.PASSWORD.ERROR.PATTERN' }, { key: 'maxlength', value: 'LOGIN.USER.MAX_LENGTH' }]);
@@ -128,7 +133,30 @@ export class WelcomePage implements OnInit {
             }
           })
         } else {
-          this.navCtrl.setRoot('DashboardPage', {isAdmin: response.body.user_rol});
+          let dataUser = [];
+          let dataEvolucinesUser = [];
+          let dataDietasUser = [];
+          this.user.getInfoOneClient(response.body.user_mail).subscribe((res: any) => {
+            if (res) {
+              dataUser = res.body.infoDataUser;
+            }
+          });
+          await this.evolucionesProvider.getOneClientEvolucion(response.body.user_mail).subscribe((res: any) => {
+            if (res) {
+              dataEvolucinesUser = res.body.evolucion;
+            }
+          });
+
+          await this.dietasProvider.getClientDietas(response.body.user_mail).subscribe((res: any) => {
+            if (res) {
+              dataDietasUser = res.body.dietas;
+            }
+          })
+
+          setTimeout(() => {
+            this.navCtrl.setRoot('DashboardPage', {isAdmin: 2, allDataUser: dataUser, oneEvolution: dataEvolucinesUser, dietas: dataDietasUser});
+          }, 1000);
+
         }
       } else {
         if (this.countError === 3) {

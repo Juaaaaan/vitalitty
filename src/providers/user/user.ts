@@ -129,6 +129,22 @@ export class User {
     return seq;
   }
 
+  getInfoOneClient(id_client) {
+    let seq = this.http.get('https://qnw4290ez9.execute-api.eu-west-3.amazonaws.com/v1Prueba/clientes/' + id_client).share();
+    seq.subscribe((res: clientData) => {
+      if (res) {
+        console.log(res);
+        return res;
+      }
+    }, err => {
+      console.error('ERROR', err);
+      this.myAlert = this.utils.createBasicAlert('Error al recuperar los datos', 'No ha sido imposible recuperar toda tu información. Intentelo más tarde');
+      this.myAlert.present();
+      return err;
+    });
+    return seq;
+  }
+
   parseAccountInfo(account: registerUser) {
     console.log(account);
     let accountpost: registerPostUser = {

@@ -21,6 +21,7 @@ import { CustomDateFormatterProvider } from '../providers/custom-date-formatter/
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EvolucionesProvider } from '../providers/evoluciones/evoluciones';
 import { CitasProvider } from '../providers/citas/citas';
+import { DietasProvider } from '../providers/dietas/dietas';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -83,7 +84,8 @@ export function provideSettings(storage: Storage) {
     CustomEventTitleFormatterProvider,
     CustomDateFormatterProvider,
     EvolucionesProvider,
-    CitasProvider
+    CitasProvider,
+    DietasProvider
   ]
 })
 export class AppModule { }

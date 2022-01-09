@@ -21,6 +21,23 @@ export class EvolucionesProvider {
     public utils: UtilsProvider) {
   }
 
+
+  getOneClientEvolucion(id_client) {
+    const url = 'https://qnw4290ez9.execute-api.eu-west-3.amazonaws.com/v1Prueba/evoluciones/' + id_client
+    let seq = this.http.get(url).share();
+    seq.subscribe((res: allEvolucionCliente) => {
+      if (res) {
+        return res;
+      }
+    }, err => {
+      console.error('ERROR', err);
+      this.myAlert = this.utils.createBasicAlert('Error al recuperar los datos', 'No hemos podido recuperar la información del usuario. Intentelo más tarde');
+      this.myAlert.present();
+      return err;
+    });
+    return seq;
+  }
+
   getClientEvolucion(item) {
     const url = 'https://qnw4290ez9.execute-api.eu-west-3.amazonaws.com/v1Prueba/clientes/' + item.id_client
     let seq = this.http.get(url).share();

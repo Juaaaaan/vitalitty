@@ -7,7 +7,7 @@ import { Items } from '../../providers';
 import { clientData } from '../../providers/user/modules.user';
 import { EvolucionesProvider } from '../../providers/evoluciones/evoluciones';
 import { allEvolucionCliente, evolucionClient } from '../../providers/evoluciones/modules.evoluciones';
-import { allCitasCliente, citasClient } from '../../providers/citas/modules.citas';
+import { allCitasCliente, citasClient, dietasClient } from '../../providers/citas/modules.citas';
 import { CitasProvider } from '../../providers/citas/citas';
 
 /**
@@ -36,7 +36,15 @@ export class DashboardPage implements OnInit, OnDestroy {
 
   public newDate = new Date();
   public isAdmin: number;
-  public userDataToSearch: clientData;
+  public userDataToSearch: any;
+  private userDataEvolution: evolucionClient[];
+  private userDataDietas: dietasClient[];
+
+  public nombreCliente: string = '';
+  public generoCliente: string = '';
+
+  public fechaDietaCliente: string = '';
+  public urlDietaCliente: string = '';
 
   // Obtenga el elemento dom del lienzo correspondiente
 	@ViewChild('pieCanvas') pieCanvas;
@@ -58,6 +66,8 @@ export class DashboardPage implements OnInit, OnDestroy {
       this.dir = platform.dir();
       this.isAdmin = this.navParams.get('isAdmin');
       this.userDataToSearch = this.navParams.get('allDataUser');
+      this.userDataEvolution = this.navParams.get('oneEvolution');
+      this.userDataDietas = this.navParams.get('dietas');
     }
 
     ionViewCanEnter(): boolean{
@@ -124,11 +134,38 @@ export class DashboardPage implements OnInit, OnDestroy {
       ];
       this.parseItemsUser();
     }
+    if (this.isAdmin === 2) {
+      this.parseUserData();
+      this.parseDietasData();
+    }
   }
 
 
   private parseItemsUser() {
     this.items.getDataClients(this.userDataToSearch);
+  }
+
+  private parseUserData() {
+    for (let index = 0; index < this.userDataToSearch.length; index++) {
+      const element = this.userDataToSearch[index];
+      this.nombreCliente = element[2];
+      this.generoCliente = element[8];
+   }
+  }
+
+  parseDietasData() {
+    console.log(this.userDataDietas);
+    for (let index = 0; index < this.userDataDietas.length; index++) {
+      const element = this.userDataDietas[index];
+      this.fechaDietaCliente = element[4];
+      this.urlDietaCliente = element[3];
+
+    }
+  }
+
+  getPdf(){
+    console.log(this.urlDietaCliente);
+    window.open(this.urlDietaCliente, '_blank');
   }
 
   getItems(ev) {
@@ -145,9 +182,11 @@ export class DashboardPage implements OnInit, OnDestroy {
   async openItem(item: Item) {
     let responseParsed: evolucionClient[];
     let responseCitasParsed: citasClient[];
+    let responseDietasParsed: dietasClient[];
     let responseAllParsed: any[];
-    await this.evolucionesProvider.getClientEvolucion(item).subscribe((res: allEvolucionCliente) => {
+    await this.evolucionesProvider.getAllClientEvolucion(item).subscribe((res: allEvolucionCliente) => {
       if (res) {
+        console.log(res);
         responseParsed = this.parseEvoluciones(res.body);
       }
       this.evolucionesProvider.getAllClientEvolucion(item).subscribe((resEvo: allEvolucionCliente) => {
@@ -158,33 +197,25 @@ export class DashboardPage implements OnInit, OnDestroy {
       this.citasProvider.getClientesCitas(item).subscribe((response: allCitasCliente) => {
         if (response) {
           responseCitasParsed = this.parseCitas(response.body);
+          responseDietasParsed = this.parseDietas(response.body);
         }
       })
     })
-    // this.evolucionesProvider.getAllClientEvolucion(item).subscribe((resEvo: allEvolucionCliente) => {
-    //   if(resEvo) {
-    //     responseAllParsed = this.parseAllEvoluciones(resEvo.body);
-    //   }
-    // })
-    // await this.citasProvider.getClientesCitas(item).subscribe((response: allCitasCliente) => {
-    //   if (response) {
-    //     responseCitasParsed = this.parseCitas(response.body);
-    //   }
-    // })
     setTimeout(() => {
-      this.goToItemDetail(item, responseParsed, responseAllParsed, responseAllParsed)
+      this.goToItemDetail(item, responseParsed, responseAllParsed, responseCitasParsed, responseDietasParsed)
     }, 1000);
 
 
   }
 
-  goToItemDetail(propioItem, infoUser, evoluciones, citas) {
+  goToItemDetail(propioItem, infoUser, evoluciones, citas, dietas) {
     setTimeout(() => {
       this.navCtrl.push('ItemDetailPage', {
         item: propioItem,
         evolucion: infoUser,
         citas: citas,
-        allEvolucion: evoluciones
+        allEvolucion: evoluciones,
+        dietas: dietas
       });
     }, 1000);
 
@@ -193,8 +224,8 @@ export class DashboardPage implements OnInit, OnDestroy {
 
   parseEvoluciones(body) {
     let bodyParsed: evolucionClient[] = [];
-    for (let index = 0; index < body.evoluciones.length; index++) {
-      const element = body.evoluciones[index];
+    for (let index = 0; index < body.evolucion.length; index++) {
+      const element = body.evolucion[index];
       bodyParsed.push({
         id_evolucion: element[0],
         id_cita: element[1],
@@ -249,6 +280,23 @@ export class DashboardPage implements OnInit, OnDestroy {
     return bodyParsed
   }
 
+  parseDietas(body) {
+    let bodyParsedDietas: dietasClient[] = [];
+    for (let index = 0; index < body.dietas.length; index++) {
+      const element = body.dietas[index];
+      bodyParsedDietas.push({
+        id_dieta: element[0],
+        id_clientes: element[1],
+        dietas_historica: element[2],
+        url_dieta: element[3],
+        fecha_subida_pdf: element[4],
+        id_dieta_user: element[5],
+        observaciones_dieta: element[6]
+      })
+    }
+    return bodyParsedDietas;
+  }
+
   menuDesplegable() {
     this.menuCtrl.toggle()
   }
@@ -294,15 +342,25 @@ export class DashboardPage implements OnInit, OnDestroy {
   }
 
   getPieChart() {
-    const data = {
-      labels: ['Peso en Kilogramos', 'Altura en cm', '% Graso', '% Muscular', 'Cintura en cm', 'Cadera en cm', 'Abdomen en cm'],
-      datasets: [
-        {
-          data: [76, 176, 19.3, 52.4, 62.3, 74.5, 68,2],
-          backgroundColor: ['#6cd5c0', '#a4c5df', '#009fbf', '#73ba9c', '#00b4ff', '#9fefcc', '#395c9c'],
-          hoverBackgroundColor: ['#6cd5c0', '#a4c5df', '#009fbf', '#73ba9c', '#00b4ff', '#9fefcc', '#395c9c']
-        }]
-    };
+    let dataUserInfoPie = [];
+    let dataUserMockPie = [];
+    let data = {};
+    if (this.userDataEvolution) {
+      data = {
+        labels: ['Peso en Kilogramos', 'Altura en cm', '% Graso', '% Muscular', 'Cintura en cm', 'Cadera en cm', 'Abdomen en cm'],
+        datasets: [
+          {
+            data: [this.userDataEvolution[0][3], this.userDataEvolution[0][4], 
+            this.userDataEvolution[0][5], this.userDataEvolution[0][6],
+            this.userDataEvolution[0][7], this.userDataEvolution[0][8],
+            this.userDataEvolution[0][9]],
+            backgroundColor: ['#6cd5c0', '#a4c5df', '#009fbf', '#73ba9c', '#00b4ff', '#9fefcc', '#395c9c'],
+            hoverBackgroundColor: ['#6cd5c0', '#a4c5df', '#009fbf', '#73ba9c', '#00b4ff', '#9fefcc', '#395c9c']
+          }]
+      };
+    } else {
+      dataUserMockPie = [76, 176, 19.3, 52.4, 62.3, 74.5, 68,2]
+    }
 
     if (this.pieCanvas) {
       return this.getChartPie(this.pieCanvas.nativeElement, 'doughnut', data);
@@ -311,26 +369,55 @@ export class DashboardPage implements OnInit, OnDestroy {
   }
 
   getBarChart() {
-    if (!this.isAdmin) {
+    if (this.isAdmin == 2) {
+      let xLabels: string[] = [];
+      let yLabels: string[] = [];
+      let zLabels: string[] = [];
+      let pLabels: string[] = [];
+      const mockXLabel = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+      const mockYLabel = [0, 10, 20, 30, 40, 50, 60, 50, 70, 60, 50, 40];
+      const mockZLabel = [95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95];
+      if (this.userDataEvolution && this.userDataEvolution) {
+        for (let index = 0; index < this.userDataEvolution.length; index++) {
+          const element = this.userDataEvolution[index];
+          xLabels.push(element[10])
+          yLabels.push(element[3]);
+          zLabels.push(element[5]);
+          pLabels.push(element[6]);
+        }
+      }
       const data = {
-        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        labels: xLabels ? xLabels : mockXLabel,
         datasets: [
           {
-            label: 'Evolución del peso mensual',
-            data: [115, 112, 108, 100, 105, 99, 95, 96, 94, 92, 93, 92],
+            label: 'Evolución del peso',
+            data: yLabels ? yLabels : mockYLabel,
             borderColor: ['#6cd5c0'],
             type: 'line',
             backgroundColor: ['#6cd5c040']
+          },
+          {
+            label: 'Porcentaje graso',
+            data: zLabels ? zLabels : mockZLabel,
+            // data: [95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95],
+            borderColor: ['#6csd43'],
+            type: 'line',
+            // backgroundColor: ['#6csd4320']
+          },
+          {
+            label: 'Porcentaje muscular',
+            data: pLabels ? pLabels : mockZLabel,
+            // data: [95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95],
+            borderColor: ['#338dff'],
+            type: 'line',
+            // backgroundColor: ['#6csd4320']
           }]
       };
-      if (this.barCanvas) {
-        return this.getChartBar(this.barCanvas.nativeElement, 'bar', data);
-      } else {
-        this.closeApp('WelcomePage');
-      }
+      return this.getChartBar(this.barCanvas.nativeElement, 'bar', data);
     }
-
   }
+
+
 
 
 

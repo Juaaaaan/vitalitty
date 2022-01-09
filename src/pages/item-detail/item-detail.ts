@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AlertController, IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
+import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Chart } from 'chart.js';
 import { Items, User } from '../../providers';
 import { FormHelperProvider } from './../../providers/form-helper/form-helper';
 import { FormGroup, FormControl } from '@angular/forms';
 import { allEvolutionInChart, evolucionClient } from '../../providers/evoluciones/modules.evoluciones';
-import { StorageProvider } from '../../shared/storage';
-import { allCitasCliente } from '../../providers/citas/modules.citas';
+import { allCitasCliente, citasClient, dietasClient } from '../../providers/citas/modules.citas';
 import { CitasProvider } from '../../providers/citas/citas';
 import { EvolucionesProvider } from '../../providers/evoluciones/evoluciones';
 @IonicPage()
@@ -23,9 +22,10 @@ export class ItemDetailPage implements OnInit {
   dietsComplete: number;
   barChart: any;
   evo: evolucionClient[];
-  citas: allCitasCliente[];
+  citas: citasClient[];
   firstElement: evolucionClient;
   allEvolution: evolucionClient[];
+  dietas: dietasClient[];
 
   @ViewChild('barCanvas') barCanvas;
 
@@ -37,9 +37,6 @@ export class ItemDetailPage implements OnInit {
   constructor(public navCtrl: NavController, 
     navParams: NavParams,
     items: Items,
-    private modalCtrl: ModalController,
-    // private formHelper: FormHelperProvider,
-    private storage: StorageProvider,
     private user: User,
     private alertCtrl: AlertController,
     private citasProvider: CitasProvider, 
@@ -49,6 +46,7 @@ export class ItemDetailPage implements OnInit {
     this.evo = navParams.get('evolucion') ? navParams.get('evolucion') : null;
     this.citas = navParams.get('citas') ? navParams.get('citas') : null;
     this.allEvolution = navParams.get('allEvolucion') ? navParams.get('allEvolucion') : null;
+    this.dietas = navParams.get('dietas') ? navParams.get('dietas') : null;
     // this.modifyInfoUserFormErrors.set('email', [{ key: 'required', value: 'LOGIN.USER.NIF.ERROR' }, { key: 'pattern', value: 'LOGIN.USER.NIF.ERROR.PATTERN' }, { key: 'maxlength', value: 'LOGIN.USER.NIF.ERROR.PATTERN' }]);
   }
 
@@ -79,35 +77,46 @@ export class ItemDetailPage implements OnInit {
     });
     this.showSelectInfo();
 
-    this.diets.push({
-      "last_cita":"18/10/2021",
-      "last_diet": "18/10/2021",
-      "observations":"no me gusta el pepino"
-    },
-    {
-      "last_cita":"18/10/2021",
-      "last_diet":"21/09/2021",
-      "observations":"No tengo tiempo de seguirla. He cambiado de trabajo"
-    },
-    {
-      "last_cita":"18/10/2021",
-      "last_diet":"01/08/2021",
-      "observations":"No tengo tiempo de seguirla. He cambiado de trabajo"
-    },
-    {
-      "last_cita":"18/10/2021",
-      "last_diet":"01/08/2021",
-      "observations":"No tengo tiempo de seguirla. He cambiado de trabajo"
-    })
+    if (this.citas) {
+      let fechaDieta: string = '';
+      let urlDieta: string = '';
+      let fechaCitaParsed = '';
+      for (let index = 0; index < this.citas.length; index++) {
+        const element = this.citas[index];
+        if (element && element.fecha_cita.includes('T')) {
+          fechaCitaParsed = element.fecha_cita.split('T')[0];
+        } else if (element && element.fecha_cita.includes(' ')) {
+          fechaCitaParsed = element.fecha_cita.split(' ')[0];
+        }
+        
+        for (let index = 0; index < this.dietas.length; index++) {
+          const element = this.dietas[index];
+          if (element.fecha_subida_pdf == fechaCitaParsed) {
+            fechaDieta = element.fecha_subida_pdf;
+            urlDieta = element.url_dieta;
+          } else {
+            fechaDieta = '';
+          }
+        }
+
+        this.diets.push({
+          "last_cita": fechaCitaParsed ? fechaCitaParsed : element.fecha_cita,
+          "last_diet": fechaDieta ? fechaDieta : element.id_dieta,
+          "observations": element.notas_cita,
+          "url_dieta": urlDieta ? urlDieta : ''
+        })
+        
+      }
+    }
     this.dietsComplete = this.diets.length;
   }
 
 
-  letPdf(index: number) {
-    console.log(index);
-    if (index) {
-      console.log(index);
-      window.open('https://vitalitty-s3-dietas.s3.eu-west-3.amazonaws.com/JUAN+JOSE+SUAREZ+RAMIREZ+31-5-20.pdf', '_blank');
+  public letPdf(dieta) {
+    console.log(dieta.url_dieta);
+    if (dieta.url_dieta) {
+      console.log(dieta.url_dieta);
+      window.open(dieta.url_dieta, '_blank');
     }
   }
 
@@ -163,7 +172,7 @@ export class ItemDetailPage implements OnInit {
 
 
               // https://calendar.google.com/calendar/u/0?cid=anVhbjExODU3QGdtYWlsLmNvbQ
-              const URL: string = 'https://www.googleapis.com/calendar/v3/calendars/juan11857@gmail.com/events';
+              // const URL: string = 'https://www.googleapis.com/calendar/v3/calendars/juan11857@gmail.com/events';
               let eventBody: object = {
                 "end": {
                   "dateTime": data.fecha + "T" + fechaFin,
@@ -205,20 +214,17 @@ export class ItemDetailPage implements OnInit {
             id_evolucion: element.id_evolucion,
             id_cita: element.id_cita,
             id_cliente: element.id_cliente,
-            peso: element.peso,
-            altura: element.altura,
-            porcentaje_graso: element.porcentaje_graso,
-            porcentaje_muscular: element.porcentaje_muscular,
-            cintura: element.cintura,
-            cadera: element.cadera,
-            abdomen: element.abdomen,
+            peso: element.peso ? element.peso : 0,
+            altura: element.altura ? element.altura : 0,
+            porcentaje_graso: element.porcentaje_graso ? element.porcentaje_graso : 0,
+            porcentaje_muscular: element.porcentaje_muscular ? element.porcentaje_muscular : 0,
+            cintura: element.cintura ? element.cintura : 0,
+            cadera: element.cadera ? element.cadera : 0,
+            abdomen: element.abdomen ? element.abdomen : 0,
             fecha_evolucion: element.fecha_evolucion
           }
         }
       }
-    } else {
-      this.storage.remove(['responseAdmin']);
-      this.navCtrl.push('WelcomePage');
     }
   }
 
@@ -228,10 +234,10 @@ export class ItemDetailPage implements OnInit {
       for (let index = 0; index < this.allEvolution.length; index++) {
         const element = this.allEvolution[index];
         parsedAllEvo.push({
-          fecha: element.fecha_evolucion ? element.fecha_evolucion.toString() : element[10].toString() ,
-          peso: element.peso ? element.peso.toString() : element[3].toString(),
-          graso: element.porcentaje_graso ? element.porcentaje_graso.toString() : element[5].toString(),
-          muscular: element.porcentaje_muscular ? element.porcentaje_muscular.toString() : element[6].toString()
+          fecha: element.fecha_evolucion ? element.fecha_evolucion.toString() : element[10].toString(),
+          peso: element.peso ? element.peso.toString() : element[3] ? element[3].toString() : 0 ,
+          graso: element.porcentaje_graso ? element.porcentaje_graso.toString() : element[5] ? element[5].toString() : 0,
+          muscular: element.porcentaje_muscular ? element.porcentaje_muscular.toString() : element [6] ? element[6].toString() : 0
         })
       }
     }

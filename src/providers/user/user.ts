@@ -20,24 +20,6 @@ export class User {
     public utils: UtilsProvider) { }
 
 
-
-
-    // getPreCallGoogle () {
-    //   const url = 'https://accounts.google.com/o/oauth2/auth?response_type=code&scope=https://www.googleapis.com/auth/verifiedaccess&client_id=1071430120392-el307509tli06fkutvitosopushhe5bc.apps.googleusercontent.com&redirect_uri=https://oauth.pstmn.io/v1/callback';
-    //   const client_id = '1071430120392-el307509tli06fkutvitosopushhe5bc.apps.googleusercontent.com';
-    //   const secret_id = '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';
-
-    //   return new Promise<any>(
-    //     (resolve,reject) =>  {
-    //       this.http.get(url, httpOptions).subscribe(
-    //         (response: any) => resolve(response),
-    //         (error) => reject(error)
-    //       );
-    //     }
-    //   )
-
-    // }
-
     getCalendar(url: string) {      
       const httpOptions = {
         headers: new HttpHeaders({

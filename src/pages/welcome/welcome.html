@@ -8,24 +8,6 @@
   </div>
 
   <div padding class="main-container">
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-
-    <div id="g_id_onload"
-         data-client_id="GET /calendar/v3/calendars/primary/events HTTP/1.1 Host: www.googleapis.com Authorization: Bearer ya29.a0ARrdaM84PKi9g42Kb8n7R6rJr58Y5Dv8DGyHMYGVXG_C9pAQ3BCNQLbyyj39CEMOWEZJrUtv5tV-qrGuwh0smGdaAx9U6UEaJzPS1hMnY01HKbKPIRmmiqnq-cP1WWPcDpj2Xnr7Y6-kY-aO9-Ot10vDHnkk"
-         data-context="signin"
-         data-ux_mode="redirect"
-         data-login_uri="http://localhost:8100">
-    </div>
-    
-    <div class="g_id_signin"
-         data-type="standard"
-         data-shape="pill"
-         data-theme="filled_black"
-         data-text="$ {button.text}"
-         data-size="medium"
-         data-locale="es"
-         data-logo_alignment="left">
-    </div>
     <ng-container>
       <div padding>
         <form [formGroup]="loginForm" (submit)="doLogin()">
@@ -66,7 +48,7 @@
     <div class="no-account" padding>
       <!-- <button ion-button block (click)="login(true)" *ngIf="!isLogin" class="login" [ngClass]="{ 'animation-form' : isLogin }">{{ 'LOGIN' | translate }}</button> -->
       <writter class="text-register" value="¿Qué no tienes cuenta en Vitalitty?"></writter>
-      <button ion-button block class="signup" (click)="getCalendar()">{{ 'SIGNUP' | translate }}</button>
+      <button ion-button block class="signup" (click)="signup()">{{ 'SIGNUP' | translate }}</button>
     </div>
 
     <div class="splash-text-info">

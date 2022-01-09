@@ -124,7 +124,22 @@ page-item-detail {
 }
 
 @media (max-width: 760px) {
+  .item-detail {
+    padding: 4px !important;
+  }
   .second-item-content {
+    padding: 0 !important;
+    .first-item-container {
+      .card-container-first {
+        .card-canvas {
+          .list-form {
+            ion-label {
+              font-size: 13px;
+            }
+          }
+        }
+      }
+    }
     .card-container-third {
       max-width: 100% !important;
       .crearCita {
